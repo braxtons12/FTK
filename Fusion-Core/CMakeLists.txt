@@ -22,7 +22,8 @@ set ( GRAPHICS
     src/graphics/buffers/vertexarray.cpp
     src/graphics/renderable2D.h
     src/graphics/renderer2D.h
-    src/graphics/simple2Drenderer.cpp )
+    src/graphics/simple2Drenderer.cpp
+    src/graphics/batchrenderer2D.cpp )
 set ( INPUT
     src/input/input.cpp )
 set ( MATH

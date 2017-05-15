@@ -14,6 +14,8 @@ namespace fusion { namespace core { namespace graphics {
         public:
             IndexBuffer(GLushort* data, GLsizei count);
 
+            ~IndexBuffer();
+
             inline void bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID); }
             inline void unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 

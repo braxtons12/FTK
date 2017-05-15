@@ -9,6 +9,13 @@
 
 namespace fusion { namespace core { namespace graphics {
 
+    struct VertexData {
+        
+        math::vec3 vertex;
+        math::vec4 color;
+
+    };
+    
     class Renderable2D
     {
         public:
