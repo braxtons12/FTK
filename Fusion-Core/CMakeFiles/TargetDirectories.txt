@@ -1,0 +1,3 @@
+/home/braxton/git/Fusion/Fusion-Core/CMakeFiles/rebuild_cache.dir
+/home/braxton/git/Fusion/Fusion-Core/CMakeFiles/edit_cache.dir
+/home/braxton/git/Fusion/Fusion-Core/CMakeFiles/main.dir
