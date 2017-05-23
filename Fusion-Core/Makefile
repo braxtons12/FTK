@@ -124,6 +124,21 @@ main/fast:
 .PHONY : main/fast
 
 # target to build an object file
+src/graphics/batchrenderer2D.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/batchrenderer2D.o
+.PHONY : src/graphics/batchrenderer2D.o
+
+# target to preprocess a source file
+src/graphics/batchrenderer2D.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/batchrenderer2D.i
+.PHONY : src/graphics/batchrenderer2D.i
+
+# target to generate assembly for a file
+src/graphics/batchrenderer2D.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/batchrenderer2D.s
+.PHONY : src/graphics/batchrenderer2D.s
+
+# target to build an object file
 src/graphics/buffers/buffer.o:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/buffers/buffer.o
 .PHONY : src/graphics/buffers/buffer.o
@@ -199,6 +214,36 @@ src/graphics/simple2Drenderer.s:
 .PHONY : src/graphics/simple2Drenderer.s
 
 # target to build an object file
+src/graphics/sprite.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/sprite.o
+.PHONY : src/graphics/sprite.o
+
+# target to preprocess a source file
+src/graphics/sprite.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/sprite.i
+.PHONY : src/graphics/sprite.i
+
+# target to generate assembly for a file
+src/graphics/sprite.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/sprite.s
+.PHONY : src/graphics/sprite.s
+
+# target to build an object file
+src/graphics/static_sprite.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/static_sprite.o
+.PHONY : src/graphics/static_sprite.o
+
+# target to preprocess a source file
+src/graphics/static_sprite.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/static_sprite.i
+.PHONY : src/graphics/static_sprite.i
+
+# target to generate assembly for a file
+src/graphics/static_sprite.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/static_sprite.s
+.PHONY : src/graphics/static_sprite.s
+
+# target to build an object file
 src/graphics/window.o:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/window.o
 .PHONY : src/graphics/window.o
@@ -267,6 +312,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
+	@echo "... src/graphics/batchrenderer2D.o"
+	@echo "... src/graphics/batchrenderer2D.i"
+	@echo "... src/graphics/batchrenderer2D.s"
 	@echo "... src/graphics/buffers/buffer.o"
 	@echo "... src/graphics/buffers/buffer.i"
 	@echo "... src/graphics/buffers/buffer.s"
@@ -282,6 +330,12 @@ help:
 	@echo "... src/graphics/simple2Drenderer.o"
 	@echo "... src/graphics/simple2Drenderer.i"
 	@echo "... src/graphics/simple2Drenderer.s"
+	@echo "... src/graphics/sprite.o"
+	@echo "... src/graphics/sprite.i"
+	@echo "... src/graphics/sprite.s"
+	@echo "... src/graphics/static_sprite.o"
+	@echo "... src/graphics/static_sprite.i"
+	@echo "... src/graphics/static_sprite.s"
 	@echo "... src/graphics/window.o"
 	@echo "... src/graphics/window.i"
 	@echo "... src/graphics/window.s"

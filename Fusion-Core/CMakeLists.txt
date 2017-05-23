@@ -9,7 +9,7 @@ SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINKER_FL
 include_directories (include
                     src/
                     src/graphics/
-                    src/graphics/buffers
+                    src/graphics/buffers/
                     src/input/
                     src/mathLibs/
                     src/utils/ )
@@ -22,6 +22,8 @@ set ( GRAPHICS
     src/graphics/buffers/vertexarray.cpp
     src/graphics/renderable2D.h
     src/graphics/renderer2D.h
+    src/graphics/static_sprite.cpp
+    src/graphics/sprite.cpp
     src/graphics/simple2Drenderer.cpp
     src/graphics/batchrenderer2D.cpp )
 set ( INPUT
