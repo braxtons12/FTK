@@ -18,9 +18,9 @@ namespace fusion { namespace core { namespace input {
             double m_MouseX;
             double m_MouseY;
 
-            Mouse();
-
         public:
+			
+			Mouse();
             static Mouse& GetInstance();
 
             inline double GetX() const { return m_MouseX; }
@@ -41,10 +41,10 @@ namespace fusion { namespace core { namespace input {
         private:
             static Keyboard m_instance;
             bool m_Keys[MAX_KEYS];
-
-            Keyboard();
         
         public:
+			
+			Keyboard();
             static Keyboard& GetInstance();
 
             inline void SetKeyState(unsigned int key, bool state) { m_Keys[key] = state; }

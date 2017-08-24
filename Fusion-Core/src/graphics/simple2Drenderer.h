@@ -1,9 +1,10 @@
 #ifndef _SIMPLE_2D_RENDERER
 #define _SIMPLE_2D_RENDERER
 
-#include <deque>
 #include "renderer2D.h"
 #include "static_sprite.h"
+
+#include <deque>
 
 namespace fusion { namespace core { namespace graphics { 
 

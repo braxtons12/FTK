@@ -1,10 +1,10 @@
 #ifndef _VERTEX_ARRAY
 #define _VERTEX_ARRAY
 
+#include "../src/graphics/buffers/buffer.h"
+
 #include <vector>
 #include <GL/glew.h>
-
-#include "../src/graphics/buffers/buffer.h"
 
 namespace fusion { namespace core { namespace graphics {
 

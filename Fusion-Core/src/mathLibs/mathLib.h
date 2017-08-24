@@ -3,9 +3,9 @@
 #define _MATH
 
 #include <math.h>
-#define _USE_MATH_DEFINES
-
 #include <iostream>
+
+#define _USE_MATH_DEFINES
 
 namespace fusion { namespace math {
 

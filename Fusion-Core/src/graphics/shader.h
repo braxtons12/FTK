@@ -1,11 +1,13 @@
 #ifndef _SHADER
 #define _SHADER
 
-#include "GL/glew.h"
-#include <vector>
 #include "../src/utils/fileutils.h"
-#include <iostream>
 #include "../src/mathLibs/mathLib.h"
+
+#include <GL/glew.h>
+#include <vector>
+#include <iostream>
+
 
 namespace fusion { namespace core { namespace graphics { 
 

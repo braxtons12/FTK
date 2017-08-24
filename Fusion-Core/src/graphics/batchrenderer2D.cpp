@@ -25,10 +25,11 @@ namespace fusion { namespace core { namespace graphics {
         glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
         glEnableVertexAttribArray(SHADER_COLOR_INDEX);
         glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*) 0);
-        glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
+        glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, 
+							(const GLvoid*)(offsetof(VertexData, VertexData::color)));
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        GLushort indices[RENDERER_INDICES_SIZE];
+        GLuint indices[RENDERER_INDICES_SIZE];
 
 		int offset = 0;
         for(int i = 0; i < RENDERER_INDICES_SIZE; i += 6) {
@@ -60,20 +61,27 @@ namespace fusion { namespace core { namespace graphics {
 		const math::vec2& size = renderable->getSize();
 		const math::vec4& color = renderable->getColor();
 		
+		int r = color.m_x * 255.0f;
+		int g = color.m_y * 255.0f;
+		int b = color.m_z * 255.0f;
+		int a = color.m_w * 255.0f;
+		
+		unsigned int c = a << 24 | b << 16 | g << 8 | r;
+		
 		m_Buffer->vertex = position;
-		m_Buffer->color = color;
+		m_Buffer->color = c;
 		m_Buffer++;
 		
 		m_Buffer->vertex = math::vec3(position.m_x, position.m_y + size.m_y, position.m_z);
-		m_Buffer->color = color;
+		m_Buffer->color = c;
 		m_Buffer++;
 		
 		m_Buffer->vertex = math::vec3(position.m_x + size.m_x, position.m_y + size.m_y, position.m_z);
-		m_Buffer->color = color;
+		m_Buffer->color = c;
 		m_Buffer++;
 		
 		m_Buffer->vertex = math::vec3(position.m_x + size.m_x, position.m_y, position.m_z);
-		m_Buffer->color = color;
+		m_Buffer->color = c;
 		m_Buffer++;
         
 		m_IndexCount += 6;
@@ -89,7 +97,7 @@ namespace fusion { namespace core { namespace graphics {
 		glBindVertexArray(m_VAO);
 		m_IBO->bind();
 		
-		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_SHORT, NULL);
+		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, NULL);
 		
 		m_IBO->unbind();
 		glBindVertexArray(0);

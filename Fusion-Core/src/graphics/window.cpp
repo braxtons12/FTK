@@ -1,32 +1,12 @@
 #include "window.h"
 
-namespace fusion { namespace core { namespace window {
+namespace fusion { namespace core { namespace graphics { namespace window {
+	
 
-    void keyCallback(GLFWwindow *window, int key, int scanCode, int action, int mods) {
-
-        input::Keyboard::GetInstance().SetKeyState(key, action != GLFW_RELEASE);
-
-    }
-
-    void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
-
-        input::Mouse::GetInstance().SetButtonState(button, action != GLFW_RELEASE);
-    }
-
-    void mousePositionCallback(GLFWwindow *window, double x, double y) {
-        
-        input::Mouse& mouse = input::Mouse::GetInstance();
-
-        mouse.SetX(x);
-        mouse.SetY(y);
-    }
-
-    void WindowResizeCallBack(GLFWwindow *window, int width, int height) {
-
-        glViewport(0, 0, width, height);
-    }
-
+	WindowUpdateSignal* Window::m_Signal = new WindowUpdateSignal();
+	
     bool Window::init() {
+		
         
         if(!glfwInit()) {
             std::cout << "Failed to initialize GLFW!" << std::endl;
@@ -43,7 +23,9 @@ namespace fusion { namespace core { namespace window {
         glfwSetKeyCallback(m_Window, keyCallback);
         glfwSetMouseButtonCallback(m_Window, mouseButtonCallback);
         glfwSetCursorPosCallback(m_Window, mousePositionCallback);
+		glfwSwapInterval(0.0f);
 
+		glewExperimental = GL_TRUE;
         if(glewInit() != GLEW_OK) {
             std::cout << "Could not initialize GLEW!" << std::endl;
             return false;
@@ -84,4 +66,4 @@ namespace fusion { namespace core { namespace window {
         return glfwWindowShouldClose(m_Window);
     }
 
-}}}
+}}}}

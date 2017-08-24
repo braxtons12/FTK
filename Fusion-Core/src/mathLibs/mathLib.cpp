@@ -1,4 +1,5 @@
 #include "mathLib.h"
+#include <string.h>
 
 namespace fusion { namespace math {
 
@@ -315,20 +316,22 @@ namespace fusion { namespace math {
 
     mat4 mat4::multiply(const mat4& right) {
 
-        mat4 result;
+		float data[16];
 
         for(int y = 0; y < 4; ++y) { 
             for (int x = 0; x < 4; ++x) {
 
-                float sum = 0.0;
+                float sum = 0.0f;
                 for(int e = 0; e < 4; ++e) {
                     sum += elements[x + e * 4] * right.elements[e + y * 4];
                 }
-                result.elements[x + y * 4] = sum;
+                data[x + y * 4] = sum;
             }
         }
+        
+        memcpy(elements, data, 16 * sizeof(float));
 
-        return result;
+        return *this;
     }
 
     mat4 operator*(mat4 left, const mat4& right) {

@@ -19,6 +19,7 @@ namespace fusion { namespace core { namespace graphics {
 			inline const VertexArray* getVAO() const { return m_VertexArray; }
 			inline const IndexBuffer* getIBO() const { return m_IndexBuffer; }
 			inline Shader& getShader() const { return m_Shader; }
+			inline void setShader(Shader& shader) { m_Shader = shader; }
 		
 		
 	};
