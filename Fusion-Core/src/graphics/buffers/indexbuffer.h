@@ -1,3 +1,13 @@
+/**
+ * Basic Index Buffer class.
+ * Used to Encapsulate openGL IBOs into a local datatype
+ * Header
+ * 
+ * Version: 0.0.1
+ * 0 2017 Braxton Salyer and Logan Tibbetts
+ * 
+ **/
+
 #ifndef _INDEX_BUFFER
 #define _INDEX_BUFFER
 
@@ -12,13 +22,29 @@ namespace fusion { namespace core { namespace graphics {
             GLuint m_Count;
 
         public:
+            /*
+             * Constructor
+             */
             IndexBuffer(GLuint* data, GLsizei count);
-
+            
+            /*
+             * Destructor
+             */
             ~IndexBuffer();
 
+            /*
+             * Binds the buffer in openGL
+             */ 
             inline void bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID); }
+            
+            /*
+             * Unbinds the buffer
+             */
             inline void unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
-
+            
+            /*
+             * Returns the number of indices
+             */
             inline GLuint getCount() const { return m_Count; }
 
     };

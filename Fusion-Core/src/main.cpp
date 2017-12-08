@@ -1,3 +1,12 @@
+/**
+ * Test-bed for Fusion-Core
+ * Used to test general component functionality
+ *
+ * Version: 0.0.1
+ * 0 2017 Braxton Salyer and Logan Tibbetts
+ * 
+ **/
+
 #include "../src/graphics/window.h"
 #include "../src/mathLibs/mathLib.h"
 #include "../src/graphics/shader.h"
