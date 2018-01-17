@@ -29,8 +29,8 @@ namespace fusion { namespace core { namespace graphics {
             GLsizei m_IndexCount;
 
             void init();
+            
         public:
-
             BatchRenderer2D();
             ~BatchRenderer2D();
             void begin() override;
