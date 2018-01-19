@@ -1,7 +1,7 @@
 project(Fusion-Core)
 
-set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -lGL -lGLEW -lglfw")
-set (GCC_COVERAGE_LINKER_FLAGS "-lGL -lGLEW -lglfw")
+set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -lGL -lGLEW -lglfw -lfreeimage")
+set (GCC_COVERAGE_LINKER_FLAGS "-lGL -lGLEW -lglfw -lfreeimage")
 
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
 SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINKER_FLAGS}" )
@@ -47,4 +47,5 @@ target_link_libraries( main
                     GL
                     GLEW
                     glfw
+                    freeimage
                     c )
