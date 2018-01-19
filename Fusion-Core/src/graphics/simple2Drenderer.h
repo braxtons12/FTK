@@ -2,11 +2,12 @@
 #define _SIMPLE_2D_RENDERER
 
 #include "renderer2D.h"
-#include "static_sprite.h"
+#include "../src/graphics/renderable2D.h"
+#include "../src/graphics/static_sprite.h"
 
 #include <deque>
 
-namespace fusion { namespace core { namespace graphics { 
+namespace fusion { namespace core { namespace graphics {
 
     class Simple2DRenderer : public Renderer2D {
 

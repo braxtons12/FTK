@@ -136,6 +136,12 @@ namespace fusion { namespace math {
             friend mat4 operator*(mat4 left, const mat4& right);
             mat4 operator*=(const mat4& right);
 
+            vec3 multiply(const vec3& right) const;
+            friend vec3 operator*(const mat4& left, const vec3& right);
+
+            vec4 multiply(const vec4& right) const;
+            friend vec4 operator*(const mat4& left, const vec4& right);
+
 
     };
 }}

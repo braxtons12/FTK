@@ -68,19 +68,19 @@ namespace fusion { namespace core { namespace graphics {
 
 		unsigned int c = a << 24 | b << 16 | g << 8 | r;
 
-		m_Buffer->vertex = position;
+		m_Buffer->vertex = m_TransformationBack * position;
 		m_Buffer->color = c;
 		m_Buffer++;
 
-		m_Buffer->vertex = math::vec3(position.m_x, position.m_y + size.m_y, position.m_z);
+		m_Buffer->vertex = m_TransformationBack * math::vec3(position.m_x, position.m_y + size.m_y, position.m_z);
 		m_Buffer->color = c;
 		m_Buffer++;
 
-		m_Buffer->vertex = math::vec3(position.m_x + size.m_x, position.m_y + size.m_y, position.m_z);
+		m_Buffer->vertex = m_TransformationBack * math::vec3(position.m_x + size.m_x, position.m_y + size.m_y, position.m_z);
 		m_Buffer->color = c;
 		m_Buffer++;
 
-		m_Buffer->vertex = math::vec3(position.m_x + size.m_x, position.m_y, position.m_z);
+		m_Buffer->vertex = m_TransformationBack * math::vec3(position.m_x + size.m_x, position.m_y, position.m_z);
 		m_Buffer->color = c;
 		m_Buffer++;
 

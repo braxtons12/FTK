@@ -1,6 +1,6 @@
 project(Fusion-Core)
 
-set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/mathLibs -I../src/utils -lGL -lGLEW -lglfw")
+set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -lGL -lGLEW -lglfw")
 set (GCC_COVERAGE_LINKER_FLAGS "-lGL -lGLEW -lglfw")
 
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
@@ -10,6 +10,8 @@ include_directories (include
                     src/
                     src/graphics/
                     src/graphics/buffers/
+                    src/graphics/layers/
+                    src/graphics/groups/
                     src/input/
                     src/mathLibs/
                     src/utils/ )
@@ -20,6 +22,9 @@ set ( GRAPHICS
     src/graphics/buffers/buffer.cpp
     src/graphics/buffers/indexbuffer.cpp
     src/graphics/buffers/vertexarray.cpp
+    src/graphics/layers/layer.cpp
+    src/graphics/layers/tilelayer.cpp
+    src/graphics/groups/group.cpp
     src/graphics/renderable2D.h
     src/graphics/renderer2D.h
     src/graphics/static_sprite.cpp
