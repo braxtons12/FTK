@@ -29,7 +29,6 @@ namespace fusion { namespace core { namespace utils {
 		*width = FreeImage_GetWidth(dib);
 		*height = FreeImage_GetHeight(dib);
 
-unsigned int i = -1;
 		return result;
 
 	}

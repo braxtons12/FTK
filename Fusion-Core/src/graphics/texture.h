@@ -29,4 +29,5 @@ namespace fusion { namespace core { namespace graphics {
 
 	};
 }}}
+
 #endif
