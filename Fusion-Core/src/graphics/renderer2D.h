@@ -1,11 +1,11 @@
 #ifndef _RENDERER_2D
 #define _RENDERER_2D
 
-#include "../src/mathLibs/mathLib.h"
+#include "../../src/mathLibs/mathLib.h"
 
 #include <GL/glew.h>
 
-]class Renderable2D;
+class Renderable2D;
 
 namespace fusion { namespace core { namespace graphics {
 

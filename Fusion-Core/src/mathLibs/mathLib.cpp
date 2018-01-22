@@ -1,7 +1,7 @@
 #include "mathLib.h"
 #include <string.h>
 
-namespace fusion { namespace math {
+namespace fusion { namespace core { namespace math {
 
 #ifndef _VEC2
 #define _VEC2
@@ -344,7 +344,7 @@ namespace fusion { namespace math {
 
 	vec3 mat4::multiply(const vec3& right) const {
 
-        return vec4(
+        return vec3(
             columns[0].m_x * right.m_x + columns[1].m_x * right.m_y + columns[2].m_x * right.m_z + columns[3].m_x,
             columns[0].m_y * right.m_x + columns[1].m_y * right.m_y + columns[2].m_y * right.m_z + columns[3].m_y,
             columns[0].m_z * right.m_x + columns[1].m_z * right.m_y + columns[2].m_z * right.m_z + columns[3].m_z
@@ -454,8 +454,6 @@ namespace fusion { namespace math {
         return result;
     }
 
-
-
 #endif
 
-}}
+}}}

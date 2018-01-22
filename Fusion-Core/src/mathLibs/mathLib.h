@@ -7,7 +7,7 @@
 
 #define _USE_MATH_DEFINES
 
-namespace fusion { namespace math {
+namespace fusion { namespace core { namespace math {
 
     class vec2{
 
@@ -144,6 +144,6 @@ namespace fusion { namespace math {
 
 
     };
-}}
+}}}
 
 #endif

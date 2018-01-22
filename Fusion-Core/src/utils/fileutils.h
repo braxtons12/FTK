@@ -4,7 +4,7 @@
 #include <cstring>
 #include <fstream>
 
-namespace fusion { 
+namespace fusion { namespace core { namespace utils {
 
     class FileUtils {
 
@@ -25,6 +25,6 @@ namespace fusion {
                 return result;
             }
     };
-}
+}}}
 
 #endif

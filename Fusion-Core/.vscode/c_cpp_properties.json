@@ -15,7 +15,12 @@
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "intelliSenseMode": "clang-x64",
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ]
         },
         {
             "name": "Linux",
@@ -32,7 +37,10 @@
                 "/usr/local/include",
                 "/usr/lib/clang/3.8.0/include",
                 "/usr/include",
-                "/usr/include/x86_64-linux-gnu"
+                "/usr/include/x86_64-linux-gnu",
+                "/usr/include/c++/7.2.1",
+                "/usr/include/c++/7.2.1/x86_64-pc-linux-gnu",
+                "/usr/include/linux"
             ],
             "defines": [],
             "browse": {
@@ -46,7 +54,8 @@
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "intelliSenseMode": "clang-x64"
         },
         {
             "name": "Win32",
@@ -64,7 +73,9 @@
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "intelliSenseMode": "msvc-x64"
         }
-    ]
+    ],
+    "version": 3
 }

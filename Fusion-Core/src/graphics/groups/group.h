@@ -1,7 +1,7 @@
 #ifndef _GROUP
 #define _GROUP
 
-#include "../src/graphics/renderable2D.h"
+#include "../../src/graphics/renderable2D.h"
 
 namespace fusion { namespace core { namespace graphics {
 

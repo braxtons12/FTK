@@ -1,11 +1,11 @@
 #ifndef _RENDERABLE_2D
 #define _RENDERABLE_2D
 
-#include "../src/graphics/buffers/buffer.h"
-#include "../src/graphics/buffers/indexbuffer.h"
-#include "../src/graphics/buffers/vertexarray.h"
-#include "../src/mathLibs/mathLib.h"
-#include "../src/graphics/shader.h"
+#include "../../src/graphics/buffers/buffer.h"
+#include "../../src/graphics/buffers/indexbuffer.h"
+#include "../../src/graphics/buffers/vertexarray.h"
+#include "../../src/mathLibs/mathLib.h"
+#include "../../src/graphics/shader.h"
 
 namespace fusion { namespace core { namespace graphics {
 
@@ -36,7 +36,7 @@ namespace fusion { namespace core { namespace graphics {
 
             }
 
-			virtual void submit(Renderer* renderer) const {
+			virtual void submit(Renderer2D* renderer) const {
 
 				renderer->submit(this);
 			}

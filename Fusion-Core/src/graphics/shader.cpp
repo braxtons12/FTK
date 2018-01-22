@@ -1,9 +1,9 @@
 #include "shader.h"
 
-namespace fusion { namespace core { namespace graphics { 
+namespace fusion { namespace core { namespace graphics {
 
-    Shader::Shader(const char* vertPath, const char* fragPath) 
-       : m_VertPath(vertPath), m_FragPath(fragPath) 
+    Shader::Shader(const char* vertPath, const char* fragPath)
+       : m_VertPath(vertPath), m_FragPath(fragPath)
     {
         m_ShaderID = load();
     }
@@ -19,8 +19,8 @@ namespace fusion { namespace core { namespace graphics {
         GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
         GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-        std::string vertSourceString = FileUtils::read_file(m_VertPath);
-        std::string fragSourceString = FileUtils::read_file(m_FragPath);
+        std::string vertSourceString = utils::FileUtils::read_file(m_VertPath);
+        std::string fragSourceString = utils::FileUtils::read_file(m_FragPath);
 
         const char* vertSource = vertSourceString.c_str();
         const char* fragSource = fragSourceString.c_str();

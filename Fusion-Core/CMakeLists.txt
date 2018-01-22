@@ -36,7 +36,8 @@ set ( INPUT
 set ( MATH
     src/mathLibs/mathLib.cpp )
 set ( UTILS
-    src/utils/fileutils.h )
+    src/utils/fileutils.h
+    src/utils/imageload.h )
 set ( MAIN
     src/main.cpp )
 

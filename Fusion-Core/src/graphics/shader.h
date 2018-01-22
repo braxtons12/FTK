@@ -1,15 +1,15 @@
 #ifndef _SHADER
 #define _SHADER
 
-#include "../src/utils/fileutils.h"
-#include "../src/mathLibs/mathLib.h"
+#include "../../src/utils/fileutils.h"
+#include "../../src/mathLibs/mathLib.h"
 
 #include <GL/glew.h>
 #include <vector>
 #include <iostream>
 
 
-namespace fusion { namespace core { namespace graphics { 
+namespace fusion { namespace core { namespace graphics {
 
     class Shader {
 
@@ -23,13 +23,13 @@ namespace fusion { namespace core { namespace graphics {
             Shader(const char* vertPath, const char* fragPath);
             ~Shader();
 
-            inline void setUniform1f(const GLchar* name, float value) 
+            inline void setUniform1f(const GLchar* name, float value)
                 { glUniform1f(getUniformLocation(name), value); }
 
-            inline void setUniform1i(const GLchar* name, int value) 
+            inline void setUniform1i(const GLchar* name, int value)
                 { glUniform1i(getUniformLocation(name), value); }
 
-            inline void setUniform2f(const GLchar* name, const math::vec2& vector) 
+            inline void setUniform2f(const GLchar* name, const math::vec2& vector)
                 { glUniform2f(getUniformLocation(name), vector.m_x, vector.m_y); }
 
             inline void setUniform3f(const GLchar* name, const math::vec3& vector)

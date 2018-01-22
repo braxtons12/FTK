@@ -1,10 +1,10 @@
 #ifndef _BATCH_RENDERER_2D
 #define _BATCH_RENDERER_2D
 
-#include "../src/graphics/renderer2D.h"
-#include "../src/graphics/renderable2D.h"
-#include "../src/graphics/buffers/vertexarray.h"
-#include "../src/graphics/buffers/indexbuffer.h"
+#include "../../src/graphics/renderer2D.h"
+#include "../../src/graphics/renderable2D.h"
+#include "../../src/graphics/buffers/vertexarray.h"
+#include "../../src/graphics/buffers/indexbuffer.h"
 
 #include <cstddef>
 
