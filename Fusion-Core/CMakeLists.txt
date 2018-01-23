@@ -1,6 +1,6 @@
 project(Fusion-Core)
 
-set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -lGL -lGLEW -lglfw -lfreeimage")
+set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -lGL -lGLEW -lglfw -lfreeimage")
 set (GCC_COVERAGE_LINKER_FLAGS "-lGL -lGLEW -lglfw -lfreeimage")
 
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
@@ -30,19 +30,25 @@ set ( GRAPHICS
     src/graphics/static_sprite.cpp
     src/graphics/sprite.cpp
     src/graphics/simple2Drenderer.cpp
-    src/graphics/batchrenderer2D.cpp )
+    src/graphics/batchrenderer2D.cpp
+    src/graphics/texture.cpp
+    src/graphics/fusionwindow.cpp
+    src/graphics/fusionUI.cpp )
 set ( INPUT
     src/input/input.cpp )
 set ( MATH
     src/mathLibs/mathLib.cpp )
+set ( SIGNALS
+    src/signals/windowupdatesignal.cpp )
 set ( UTILS
     src/utils/fileutils.h
-    src/utils/imageload.h )
+    src/utils/imageload.h
+    src/utils/timer.h )
 set ( MAIN
     src/main.cpp )
 
 set(EXECUTABLE_OUTPUT_PATH bin)
-add_executable ( main ${MAIN} ${GRAPHICS} ${INPUT} ${MATH} ${UTILS} )
+add_executable ( main ${MAIN} ${GRAPHICS} ${INPUT} ${MATH} ${SIGNALS} ${UTILS} )
 
 target_link_libraries( main
                     GL

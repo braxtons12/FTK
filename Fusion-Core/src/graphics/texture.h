@@ -24,8 +24,9 @@ namespace fusion { namespace core { namespace graphics {
 			void bind() const;
 			void unbind() const;
 
-			inline const GLsizei getWidth() const { return m_Width; }
-			inline const GLsizei getHeight() const { return m_Height; }
+			inline const unsigned int getID() const { return m_TID; }
+			inline const unsigned int getWidth() const { return m_Width; }
+			inline const unsigned int getHeight() const { return m_Height; }
 
 	};
 }}}

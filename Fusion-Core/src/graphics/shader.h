@@ -26,8 +26,14 @@ namespace fusion { namespace core { namespace graphics {
             inline void setUniform1f(const GLchar* name, float value)
                 { glUniform1f(getUniformLocation(name), value); }
 
+            inline void setUniform1fv(const GLchar* name, float* value, int count)
+                { glUniform1fv(getUniformLocation(name), count, value); }
+
             inline void setUniform1i(const GLchar* name, int value)
                 { glUniform1i(getUniformLocation(name), value); }
+
+            inline void setUniform1iv(const GLchar* name, int* value, int count)
+                { glUniform1iv(getUniformLocation(name), count, value); }
 
             inline void setUniform2f(const GLchar* name, const math::vec2& vector)
                 { glUniform2f(getUniformLocation(name), vector.m_x, vector.m_y); }
