@@ -96,7 +96,7 @@ namespace fusion { namespace core { namespace graphics {
                     begin();
                 }
                 m_TextureSlots.push_back(tid);
-                ts = (float)(m_TextureSlots.size() -1);
+                ts = (float)(m_TextureSlots.size());
             }
 
         } else {
@@ -148,7 +148,7 @@ namespace fusion { namespace core { namespace graphics {
             glActiveTexture(GL_TEXTURE0 + i);
             glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
         }
-        
+
 		glBindVertexArray(m_VAO);
 		m_IBO->bind();
 

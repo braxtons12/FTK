@@ -9,6 +9,7 @@
 
 #include "../src/graphics/window.h"
 #include "../src/mathLibs/mathLib.h"
+#include "../src/utils/timer.h"
 #include "../src/graphics/shader.h"
 #include "../src/graphics/buffers/buffer.h"
 #include "../src/graphics/buffers/indexbuffer.h"
@@ -21,7 +22,6 @@
 #include "../src/graphics/batchrenderer2D.h"
 #include "../src/graphics/fusionwindow.h"
 #include "../src/graphics/fusionUI.h"
-#include "../src/utils/timer.h"
 #include "../src/graphics/layers/tilelayer.h"
 
 #include <time.h>
