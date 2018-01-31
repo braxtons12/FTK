@@ -88,7 +88,7 @@ namespace fusion { namespace core { namespace graphics {
                     }
                     else {
 
-                        m_State = MENU_STATE_NORMAL;
+                        SetState(MENU_STATE_NORMAL);
                         for(i = 0; i < m_NumMenus; ++i) {
 
                             m_Buttons.at(i).setMenuNotClicked();
@@ -98,7 +98,7 @@ namespace fusion { namespace core { namespace graphics {
                 }
                 else {
 
-                    m_State = MENU_STATE_NORMAL;
+                    SetState(MENU_STATE_NORMAL);
                     for(i = 0; i < m_NumMenus; ++i) {
 
                         m_Buttons.at(i).setMenuNotClicked();
