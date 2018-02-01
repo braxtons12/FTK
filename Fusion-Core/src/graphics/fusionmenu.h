@@ -47,6 +47,32 @@ namespace fusion { namespace core { namespace graphics {
                 SetTexture();
             }
 
+            void Hover(double x, double y) {
+
+                if(m_MenuType == MENU_TYPE_HORIZONTAL) {
+
+                    for(i = 0; i < m_NumMenus; ++i) {
+
+                        if(x >= m_Divisons.at(i) && x <= m_Divisions.at(i+1)) {
+
+                            m_Buttons.at(i).setMenuClicked();
+                            m_SubMenus.at(i).SetState(MENU_STATE_HOVER);
+                        }
+                    }
+                }
+                else if (m_MenuType == MENU_TYPE_VERTICAL) {
+
+                    for(i = 0; i < m_NumMenus; ++i) {
+
+                        if(y >= m_Divisions.at(i) && y <= m_Divisions.at(i+1)) {
+
+                            m_Buttons.at(i).SetMenuClicked();
+                            m_SubMenus.at(i).SetState(MENU_STATE_HOVER);
+                        }
+                    }
+                }
+            }
+
         public:
             FusionMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,
                                int state, int menuType std::vector<float> divisions, int numMenus, Window* parentWindow)
@@ -65,6 +91,11 @@ namespace fusion { namespace core { namespace graphics {
 
                 m_SubMenus.push_back(FusionMenu(position, size, m_Color, m_HoverTexture, m_NormalTexture, false,
                                                 divisions, numMenus, m_ParentWindow));
+            }
+
+            void addSubMenu(FusionMenu& menu) {
+
+                m_SubMenus.push_back(menu);
             }
 
             void addButon(math::vec3 position, math::vec2 size) {
@@ -107,29 +138,12 @@ namespace fusion { namespace core { namespace graphics {
                 }
             }
 
-            void Hover(double x, double y) {
+            void submit(Renderer2D* renderer) const override {
 
-                if(m_MenuType == MENU_TYPE_HORIZONTAL) {
+                renderer->submit(this);
+                for(int i = 0; i < m_NumMenus; ++i) {
 
-                    for(i = 0; i < m_NumMenus; ++i) {
-
-                        if(x >= m_Divisons.at(i) && x <= m_Divisions.at(i+1)) {
-
-                            m_Buttons.at(i).setMenuClicked();
-                            m_SubMenus.at(i).SetState(MENU_STATE_HOVER);
-                        }
-                    }
-                }
-                else if (m_MenuType == MENU_TYPE_VERTICAL) {
-
-                    for(i = 0; i < m_NumMenus; ++i) {
-
-                        if(y >= m_Divisions.at(i) && y <= m_Divisions.at(i+1)) {
-
-                            m_Buttons.at(i).SetMenuClicked();
-                            m_SubMenus.at(i).SetState(MENU_STATE_HOVER);
-                        }
-                    }
+                    renderer->submit(m_SubMenus.at(i));
                 }
             }
 

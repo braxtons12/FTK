@@ -11,9 +11,13 @@
 #include "../../src/graphics/static_sprite.h"
 #include "../../src/graphics/renderer2D.h"
 #include "../../src/graphics/batchrenderer2D.h"
+#include "../../src/graphics/fusionmenu.h"
 
 #include <typeinfo>
 #include <vector>
+
+#define WINDOW_HAS_MENU 1
+#define WINDOW_NO_MENU  0
 
 namespace fusion { namespace core { namespace graphics { namespace window {
 
@@ -23,7 +27,7 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 
 	private:
 
-		Window* m_Child;
+		Window* m_Window;
 		const WindowUpdateSignal* m_Signal;
 		const char* m_Name;
 		int m_Width;
@@ -34,12 +38,14 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		const char* m_FragmentShaderPath;
 		Shader* m_Shader;
 		Renderer2D* m_Renderer;
+		bool m_HasMenu;
+		FusionMenu m_Menu;
 
 		void init();
 
 	public:
 
-		FusionWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath);
+		FusionWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath, bool hasMenu);
 
 		inline const char* const getName() { return m_Name; }
 		inline int const getHeight() { return m_Height; }
@@ -51,6 +57,9 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 			m_Renderer->submit(renderable);
 		}
 
+		void setMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,
+                               int state, int menuType std::vector<float> divisions, int numMenus, std::vector<FusionMenu&> subMenus);
+
 		void update();
 
 		inline void beginRenderer() { m_Renderer->begin(); }
@@ -60,7 +69,7 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 
 		inline void setShader(Shader& shader) { *m_Shader = shader; }
 		inline Shader& getShader() { return *m_Shader; }
-		inline Window* const getWindow() { return m_Child; }
+		inline Window* const getWindow() { return m_Window; }
 		inline input::Mouse* const getMouse() { return m_Mouse; }
 		inline input::Keyboard* const getKeyboard() { return m_Keyboard; }
 
