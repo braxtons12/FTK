@@ -37,7 +37,7 @@
                     ]
                   },
                   {
-                    "compileFlags": " -g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -lGL -lGLEW -lglfw -lfreeimage -lfreetype2 -lFTGL -g  ",
+                    "compileFlags": " -g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g  ",
                     "includePath": [
                       {
                         "path": "/home/braxton/git/Fusion/Fusion-Core/include"
@@ -93,8 +93,8 @@
                   }
                 ],
                 "fullName": "main",
-                "linkFlags": "-lGL -lGLEW -lglfw -lfreeimage -lfreetype2 -lFTGL   -rdynamic",
-                "linkLanguageFlags": "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -lGL -lGLEW -lglfw -lfreeimage -lfreetype2 -lFTGL -g",
+                "linkFlags": "-lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl   -rdynamic",
+                "linkLanguageFlags": "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g",
                 "linkLibraries": "-lGL -lGLEW -lglfw -lfreeimage -lc",
                 "linkerLanguage": "CXX",
                 "name": "main",
@@ -106,7 +106,7 @@
         ]
       }
     ],
-    "cookie": "0.31884843906607396",
+    "cookie": "0.3566906369806575",
     "inReplyTo": "codemodel",
     "type": "reply"
   }

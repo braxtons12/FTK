@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include <fstream>
+#include <iostream>
 
 namespace fusion { namespace core { namespace utils {
 
@@ -12,6 +13,7 @@ namespace fusion { namespace core { namespace utils {
         static std::string read_file(const char* filepath) {
 
                 FILE* file = fopen(filepath, "rt");
+                if(file == NULL) std::cout << "FILE IS NULL" << std::endl;
                 fseek(file, (long)0, SEEK_END);
                 unsigned long length = ftell(file);
                 char *data = new char[length + 1];
