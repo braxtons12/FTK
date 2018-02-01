@@ -40,6 +40,7 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		Renderer2D* m_Renderer;
 		bool m_HasMenu;
 		FusionMenu m_Menu;
+		std::vector<const Renderable2D*>* m_PermanentRenderables;
 
 		void init();
 
@@ -52,9 +53,14 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		inline int const getWidth() { return m_Width; }
 		inline void updateSize(int width, int height) { m_Width = width; m_Height = height; }
 
-		inline void addElement(const Renderable2D* renderable) {
+		inline void addPermanentElement(const Renderable2D* renderable) {
 			if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader);
-			m_Renderer->submit(renderable);
+			m_PermanentRenderables->push_back(renderable);
+		}
+
+		inline void addTemporaryElement(const Renderable2D* renderable) {
+			if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader);
+			renderable->submit(m_Renderer);
 		}
 
 		void setMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,

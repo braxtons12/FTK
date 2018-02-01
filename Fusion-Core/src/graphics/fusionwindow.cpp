@@ -13,6 +13,8 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		
 		m_Shader = new Shader(m_VertexShaderPath, m_FragmentShaderPath);
 		m_Shader->enable();
+
+		m_PermanentRenderables = new std::vector<const Renderable2d*>;
 		
 	}
 	
@@ -42,6 +44,11 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 
 		m_Menu.checkHover();
 		m_Menu.submit(m_Renderer);
+
+		for(int i = 0; i < m_PermanentRenderables.size(); ++i) {
+
+			m_PermanentRenderables.at(i)->submit(m_Renderer);
+		}
 		
 		m_Window->clear();
 		
