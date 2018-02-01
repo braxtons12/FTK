@@ -39,7 +39,7 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		Shader* m_Shader;
 		Renderer2D* m_Renderer;
 		bool m_HasMenu;
-		FusionMenu m_Menu;
+		FusionMenu* m_Menu;
 		std::vector<const Renderable2D*>* m_PermanentRenderables;
 
 		void init();
@@ -64,7 +64,7 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		}
 
 		void setMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,
-                               int state, int menuType std::vector<float> divisions, int numMenus, std::vector<FusionMenu&> subMenus);
+                               int state, int menuType, std::vector<float> divisions, int numMenus, std::vector<FusionMenu*> subMenus);
 
 		void update();
 

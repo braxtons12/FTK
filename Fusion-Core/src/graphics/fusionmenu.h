@@ -10,28 +10,28 @@
 
 #include "../../src/input/input.h"
 #include "../../src/graphics/window.h"
-#include "../../src/graphics/fusiontogglebutton.h"
+#include "../../src/graphics/fusionbutton.h"
 
 namespace fusion { namespace core { namespace graphics {
 
-    class FusionMenu : Renderable2D {
+    class FusionMenu : public Renderable2D {
 
         private:
-            Input::Mouse m_Mouse;
-            Window* m_ParentWindow;
+            input::Mouse m_Mouse;
+            window::Window* m_ParentWindow;
             Texture* m_OffTexture;
             Texture* m_HoverTexture;
             Texture* m_NormalTexture;
             int m_State;
             int m_MenuType;
-            std::vector<FusionMenu&> m_SubMenus;
+            std::vector<FusionMenu*> m_SubMenus;
             std::vector<float> m_Divisions;
             int m_NumMenus;
-            std::vector<FusionToggleButton&> m_Buttons;
+            std::vector<FusionButton*> m_Buttons;
 
             inline void init() {
 
-                m_Mouse = Input::Mouse::GetInstace();
+                m_Mouse = input::Mouse::GetInstance();
             }
 
             void SetTexture() {
@@ -51,23 +51,23 @@ namespace fusion { namespace core { namespace graphics {
 
                 if(m_MenuType == MENU_TYPE_HORIZONTAL) {
 
-                    for(i = 0; i < m_NumMenus; ++i) {
+                    for(int i = 0; i < m_NumMenus; ++i) {
 
-                        if(x >= m_Divisons.at(i) && x <= m_Divisions.at(i+1)) {
+                        if(x >= m_Divisions.at(i) && x <= m_Divisions.at(i+1)) {
 
-                            m_Buttons.at(i).setState(BUTTON_STATE_HOVER);
-                            m_SubMenus.at(i).SetState(MENU_STATE_HOVER);
+                            m_Buttons.at(i)->setState(BUTTON_STATE_HOVER);
+                            m_SubMenus.at(i)->SetState(MENU_STATE_HOVER);
                         }
                     }
                 }
                 else if (m_MenuType == MENU_TYPE_VERTICAL) {
 
-                    for(i = 0; i < m_NumMenus; ++i) {
+                    for(int i = 0; i < m_NumMenus; ++i) {
 
                         if(y >= m_Divisions.at(i) && y <= m_Divisions.at(i+1)) {
 
-                            m_Buttons.at(i).setState(BUTTON_STATE_HOVER);
-                            m_SubMenus.at(i).SetState(MENU_STATE_HOVER);
+                            m_Buttons.at(i)->setState(BUTTON_STATE_HOVER);
+                            m_SubMenus.at(i)->SetState(MENU_STATE_HOVER);
                         }
                     }
                 }
@@ -75,8 +75,8 @@ namespace fusion { namespace core { namespace graphics {
 
         public:
             FusionMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,
-                               int state, int menuType std::vector<float> divisions, int numMenus, Window* parentWindow)
-                : Renderable2D(math::vec3 position, math::vec2 size, math::vec4 color),
+                               int state, int menuType, std::vector<float> divisions, int numMenus, window::Window* parentWindow)
+                : Renderable2D(position, size, color),
                 m_OffTexture(offTexture), m_HoverTexture(hoverTexture), m_NormalTexture(normalTexture), m_State(state), 
                 m_MenuType(menuType), m_Divisions(divisions), m_NumMenus(numMenus), m_ParentWindow(parentWindow)
             {
@@ -87,28 +87,28 @@ namespace fusion { namespace core { namespace graphics {
 
             ~FusionMenu() { }
 
-            void addSubMenu(math::vec3 position, math::vec2 size, std::vector<float> divisions, int numMenus) {
+            void addSubMenu(math::vec3 position, math::vec2 size, std::vector<float>& divisions, int numMenus, int menuType) {
 
-                m_SubMenus.push_back(FusionMenu(position, size, m_Color, m_HoverTexture, m_NormalTexture, false,
-                                                divisions, numMenus, m_ParentWindow));
+                m_SubMenus.push_back(new FusionMenu(position, size, m_Color, m_OffTexture, m_HoverTexture, m_NormalTexture, MENU_STATE_OFF,
+                                                menuType, divisions, numMenus, m_ParentWindow));
             }
 
-            void addSubMenu(FusionMenu& menu) {
+            void addSubMenu(FusionMenu* menu) {
 
                 m_SubMenus.push_back(menu);
             }
 
             void addButon(math::vec3 position, math::vec2 size) {
 
-                m_Buttons.push_back(FusionToggleButton(position, size, m_Color, m_NormalTexture, m_HoverTexture, false, m_ParentWindow))
+                m_Buttons.push_back(new FusionButton(position, size, m_Color, m_NormalTexture, m_HoverTexture, m_ParentWindow));
             }
 
             void checkHover() {
 
                 double x, y = 0.0f;
                 m_Mouse.getMousePosition(x, y);
-                x = (x * 32.0f / m_ParentWindow.getWidth() - 16.0f);
-                y = (9.0f - y * 18.0f / m_ParentWindow.getHeight());
+                x = (x * 32.0f / m_ParentWindow->getWidth() - 16.0f);
+                y = (9.0f - y * 18.0f / m_ParentWindow->getHeight());
 
                 if(x <= m_Size.m_x && x >= m_Position.m_x) {
 
@@ -120,30 +120,31 @@ namespace fusion { namespace core { namespace graphics {
                     else {
 
                         SetState(MENU_STATE_NORMAL);
-                        for(i = 0; i < m_NumMenus; ++i) {
+                        for(int i = 0; i < m_NumMenus; ++i) {
 
-                            m_Buttons.at(i).setMenuNotClicked();
-                            m_SubMenus.at(i).SetState(MENU_STATE_OFF);
+                            m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
+                            m_SubMenus.at(i)->SetState(MENU_STATE_OFF);
                         }
                     }
                 }
                 else {
 
                     SetState(MENU_STATE_NORMAL);
-                    for(i = 0; i < m_NumMenus; ++i) {
+                    for(int i = 0; i < m_NumMenus; ++i) {
 
-                        m_Buttons.at(i).setMenuNotClicked();
-                        m_SubMenus.at(i).SetState(MENU_STATE_OFF);
+                        m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
+                        m_SubMenus.at(i)->SetState(MENU_STATE_OFF);
                     }
                 }
             }
 
             void submit(Renderer2D* renderer) const override {
 
-                renderer->submit(this);
+                ((Renderable2D*)this)->submit(renderer);
                 for(int i = 0; i < m_NumMenus; ++i) {
 
-                    renderer->submit(m_SubMenus.at(i));
+                    m_SubMenus.at(i)->submit(renderer);
+                    m_Buttons.at(i)->submit(renderer);
                 }
             }
 

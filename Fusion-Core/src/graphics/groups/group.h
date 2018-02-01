@@ -9,7 +9,7 @@ namespace fusion { namespace core { namespace graphics {
 
 		private:
 			std::vector<Renderable2D*> m_Renderables;
-			math::mat4 m_TranformationMatrix;
+			math::mat4 m_TransformationMatrix;
 
 		public:
 			Group(const math::mat4& transform);

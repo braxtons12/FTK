@@ -4,16 +4,17 @@
 #include "../../src/mathLibs/mathLib.h"
 
 #include <GL/glew.h>
-
-class Renderable2D;
+#include <vector>
 
 namespace fusion { namespace core { namespace graphics {
+
+    class Renderable2D;
 
     class Renderer2D {
 
         protected:
-            std::vector<const math::mat4> m_TransformationStack;
-			const math::mat4* m_TransformationBack;
+            std::vector<math::mat4> m_TransformationStack;
+			math::mat4* m_TransformationBack;
 
             Renderer2D() {
 

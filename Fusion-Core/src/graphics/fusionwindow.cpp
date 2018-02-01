@@ -14,7 +14,7 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		m_Shader = new Shader(m_VertexShaderPath, m_FragmentShaderPath);
 		m_Shader->enable();
 
-		m_PermanentRenderables = new std::vector<const Renderable2d*>;
+		m_PermanentRenderables = new std::vector<const Renderable2D*>;
 		
 	}
 	
@@ -26,12 +26,12 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 	}
 	
 	void FusionWindow::setMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, 
-							   Texture* normalTexture, int state, int menuType std::vector<float> divisions, int numMenus, 
-							   std::vector<FusionMenu&> subMenus) 
+							   Texture* normalTexture, int state, int menuType, std::vector<float> divisions, int numMenus, 
+							   std::vector<FusionMenu*> subMenus) 
 	{
-		m_Menu(position, size, color, offTexture, hoverTexter, normalTexture, state, menuType, divisions, numMenus, m_Window);
+		m_Menu = new FusionMenu(position, size, color, offTexture, hoverTexture, normalTexture, state, menuType, divisions, numMenus, m_Window);
 		for (int i = 0; i < numMenus; ++i) {
-			m_Menu.addSubMenu(subMenus.at(i));
+			m_Menu->addSubMenu(subMenus.at(i));
 		}
 	}
 	void FusionWindow::update() {
@@ -42,12 +42,12 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 			m_Signal->resetSignal();
 		}
 
-		m_Menu.checkHover();
-		m_Menu.submit(m_Renderer);
+		m_Menu->checkHover();
+		m_Menu->submit(m_Renderer);
 
-		for(int i = 0; i < m_PermanentRenderables.size(); ++i) {
+		for(int i = 0; i < m_PermanentRenderables->size(); ++i) {
 
-			m_PermanentRenderables.at(i)->submit(m_Renderer);
+			m_PermanentRenderables->at(i)->submit(m_Renderer);
 		}
 		
 		m_Window->clear();

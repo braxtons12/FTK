@@ -7,6 +7,7 @@
 #include "../../src/mathLibs/mathLib.h"
 #include "../../src/graphics/shader.h"
 #include "../../src/graphics/texture.h"
+#include "../../src/graphics/renderer2D.h"
 
 namespace fusion { namespace core { namespace graphics {
 

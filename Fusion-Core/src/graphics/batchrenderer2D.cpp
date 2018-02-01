@@ -89,7 +89,7 @@ namespace fusion { namespace core { namespace graphics {
 
             if (!found) {
 
-                if (m_TextureSlots.size >= 32) {
+                if (m_TextureSlots.size() >= 32) {
 
                     end();
                     flush();
@@ -109,25 +109,25 @@ namespace fusion { namespace core { namespace graphics {
             c = a << 24 | b << 16 | g << 8 | r;
         }
 
-		m_Buffer->vertex = m_TransformationBack * position;
+		m_Buffer->vertex = *m_TransformationBack * position;
         m_Buffer->uv = uv[0];
         m_Buffer->tid = ts;
 		m_Buffer->color = c;
 		m_Buffer++;
 
-		m_Buffer->vertex = m_TransformationBack * math::vec3(position.m_x, position.m_y + size.m_y, position.m_z);
+		m_Buffer->vertex = *m_TransformationBack * math::vec3(position.m_x, position.m_y + size.m_y, position.m_z);
         m_Buffer->uv = uv[1];
         m_Buffer->tid = ts;
 		m_Buffer->color = c;
 		m_Buffer++;
 
-		m_Buffer->vertex = m_TransformationBack * math::vec3(position.m_x + size.m_x, position.m_y + size.m_y, position.m_z);
+		m_Buffer->vertex = *m_TransformationBack * math::vec3(position.m_x + size.m_x, position.m_y + size.m_y, position.m_z);
         m_Buffer->uv = uv[2];
         m_Buffer->tid = ts;
 		m_Buffer->color = c;
 		m_Buffer++;
 
-		m_Buffer->vertex = m_TransformationBack * math::vec3(position.m_x + size.m_x, position.m_y, position.m_z);
+		m_Buffer->vertex = *m_TransformationBack * math::vec3(position.m_x + size.m_x, position.m_y, position.m_z);
         m_Buffer->uv = uv[3];
         m_Buffer->tid = ts;
 		m_Buffer->color = c;

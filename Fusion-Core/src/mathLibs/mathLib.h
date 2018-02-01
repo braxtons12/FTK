@@ -133,7 +133,7 @@ namespace fusion { namespace core { namespace math {
             static mat4 scale(const vec3& scale);
 
             mat4 multiply(const mat4& right);
-            friend mat4 operator*(mat4 left, const mat4& right);
+            friend mat4 operator*(const mat4 left, const mat4& right);
             mat4 operator*=(const mat4& right);
 
             vec3 multiply(const vec3& right) const;

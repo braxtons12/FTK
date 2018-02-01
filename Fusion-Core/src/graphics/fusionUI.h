@@ -21,9 +21,9 @@ namespace fusion { namespace core { namespace graphics {
 		FusionUI();
 		~FusionUI();
 
-		inline void addWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath) {
+		inline void addWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath, bool hasMenu) {
 
-			m_Windows->push_back(new window::FusionWindow(name, width, height, vertexShaderPath, fragmentShaderPath));
+			m_Windows->push_back(new window::FusionWindow(name, width, height, vertexShaderPath, fragmentShaderPath, hasMenu));
 			m_NumWindows++;
 		}
 

@@ -3,24 +3,25 @@
 
 #include "../../src/input/input.h"
 #include "../../src/graphics/window.h"
+#include "../../src/graphics/renderable2D.h"
 
 #define BUTTON_STATE_OFF   0
 #define BUTTON_STATE_HOVER 1
 
 namespace fusion { namespace core { namespace graphics { 
 
-    class FusionButton : Renderable2D {
+    class FusionButton : public Renderable2D {
 
-        private:
-            Input::Mouse m_Mouse;
-            Window* m_ParentWindow;
+        protected:
+            input::Mouse m_Mouse;
+            window::Window* m_ParentWindow;
             int m_State;
             Texture* m_TextureOff;
             Texture* m_TextureHover;
 
             inline void init() {
 
-                m_Mouse = Input::Mouse::GetInstace();
+                m_Mouse = input::Mouse::GetInstance();
                 m_State = BUTTON_STATE_OFF;
             }
 
@@ -37,10 +38,10 @@ namespace fusion { namespace core { namespace graphics {
             }
 
         public:
-            FusionButton(math::vec3 position, math::vec2 size, math::vec4 color, Texture* textureOff, Texture* textureHover, Window* parentWindow)
-                : Renderable2D(math::vec3 position, math::vec2 size, math::vec4 color), m_Texture(textureOff),
-                m_TextureOff(textureOff), m_TextureHover(textureHover), m_ParentWindow(parentWindow) 
+            FusionButton(math::vec3 position, math::vec2 size, math::vec4 color, Texture* textureOff, Texture* textureHover, window::Window* parentWindow)
+                : Renderable2D(position, size, color), m_TextureOff(textureOff), m_TextureHover(textureHover), m_ParentWindow(parentWindow) 
             {
+                m_Texture = textureOff;
                 init();
             }
             
@@ -50,8 +51,8 @@ namespace fusion { namespace core { namespace graphics {
 
                 double x,y = 0.0f;
                 m_Mouse.getMousePosition(x,y);
-                if (m_Mouse.Pressed(0) && (float)(x * 32.0f / m_ParentWindow.getWidth() - 16.0f) == position.m_x &&
-                   (float)(9.0f - y * 18.0f / m_ParentWindow.getHeight())== position.m_y) 
+                if (m_Mouse.Pressed(0) && (float)(x * 32.0f / m_ParentWindow->getWidth() - 16.0f) == m_Position.m_x &&
+                   (float)(9.0f - y * 18.0f / m_ParentWindow->getHeight())== m_Position.m_y) 
                    return true;
                 else return false;
             }
@@ -60,8 +61,8 @@ namespace fusion { namespace core { namespace graphics {
 
                 double x, y = 0.0f;
                 m_Mouse.getMousePosition(x, y);
-                x = (x * 32.0f / m_ParentWindow.getWidth() - 16.0f);
-                y = (9.0f - y * 18.0f / m_ParentWindow.getHeight());
+                x = (x * 32.0f / m_ParentWindow->getWidth() - 16.0f);
+                y = (9.0f - y * 18.0f / m_ParentWindow->getHeight());
 
                 if(x <= m_Size.m_x && x >= m_Position.m_x) {
 
@@ -79,6 +80,9 @@ namespace fusion { namespace core { namespace graphics {
                     SetState(BUTTON_STATE_OFF);
                 }
             }
+
+            inline bool getState() const { return m_State; }
+            inline void setState(int state) { m_State = state; }
     };
 }}}
 
