@@ -11,7 +11,8 @@ namespace fusion { namespace core { namespace graphics {
             Texture* m_OffTexture;
             Texture* m_OnTexture;
             bool m_State;
-            bool m_MenuState;
+            bool m_MenuState; //helper variable for when contained inside a menu (eg, when it is an entry in a menu, not a real button)
+                              //used to trigger a texture update (eg, hover animation) without registering a real click
 
             void SetTexture() {
 
@@ -46,6 +47,8 @@ namespace fusion { namespace core { namespace graphics {
                 else return false;
             }
 
+            //helper functions used to set texture state when used as an entry in a menu instead of a real button.
+            //see comment for m_MenuState above
             void setMenuClicked() {
 
                 m_MenuState = true;
@@ -58,6 +61,7 @@ namespace fusion { namespace core { namespace graphics {
                 SetTexture();
             }
 
+            //functions used to get and set the clicked state
             inline bool getState() const { return m_State; }
             inline void setState(bool state) { m_State = state; }
         
