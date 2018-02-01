@@ -33,7 +33,10 @@ set ( GRAPHICS
     src/graphics/batchrenderer2D.cpp
     src/graphics/texture.cpp
     src/graphics/fusionwindow.cpp
-    src/graphics/fusionUI.cpp )
+    src/graphics/fusionUI.cpp
+    src/graphics/fusionbutton.h
+    src/graphics/fusiontogglebutton.h
+    src/graphics/fusionmenu.h )
 set ( INPUT
     src/input/input.cpp )
 set ( MATH
