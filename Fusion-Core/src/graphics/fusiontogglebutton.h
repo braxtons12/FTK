@@ -3,29 +3,32 @@
 
 #include "../../src/graphics/fusionbutton.h"
 
+#define BUTTON_STATE_ON 2
+
 namespace fusion { namespace core { namespace graphics {
 
     class FusionToggleButton : FusionButton {
 
         private:
-            Texture* m_OffTexture;
-            Texture* m_OnTexture;
-            bool m_State;
-            bool m_MenuState; //helper variable for when contained inside a menu (eg, when it is an entry in a menu, not a real button)
-                              //used to trigger a texture update (eg, hover animation) without registering a real click
+            Texture* m_TextureOn;
+            int m_State;
+            bool m_On;
 
-            void SetTexture() {
+            void SetTexture() override {
 
-                if(m_State || m_MenuState) m_Texture = m_OnTexture;
-                else m_Texture = m_OffTexture;
+                if(m_State == BUTTON_STATE_OFF) m_Texture = m_TextureOff;
+                else if (m_State == BUTTON_STATE_HOVER && !m_On) m_Texture = m_TextureHover;
+                else if (m_Sate == BUTTON_STATE_ON || m_On) m_Texture = m_TextureOn;
             }
         
         public:
-            FusionToggleButton(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* onTexture,
-                               bool state, Window* parentWindow)
-                : Renderable2D(math::vec3 position, math::vec2 size, math::vec4 color), m_State(state), 
-                m_OffTexture(offTexture), m_OnTexture(onTexture), m_ParentWindow(parentWindow), m_MenuState(false)
+            FusionToggleButton(math::vec3 position, math::vec2 size, math::vec4 color, Texture* textureOff, Texture* textureOn,
+                               Texture* textureHover, int state, Window* parentWindow)
+                : Renderable2D(math::vec3 position, math::vec2 size, math::vec4 color), m_State(state), m_Texture(textureOff)
+                m_TextureOff(textureOff), m_TextureOn(textureOn), m_TextureHover(textureHover), m_ParentWindow(parentWindow)
             {
+                if(state < 2) m_On = state;
+                else m_On = false;
                 init();
                 SetTexture();
             }
@@ -40,30 +43,40 @@ namespace fusion { namespace core { namespace graphics {
                    (float)(9.0f - y * 18.0f / m_ParentWindow.getHeight()) == position.m_y) 
                 {
 
-                    m_State = !m_State;
+                    m_State = BUTTON_STATE_ON;
                     SetTexture();
-                    return true;
+                    return m_On = true;
                 }
-                else return false;
+                else return m_On = false;
             }
 
-            //helper functions used to set texture state when used as an entry in a menu instead of a real button.
-            //see comment for m_MenuState above
-            void setMenuClicked() {
+            virtual void checkHover() override {
 
-                m_MenuState = true;
-                SetTexture();
-            }
+                double x, y = 0.0f;
+                m_Mouse.getMousePosition(x, y);
+                x = (x * 32.0f / m_ParentWindow.getWidth() - 16.0f);
+                y = (9.0f - y * 18.0f / m_ParentWindow.getHeight());
 
-            void setMenuNotClicked() {
+                if(x <= m_Size.m_x && x >= m_Position.m_x) {
 
-                m_MenuState = false;
-                SetTexture();
+                    if(y <= m_Size.m_y && y >= m_Position.m_y) {
+
+                        SetState(BUTTON_STATE_HOVER);
+                    }
+                    else {
+
+                        SetState(m_On);
+                    }
+                }
+                else {
+
+                    SetState(m_On);
+                }
             }
 
             //functions used to get and set the clicked state
             inline bool getState() const { return m_State; }
-            inline void setState(bool state) { m_State = state; }
+            inline void setState(int state) { if(state < 2) m_On = state; m_State = state; }
         
     };
 }}}

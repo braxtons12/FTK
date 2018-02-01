@@ -55,7 +55,7 @@ namespace fusion { namespace core { namespace graphics {
 
                         if(x >= m_Divisons.at(i) && x <= m_Divisions.at(i+1)) {
 
-                            m_Buttons.at(i).setMenuClicked();
+                            m_Buttons.at(i).setState(BUTTON_STATE_HOVER);
                             m_SubMenus.at(i).SetState(MENU_STATE_HOVER);
                         }
                     }
@@ -66,7 +66,7 @@ namespace fusion { namespace core { namespace graphics {
 
                         if(y >= m_Divisions.at(i) && y <= m_Divisions.at(i+1)) {
 
-                            m_Buttons.at(i).SetMenuClicked();
+                            m_Buttons.at(i).setState(BUTTON_STATE_HOVER);
                             m_SubMenus.at(i).SetState(MENU_STATE_HOVER);
                         }
                     }
