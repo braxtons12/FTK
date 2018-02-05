@@ -27,6 +27,7 @@ namespace fusion { namespace core { namespace graphics {
             std::vector<FusionMenu*> m_SubMenus;
             std::vector<float> m_Divisions;
             int m_NumMenus;
+            int m_NumEntries;
             std::vector<FusionButton*> m_Buttons;
 
             inline void init() {
@@ -75,7 +76,7 @@ namespace fusion { namespace core { namespace graphics {
 
         public:
             FusionMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,
-                               int state, int menuType, std::vector<float> divisions, int numMenus, window::Window* parentWindow)
+                               int state, int menuType, std::vector<float> divisions, int numMenus, int numEntries, window::Window* parentWindow)
                 : Renderable2D(position, size, color),
                 m_OffTexture(offTexture), m_HoverTexture(hoverTexture), m_NormalTexture(normalTexture), m_State(state), 
                 m_MenuType(menuType), m_Divisions(divisions), m_NumMenus(numMenus), m_ParentWindow(parentWindow)
@@ -87,10 +88,10 @@ namespace fusion { namespace core { namespace graphics {
 
             ~FusionMenu() { }
 
-            void addSubMenu(math::vec3 position, math::vec2 size, std::vector<float>& divisions, int numMenus, int menuType) {
+            void addSubMenu(math::vec3 position, math::vec2 size, std::vector<float>& divisions, int numMenus, int numEntries, int menuType) {
 
                 m_SubMenus.push_back(new FusionMenu(position, size, m_Color, m_OffTexture, m_HoverTexture, m_NormalTexture, MENU_STATE_OFF,
-                                                menuType, divisions, numMenus, m_ParentWindow));
+                                                menuType, divisions, numMenus, numEntries, m_ParentWindow));
             }
 
             void addSubMenu(FusionMenu* menu) {
@@ -98,7 +99,7 @@ namespace fusion { namespace core { namespace graphics {
                 m_SubMenus.push_back(menu);
             }
 
-            void addButon(math::vec3 position, math::vec2 size) {
+            void addButton(math::vec3 position, math::vec2 size) {
 
                 m_Buttons.push_back(new FusionButton(position, size, m_Color, m_NormalTexture, m_HoverTexture, m_ParentWindow));
             }
@@ -122,8 +123,11 @@ namespace fusion { namespace core { namespace graphics {
                         SetState(MENU_STATE_NORMAL);
                         for(int i = 0; i < m_NumMenus; ++i) {
 
-                            m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
                             m_SubMenus.at(i)->SetState(MENU_STATE_OFF);
+                        }
+                        for(int i = 0; i < m_NumEntries; ++i) {
+
+                            m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
                         }
                     }
                 }
@@ -132,18 +136,23 @@ namespace fusion { namespace core { namespace graphics {
                     SetState(MENU_STATE_NORMAL);
                     for(int i = 0; i < m_NumMenus; ++i) {
 
-                        m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
                         m_SubMenus.at(i)->SetState(MENU_STATE_OFF);
+                    }
+                    for(int i = 0; i < m_NumEntries; ++i) {
+
+                        m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
                     }
                 }
             }
 
             void submit(Renderer2D* renderer) const override {
 
-                ((Renderable2D*)this)->submit(renderer);
                 for(int i = 0; i < m_NumMenus; ++i) {
 
                     m_SubMenus.at(i)->submit(renderer);
+                }
+                for(int i = 0; i < m_NumEntries; ++i) {
+
                     m_Buttons.at(i)->submit(renderer);
                 }
             }

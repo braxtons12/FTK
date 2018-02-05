@@ -41,6 +41,8 @@ namespace fusion { namespace core { namespace graphics {
             void submit(const Renderable2D* renderable) override;
             void end() override;
             void flush() override;
+            inline unsigned int getNumTextures() { return m_TextureSlots.size(); }
+            inline std::vector<GLuint>& getTextureIDs() { return m_TextureSlots; }
     };
 }}}
 

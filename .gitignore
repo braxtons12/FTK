@@ -1,3 +1,7 @@
 Fusion-Core/.vscode/cquery_cached_index
 
 Fusion-Core/build
+Fusion-Core/CMakeFiles
+Fusion-Core/Makefile
+Fusion-Core/cmake_install.cmake
+Fusion-Core/CMakeCache.txt

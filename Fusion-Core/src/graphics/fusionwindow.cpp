@@ -14,8 +14,9 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		m_Shader = new Shader(m_VertexShaderPath, m_FragmentShaderPath);
 		m_Shader->enable();
 
-		m_PermanentRenderables = new std::vector<const Renderable2D*>;
-		
+		m_Renderables = new std::vector<const Renderable2D*>;
+
+		m_Shader->enable();
 	}
 	
 	FusionWindow::FusionWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath, bool hasMenu)
@@ -26,35 +27,45 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 	}
 	
 	void FusionWindow::setMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, 
-							   Texture* normalTexture, int state, int menuType, std::vector<float> divisions, int numMenus, 
+							   Texture* normalTexture, int state, int menuType, std::vector<float> divisions, int numMenus, int numEntries,
 							   std::vector<FusionMenu*> subMenus) 
 	{
-		m_Menu = new FusionMenu(position, size, color, offTexture, hoverTexture, normalTexture, state, menuType, divisions, numMenus, m_Window);
+		m_Menu = new FusionMenu(position, size, color, offTexture, hoverTexture, normalTexture, state, menuType, divisions, numMenus, 
+								numEntries, m_Window);
 		for (int i = 0; i < numMenus; ++i) {
 			m_Menu->addSubMenu(subMenus.at(i));
 		}
 	}
+
 	void FusionWindow::update() {
-		
+
 		if (m_Signal->getSignal()) {
 			
 			this->updateSize(m_Window->getWidth(), m_Window->getHeight());
 			m_Signal->resetSignal();
 		}
 
-		m_Menu->checkHover();
-		m_Menu->submit(m_Renderer);
+		if(m_HasMenu) {
 
-		for(int i = 0; i < m_PermanentRenderables->size(); ++i) {
-
-			m_PermanentRenderables->at(i)->submit(m_Renderer);
+			m_Menu->checkHover();
+			m_Menu->submit(m_Renderer);
 		}
-		
+
 		m_Window->clear();
-		
+
+		m_Renderer->begin();
+
+		for(int i = 0; i < m_Renderables->size(); ++i) {
+
+			m_Renderables->at(i)->submit(m_Renderer);
+		}
+
 		m_Renderer->end();
 		m_Renderer->flush();
+
 		m_Window->update();
+
+		m_Renderables = new std::vector<const Renderable2D*>; 
 		
 	}
 

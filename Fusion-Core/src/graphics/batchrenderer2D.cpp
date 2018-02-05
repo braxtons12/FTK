@@ -15,6 +15,7 @@ namespace fusion { namespace core { namespace graphics {
 
     void BatchRenderer2D::init() {
 
+        m_IndexCount = 0;
         glGenVertexArrays(1, &m_VAO);
         glGenBuffers(1, &m_VBO);
 
@@ -81,7 +82,7 @@ namespace fusion { namespace core { namespace graphics {
 
                 if(m_TextureSlots[i] == tid) {
 
-                    ts = (float)i;
+                    ts = (float)(i + 1);
                     found = true;
                     break;
                 }

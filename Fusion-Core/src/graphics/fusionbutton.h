@@ -83,6 +83,7 @@ namespace fusion { namespace core { namespace graphics {
 
             inline bool getState() const { return m_State; }
             inline void setState(int state) { m_State = state; }
+            inline void submit(Renderer2D* renderer) const override { renderer->submit(this); }
     };
 }}}
 

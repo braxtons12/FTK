@@ -15,6 +15,7 @@
 
 #include <typeinfo>
 #include <vector>
+#include <GL/glew.h>
 
 #define WINDOW_HAS_MENU 1
 #define WINDOW_NO_MENU  0
@@ -40,7 +41,7 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		Renderer2D* m_Renderer;
 		bool m_HasMenu;
 		FusionMenu* m_Menu;
-		std::vector<const Renderable2D*>* m_PermanentRenderables;
+		std::vector<const Renderable2D*>* m_Renderables;
 
 		void init();
 
@@ -53,31 +54,25 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		inline int const getWidth() { return m_Width; }
 		inline void updateSize(int width, int height) { m_Width = width; m_Height = height; }
 
-		inline void addPermanentElement(const Renderable2D* renderable) {
-			if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader);
-			m_PermanentRenderables->push_back(renderable);
-		}
-
-		inline void addTemporaryElement(const Renderable2D* renderable) {
-			if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader);
-			renderable->submit(m_Renderer);
+		inline void addElement(const Renderable2D* renderable) {
+			//if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader);
+			m_Renderables->push_back(renderable);
 		}
 
 		void setMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,
-                               int state, int menuType, std::vector<float> divisions, int numMenus, std::vector<FusionMenu*> subMenus);
+                               int state, int menuType, std::vector<float> divisions, int numMenus, int numEntries, 
+							   std::vector<FusionMenu*> subMenus);
+
+		inline void setMenu(FusionMenu* menu) { m_Menu = menu; }
 
 		void update();
-
-		inline void beginRenderer() { m_Renderer->begin(); }
-
-		// Not sure if necessary. Thinking not.
-		//inline void endRenderer() { ((BatchRenderer2D*)(m_Renderer))->end(); }
 
 		inline void setShader(Shader& shader) { *m_Shader = shader; }
 		inline Shader& getShader() { return *m_Shader; }
 		inline Window* const getWindow() { return m_Window; }
 		inline input::Mouse* const getMouse() { return m_Mouse; }
 		inline input::Keyboard* const getKeyboard() { return m_Keyboard; }
+		inline FusionMenu* const getMenu() { return m_Menu; }
 
 		inline void activateRenderer() { m_Renderer = new BatchRenderer2D(); }
 

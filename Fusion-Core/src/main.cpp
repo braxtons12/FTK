@@ -3,7 +3,7 @@
  * Used to test general component functionality
  *
  * Version: 0.0.1
- * 0 2017 Braxton Salyer and Logan Tibbetts
+ * Copyright 2017 Braxton Salyer
  *
  **/
 
@@ -23,8 +23,11 @@
 #include "../src/graphics/fusionwindow.h"
 #include "../src/graphics/fusionUI.h"
 #include "../src/graphics/layers/tilelayer.h"
+#include "../src/graphics/texture.h"
+#include "../src/graphics/fusionmenu.h"
+#include "../src/graphics/fusionbutton.h"
 
-#include <time.h>
+#include <ctime>
 #include <pthread.h>
 
 using namespace fusion;
@@ -36,53 +39,28 @@ using namespace input;
 
 int main() {
 
-	Window window("Sparky!", 960, 540);
-
     math::mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 
-	Shader shader("../src/shaders/basic.vert", "../src/shaders/basic.frag");
-	shader.setUniform2f("light_pos", vec2(4.0f, 1.5f));
+	FusionUI fusionUI = FusionUI();/* no menu
+/* no menu
+	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", false));
+*/
 
-	TileLayer layer(&shader);
-	for (float y = -9.0f; y < 9.0f; y += 0.05) {
+//menu
+	Texture* menuOff = new Texture("res/menus/main_off.png");
+	Texture* menuHover = new Texture("res/menus/main_hover.png");
+	std::vector<float>* menuDivisions = new std::vector<float>();
+	menuDivisions->push_back(0.0f);
+	menuDivisions->push_back(16.0f);
+	std::vector<FusionMenu>* otherMenus = new std::vector<FusionMenu>();
 
-		for (float x = -16.0f; x < 16.0f; x += 0.05) {
-
-			layer.add(new Sprite(x, y, 0.04f, 0.04f, vec4(rand() % 1000/ 1000.0f, 0, 1, 1)));
-		}
-	}
-
-	Timer time;
-	float timer = 0;
-	unsigned int frames = 0;
-
-	while (!window.closed()) {
-
-		window.clear();
-		double x, y;
-		Mouse mouse = input::Mouse::GetInstance();
-		mouse.getMousePosition(x, y);
-		shader.setUniform2f("light_pos", vec2((float)(x * 32.0f / window.getWidth() - 16.0f), (float)(9.0f - y * 18.0f / window.getHeight())));
-
-		window.update();
-		frames++;
-		if (time.elapsed() - timer > 1.0f) {
-
-			timer += 1.0f;
-			printf("%d fps\n", frames);
-			frames = 0;
-		}
-
-	}
-
-	delete &shader;
-
-	//old stuff. TODO update when FusionUI refactored for layer, transformation support
-	 /*FusionUI fusionUI = FusionUI();
-	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "../src/shaders/basic.vert", "../src/shaders/basic.frag"));
+	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", true));
+	fusionUI.windowAt(0)->setMenu(new FusionMenu(math::vec3(0.0f, 0.8f, 0.0f), math::vec2(0.9f, 0.9f), math::vec4(0.5, 0.5, 0.5, 1), menuOff, menuHover, menuOff,
+                               MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, *menuDivisions, 0, 1, fusionUI.windowAt(0)->getWindow()));
+	fusionUI.windowAt(0)->getMenu()->addButton(math::vec3(0.0f, 0.8f, 0.0f), math::vec2(0.9f, 0.9f));
 	fusionUI.windowAt(0)->activateRenderer();
 
-	Shader shader = fusionUI.windowAt(0)->getShader();
+	Shader& shader = fusionUI.windowAt(0)->getShader();
     shader.setUniformMat4("pr_matrix", ortho);
 
 	srand(time(NULL));
@@ -90,28 +68,39 @@ int main() {
 	float time = 0;
 	int frames = 0;
 
+	Texture* tex1 = new Texture("res/tex1.bmp");
+	Texture* tex2 = new Texture("res/tex2.bmp");
+
 	std::vector<Renderable2D*> sprites;
+	int flip = 0;
 	for (float y = 0; y < 9.0f; y += 0.05) {
 
 		for (float x = 0; x < 16.0f; x += 0.05) {
 
-			sprites.push_back(new Sprite(x, y, 0.04f, 0.04f, math::vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
-
+			if(!(flip % 2)) sprites.push_back(new Sprite(x, y, 0.9f, 0.9f, tex1));
+			else sprites.push_back(new Sprite(x, y, 0.9f, 0.9f, tex2));
+			++flip;
 		}
+		++flip;
 	}
 
     shader.setUniform2f("light_pos", math::vec2(4.0f, 1.5f));
-	shader.setUniform4f("colour", math::vec4(0.2f, 0.3f, 0.8f, 1.0f));
+	GLint* texIDs = new GLint[32];
+	for(int i = 0; i < 32; ++i) {
+		texIDs[i] = i;
+	}
+	shader.setUniform1iv("textures", texIDs, 32);
+
+	BatchRenderer2D* renderer = new BatchRenderer2D();
 
 	while (!fusionUI.windowAt(0)->getWindow()->closed()) {
 
         double x, y;
-		Mouse* mouse = fusionUI.windowAt(0)->getMouse();
-        mouse->getMousePosition(x, y);
+		Mouse mouse = input::Mouse::GetInstance();
+        mouse.getMousePosition(x, y);
 		shader.setUniform2f("light_pos", math::vec2((float)(x * 16.0f/(float)fusionUI.windowAt(0)->getWidth()),
 													(float)(9.0f - y * 9.0f/(float)fusionUI.windowAt(0)->getHeight())));
 
-		fusionUI.windowAt(0)->beginRenderer();
 
 		for(int i = 0; i < sprites.size(); ++i) {
 
@@ -129,7 +118,7 @@ int main() {
 
 		}
 
-    } */
+    } 
 
     return 0;
 }
