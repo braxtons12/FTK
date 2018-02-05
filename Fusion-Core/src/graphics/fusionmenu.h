@@ -79,7 +79,7 @@ namespace fusion { namespace core { namespace graphics {
                                int state, int menuType, std::vector<float> divisions, int numMenus, int numEntries, window::Window* parentWindow)
                 : Renderable2D(position, size, color),
                 m_OffTexture(offTexture), m_HoverTexture(hoverTexture), m_NormalTexture(normalTexture), m_State(state), 
-                m_MenuType(menuType), m_Divisions(divisions), m_NumMenus(numMenus), m_ParentWindow(parentWindow)
+                m_MenuType(menuType), m_Divisions(divisions), m_NumMenus(numMenus), m_NumEntries(numEntries), m_ParentWindow(parentWindow)
             {
 
                 init();

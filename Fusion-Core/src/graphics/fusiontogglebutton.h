@@ -56,7 +56,7 @@ namespace fusion { namespace core { namespace graphics {
                 else return m_On = false;
             }
 
-            virtual void checkHover() override {
+            void checkHover() override {
 
                 double x, y = 0.0f;
                 m_Mouse.getMousePosition(x, y);
@@ -81,7 +81,7 @@ namespace fusion { namespace core { namespace graphics {
             }
 
             //functions used to get and set the clicked state
-            inline bool getState() const { return m_State; }
+            inline int getState() const { return m_State; }
             inline void setState(int state) { if(state < 2) m_On = state; m_State = state; }
         
     };

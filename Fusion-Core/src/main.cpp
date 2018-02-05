@@ -41,7 +41,7 @@ int main() {
 
     math::mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 
-	FusionUI fusionUI = FusionUI();/* no menu
+	FusionUI fusionUI = FusionUI();
 /* no menu
 	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", false));
 */

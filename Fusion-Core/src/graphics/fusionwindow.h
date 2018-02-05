@@ -19,10 +19,10 @@
 
 #define WINDOW_HAS_MENU 1
 #define WINDOW_NO_MENU  0
+#define MAX_SHADERS 1000
 
 namespace fusion { namespace core { namespace graphics { namespace window {
 
-#define MAX_SHADERS 1000
 
 	class FusionWindow {
 
