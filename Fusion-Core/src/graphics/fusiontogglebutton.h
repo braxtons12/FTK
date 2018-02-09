@@ -58,14 +58,14 @@ namespace fusion { namespace core { namespace graphics {
 
             void checkHover() override {
 
-                double x, y = 0.0f;
+                double x, y;
                 m_Mouse.getMousePosition(x, y);
-                x = (x * 32.0f / m_ParentWindow->getWidth() - 16.0f);
-                y = (9.0f - y * 18.0f / m_ParentWindow->getHeight());
+                x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
+                y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
 
                 if(x <= m_Size.m_x && x >= m_Position.m_x) {
 
-                    if(y <= m_Size.m_y && y >= m_Position.m_y) {
+                    if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
 
                         SetState(BUTTON_STATE_HOVER);
                     }

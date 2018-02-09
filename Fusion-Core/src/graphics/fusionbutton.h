@@ -13,7 +13,7 @@ namespace fusion { namespace core { namespace graphics {
     class FusionButton : public Renderable2D {
 
         protected:
-            input::Mouse m_Mouse;
+            input::Mouse& m_Mouse = input::Mouse::GetInstance();
             window::Window* m_ParentWindow;
             int m_State;
             Texture* m_TextureOff;
@@ -21,7 +21,6 @@ namespace fusion { namespace core { namespace graphics {
 
             inline void init() {
 
-                m_Mouse = input::Mouse::GetInstance();
                 m_State = BUTTON_STATE_OFF;
             }
 
@@ -49,7 +48,7 @@ namespace fusion { namespace core { namespace graphics {
 
             virtual bool clicked() {
 
-                double x,y = 0.0f;
+                double x,y;
                 m_Mouse.getMousePosition(x,y);
                 if (m_Mouse.Pressed(0) && (float)(x * 32.0f / m_ParentWindow->getWidth() - 16.0f) == m_Position.m_x &&
                    (float)(9.0f - y * 18.0f / m_ParentWindow->getHeight())== m_Position.m_y) 
@@ -61,12 +60,12 @@ namespace fusion { namespace core { namespace graphics {
 
                 double x, y = 0.0f;
                 m_Mouse.getMousePosition(x, y);
-                x = (x * 32.0f / m_ParentWindow->getWidth() - 16.0f);
-                y = (9.0f - y * 18.0f / m_ParentWindow->getHeight());
+                x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
+                y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
 
                 if(x <= m_Size.m_x && x >= m_Position.m_x) {
 
-                    if(y <= m_Size.m_y && y >= m_Position.m_y) {
+                    if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
 
                         SetState(BUTTON_STATE_HOVER);
                     }

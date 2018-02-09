@@ -45,12 +45,6 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 			m_Signal->resetSignal();
 		}
 
-		if(m_HasMenu) {
-
-			m_Menu->checkHover();
-			m_Menu->submit(m_Renderer);
-		}
-
 		m_Window->clear();
 
 		m_Renderer->begin();
@@ -58,6 +52,12 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		for(int i = 0; i < m_Renderables->size(); ++i) {
 
 			m_Renderables->at(i)->submit(m_Renderer);
+		}
+
+		if(m_HasMenu) {
+
+			m_Menu->checkHover();
+			m_Menu->submit(m_Renderer);
 		}
 
 		m_Renderer->end();

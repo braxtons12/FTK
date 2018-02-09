@@ -46,18 +46,20 @@ int main() {
 	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", false));
 */
 
-//menu
-	Texture* menuOff = new Texture("res/menus/main_off.png");
-	Texture* menuHover = new Texture("res/menus/main_hover.png");
+//create window
+	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag",true));
+
+//create stuff for menu
+	Texture* menuOff = new Texture("res/menus/main_off.bmp");
+	Texture* menuHover = new Texture("res/menus/main_hover.bmp");
 	std::vector<float>* menuDivisions = new std::vector<float>();
 	menuDivisions->push_back(0.0f);
 	menuDivisions->push_back(16.0f);
-	std::vector<FusionMenu>* otherMenus = new std::vector<FusionMenu>();
 
-	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", true));
-	fusionUI.windowAt(0)->setMenu(new FusionMenu(math::vec3(0.0f, 0.8f, 0.0f), math::vec2(0.9f, 0.9f), math::vec4(0.5, 0.5, 0.5, 1), menuOff, menuHover, menuOff,
-                               MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, *menuDivisions, 0, 1, fusionUI.windowAt(0)->getWindow()));
-	fusionUI.windowAt(0)->getMenu()->addButton(math::vec3(0.0f, 0.8f, 0.0f), math::vec2(0.9f, 0.9f));
+//create menu	
+	fusionUI.windowAt(0)->setMenu(new FusionMenu(math::vec3(0.0f, 8.2f, 0.0f), math::vec2(16.0f, 0.5f), math::vec4(0.5, 0.5, 0.5, 1), menuOff, menuHover, menuOff,
+								  MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, *menuDivisions, 0, 1, fusionUI.windowAt(0)->getWindow()));
+	fusionUI.windowAt(0)->getMenu()->addButton(math::vec3(0.0f, 8.2f, 0.0f), math::vec2(16.0f, 0.5f));
 	fusionUI.windowAt(0)->activateRenderer();
 
 	Shader& shader = fusionUI.windowAt(0)->getShader();
@@ -100,7 +102,6 @@ int main() {
         mouse.getMousePosition(x, y);
 		shader.setUniform2f("light_pos", math::vec2((float)(x * 16.0f/(float)fusionUI.windowAt(0)->getWidth()),
 													(float)(9.0f - y * 9.0f/(float)fusionUI.windowAt(0)->getHeight())));
-
 
 		for(int i = 0; i < sprites.size(); ++i) {
 

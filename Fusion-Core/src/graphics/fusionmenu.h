@@ -17,7 +17,7 @@ namespace fusion { namespace core { namespace graphics {
     class FusionMenu : public Renderable2D {
 
         private:
-            input::Mouse m_Mouse;
+            input::Mouse& m_Mouse = input::Mouse::GetInstance();
             window::Window* m_ParentWindow;
             Texture* m_OffTexture;
             Texture* m_HoverTexture;
@@ -29,11 +29,6 @@ namespace fusion { namespace core { namespace graphics {
             int m_NumMenus;
             int m_NumEntries;
             std::vector<FusionButton*> m_Buttons;
-
-            inline void init() {
-
-                m_Mouse = input::Mouse::GetInstance();
-            }
 
             void SetTexture() {
 
@@ -82,7 +77,6 @@ namespace fusion { namespace core { namespace graphics {
                 m_MenuType(menuType), m_Divisions(divisions), m_NumMenus(numMenus), m_NumEntries(numEntries), m_ParentWindow(parentWindow)
             {
 
-                init();
                 SetTexture();
             }
 
@@ -106,28 +100,35 @@ namespace fusion { namespace core { namespace graphics {
 
             void checkHover() {
 
-                double x, y = 0.0f;
+                double x, y;
                 m_Mouse.getMousePosition(x, y);
-                x = (x * 32.0f / m_ParentWindow->getWidth() - 16.0f);
-                y = (9.0f - y * 18.0f / m_ParentWindow->getHeight());
+                x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
+                y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
 
                 if(x <= m_Size.m_x && x >= m_Position.m_x) {
 
-                    if(y <= m_Size.m_y && y >= m_Position.m_y) {
+                    if(y <=(m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
 
                         if(m_State != MENU_STATE_HOVER) m_State = MENU_STATE_HOVER;
-                        Hover(x, y);
+                        for(int i = 0; i < m_NumMenus; ++i) {
+
+                            m_SubMenus.at(i)->checkHover();
+                        }
+                        for(int i = 0; i < m_NumEntries; ++i) {
+
+                            m_Buttons.at(i)->checkHover();
+                        }
                     }
                     else {
 
                         SetState(MENU_STATE_NORMAL);
                         for(int i = 0; i < m_NumMenus; ++i) {
 
-                            m_SubMenus.at(i)->SetState(MENU_STATE_OFF);
+                            m_SubMenus.at(i)->checkHover();
                         }
                         for(int i = 0; i < m_NumEntries; ++i) {
 
-                            m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
+                            m_Buttons.at(i)->checkHover();
                         }
                     }
                 }
@@ -136,11 +137,11 @@ namespace fusion { namespace core { namespace graphics {
                     SetState(MENU_STATE_NORMAL);
                     for(int i = 0; i < m_NumMenus; ++i) {
 
-                        m_SubMenus.at(i)->SetState(MENU_STATE_OFF);
+                        m_SubMenus.at(i)->checkHover();
                     }
                     for(int i = 0; i < m_NumEntries; ++i) {
 
-                        m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
+                        m_Buttons.at(i)->checkHover();
                     }
                 }
             }
