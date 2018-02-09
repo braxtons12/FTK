@@ -60,7 +60,7 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 		}
 
 		void setMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,
-                               int state, int menuType, std::vector<float> divisions, int numMenus, int numEntries, 
+                               int state, int menuType, int numMenus, int numEntries, bool alwaysVisible,
 							   std::vector<FusionMenu*> subMenus);
 
 		inline void setMenu(FusionMenu* menu) { m_Menu = menu; }

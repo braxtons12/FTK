@@ -27,11 +27,11 @@ namespace fusion { namespace core { namespace graphics { namespace window {
 	}
 	
 	void FusionWindow::setMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, 
-							   Texture* normalTexture, int state, int menuType, std::vector<float> divisions, int numMenus, int numEntries,
+							   Texture* normalTexture, int state, int menuType, int numMenus, int numEntries, bool alwaysVisible,
 							   std::vector<FusionMenu*> subMenus) 
 	{
-		m_Menu = new FusionMenu(position, size, color, offTexture, hoverTexture, normalTexture, state, menuType, divisions, numMenus, 
-								numEntries, m_Window);
+		m_Menu = new FusionMenu(position, size, color, offTexture, hoverTexture, normalTexture, state, menuType, numMenus, 
+								numEntries, alwaysVisible, m_Window);
 		for (int i = 0; i < numMenus; ++i) {
 			m_Menu->addSubMenu(subMenus.at(i));
 		}

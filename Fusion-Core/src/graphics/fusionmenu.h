@@ -25,67 +25,113 @@ namespace fusion { namespace core { namespace graphics {
             int m_State;
             int m_MenuType;
             std::vector<FusionMenu*> m_SubMenus;
-            std::vector<float> m_Divisions;
             int m_NumMenus;
             int m_NumEntries;
             std::vector<FusionButton*> m_Buttons;
+            bool m_AlwaysVisible;
+            bool m_Visible;
 
             void SetTexture() {
 
-                if(m_State == MENU_STATE_OFF) m_Texture = m_OffTexture;
-                else if (m_State == MENU_STATE_NORMAL) m_Texture = m_NormalTexture;
-                else if (m_State == MENU_STATE_HOVER) checkHover();
+                if(m_State == MENU_STATE_OFF) { m_Texture = m_OffTexture; m_Visible = false; }
+                else if (m_State == MENU_STATE_NORMAL) { m_Texture = m_NormalTexture; m_Visible = true; }
+                else if (m_State == MENU_STATE_HOVER) { m_Visible = true; checkHover(); }
             }
 
-            void SetState(int state) {
+            void CheckHoverInBounds() {
 
-                m_State = state;
-                SetTexture();
+                m_State = MENU_STATE_HOVER;
+                m_Visible = true;
+                for(int i = 0; i < m_NumMenus; ++i) {
+
+                    m_SubMenus.at(i)->checkHover();
+                }
+                for(int i = 0; i < m_NumEntries; ++i) {
+
+                    m_Buttons.at(i)->checkHover();
+                }
             }
 
-            void Hover(double x, double y) {
+            void CheckHoverOutOfBounds() {
 
-                if(m_MenuType == MENU_TYPE_HORIZONTAL) {
+                bool temp = false;
+                for(int i = 0; i < m_NumMenus; ++i) {
 
-                    for(int i = 0; i < m_NumMenus; ++i) {
+                    temp = m_SubMenus.at(i)->getVisible();
+                }
+                
+                if(temp) { m_State = MENU_STATE_HOVER; m_Visible = true; }
+                else if(m_AlwaysVisible) setState(MENU_STATE_NORMAL);
+                else { setState(MENU_STATE_OFF);}
 
-                        if(x >= m_Divisions.at(i) && x <= m_Divisions.at(i+1)) {
+                for(int i = 0; i < m_NumMenus; ++i) {
 
-                            m_Buttons.at(i)->setState(BUTTON_STATE_HOVER);
-                            m_SubMenus.at(i)->SetState(MENU_STATE_HOVER);
-                        }
+                    if(m_State == MENU_STATE_HOVER) m_SubMenus.at(i)->checkHover();
+                    else m_SubMenus.at(i)->setState(MENU_STATE_OFF);
+                }
+                for(int i = 0; i < m_NumEntries; ++i) {
+
+                    if(m_State == MENU_STATE_HOVER) m_Buttons.at(i)->checkHover();
+                    else if(m_AlwaysVisible) m_Buttons.at(i)->setState(BUTTON_STATE_NORMAL);
+                    else m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
+                }
+            }
+
+            void CheckHoverVertical(double x, double y) {
+
+                if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
+
+                    if(x <= m_Size.m_x && x >= m_Position.m_x) {
+
+                        CheckHoverInBounds();
+                    }
+                    else {
+
+                        CheckHoverOutOfBounds();
                     }
                 }
-                else if (m_MenuType == MENU_TYPE_VERTICAL) {
+                else {
 
-                    for(int i = 0; i < m_NumMenus; ++i) {
+                    CheckHoverOutOfBounds();
+                }
+            } 
+            
+            void CheckHoverHorizontal(double x, double y) {
 
-                        if(y >= m_Divisions.at(i) && y <= m_Divisions.at(i+1)) {
+                if(x <= m_Size.m_x && x >= m_Position.m_x) {
 
-                            m_Buttons.at(i)->setState(BUTTON_STATE_HOVER);
-                            m_SubMenus.at(i)->SetState(MENU_STATE_HOVER);
-                        }
+                    if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
+
+                        CheckHoverInBounds();
                     }
+                    else {
+
+                       CheckHoverOutOfBounds();
+                    }
+                }
+                else {
+
+                    CheckHoverOutOfBounds();
                 }
             }
 
         public:
             FusionMenu(math::vec3 position, math::vec2 size, math::vec4 color, Texture* offTexture, Texture* hoverTexture, Texture* normalTexture,
-                               int state, int menuType, std::vector<float> divisions, int numMenus, int numEntries, window::Window* parentWindow)
+                               int state, int menuType,  int numMenus, int numEntries, bool alwaysVisible, window::Window* parentWindow)
                 : Renderable2D(position, size, color),
                 m_OffTexture(offTexture), m_HoverTexture(hoverTexture), m_NormalTexture(normalTexture), m_State(state), 
-                m_MenuType(menuType), m_Divisions(divisions), m_NumMenus(numMenus), m_NumEntries(numEntries), m_ParentWindow(parentWindow)
+                m_MenuType(menuType), m_NumMenus(numMenus), m_NumEntries(numEntries), m_AlwaysVisible(alwaysVisible), m_ParentWindow(parentWindow)
             {
-
+                m_Visible = m_AlwaysVisible;
                 SetTexture();
             }
 
             ~FusionMenu() { }
 
-            void addSubMenu(math::vec3 position, math::vec2 size, std::vector<float>& divisions, int numMenus, int numEntries, int menuType) {
+            void addSubMenu(math::vec3 position, math::vec2 size, int numMenus, int numEntries, int menuType, bool alwaysVisible) {
 
                 m_SubMenus.push_back(new FusionMenu(position, size, m_Color, m_OffTexture, m_HoverTexture, m_NormalTexture, MENU_STATE_OFF,
-                                                menuType, divisions, numMenus, numEntries, m_ParentWindow));
+                                                menuType, numMenus, numEntries, alwaysVisible, m_ParentWindow));
             }
 
             void addSubMenu(FusionMenu* menu) {
@@ -95,7 +141,7 @@ namespace fusion { namespace core { namespace graphics {
 
             void addButton(math::vec3 position, math::vec2 size) {
 
-                m_Buttons.push_back(new FusionButton(position, size, m_Color, m_NormalTexture, m_HoverTexture, m_ParentWindow));
+                m_Buttons.push_back(new FusionButton(position, size, m_Color, m_OffTexture, m_HoverTexture, m_NormalTexture, m_ParentWindow));
             }
 
             void checkHover() {
@@ -105,45 +151,9 @@ namespace fusion { namespace core { namespace graphics {
                 x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
                 y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
 
-                if(x <= m_Size.m_x && x >= m_Position.m_x) {
-
-                    if(y <=(m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
-
-                        if(m_State != MENU_STATE_HOVER) m_State = MENU_STATE_HOVER;
-                        for(int i = 0; i < m_NumMenus; ++i) {
-
-                            m_SubMenus.at(i)->checkHover();
-                        }
-                        for(int i = 0; i < m_NumEntries; ++i) {
-
-                            m_Buttons.at(i)->checkHover();
-                        }
-                    }
-                    else {
-
-                        SetState(MENU_STATE_NORMAL);
-                        for(int i = 0; i < m_NumMenus; ++i) {
-
-                            m_SubMenus.at(i)->checkHover();
-                        }
-                        for(int i = 0; i < m_NumEntries; ++i) {
-
-                            m_Buttons.at(i)->checkHover();
-                        }
-                    }
-                }
-                else {
-
-                    SetState(MENU_STATE_NORMAL);
-                    for(int i = 0; i < m_NumMenus; ++i) {
-
-                        m_SubMenus.at(i)->checkHover();
-                    }
-                    for(int i = 0; i < m_NumEntries; ++i) {
-
-                        m_Buttons.at(i)->checkHover();
-                    }
-                }
+                if(m_MenuType == MENU_TYPE_HORIZONTAL) CheckHoverHorizontal(x, y);
+                else CheckHoverVertical(x, y);
+                
             }
 
             void submit(Renderer2D* renderer) const override {
@@ -157,6 +167,10 @@ namespace fusion { namespace core { namespace graphics {
                     m_Buttons.at(i)->submit(renderer);
                 }
             }
+
+            void setState(int state) { m_State = state; SetTexture(); }
+            inline void setVisible(bool visibile) { m_Visible = visibile; }
+            inline bool getVisible() { return m_Visible; }
 
 
     };
