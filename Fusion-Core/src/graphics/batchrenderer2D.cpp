@@ -16,6 +16,7 @@ namespace fusion { namespace core { namespace graphics {
     void BatchRenderer2D::init() {
 
         m_IndexCount = 0;
+
         glGenVertexArrays(1, &m_VAO);
         glGenBuffers(1, &m_VBO);
 

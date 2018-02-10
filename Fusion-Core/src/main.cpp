@@ -26,6 +26,7 @@
 #include "../src/graphics/texture.h"
 #include "../src/graphics/fusionmenu.h"
 #include "../src/graphics/fusionbutton.h"
+#include "../src/graphics/color.h"
 
 #include <ctime>
 #include <pthread.h>
@@ -52,26 +53,25 @@ int main() {
 	FusionWindow* window = fusionUI.windowAt(0);
 
 //create stuff for mainMenu
-	Texture* menuOff = new Texture("res/menus/main_off.png");
-	Texture* menuNormal = new Texture("res/menus/main_normal.bmp");
-	Texture* menuHover = new Texture("res/menus/main_hover.bmp");
-
+	Color colorOff = Color(math::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+	Color colorNormal = Color(math::vec4(0.2f, 0.2f, 0.2f, 1.0f));
+	Color colorHover = Color(math::vec4(0.35f, 0.35f, 0.35f, 1.0f));
 
 //create menus
-	FusionMenu* mainMenu =new FusionMenu(math::vec3(0.0f, 8.5f, 0.0f), math::vec2(16.0f, 0.5f), math::vec4(0.5, 0.5, 0.5, 1), menuOff, menuHover, menuNormal,
+	FusionMenu* mainMenu =new FusionMenu(math::vec3(0.0f, 8.5f, 0.0f), math::vec2(16.0f, 0.5f), colorOff, colorNormal, colorHover,
 								  MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, 1, 2, true, fusionUI.windowAt(0)->getWindow());
 	mainMenu->addButton(math::vec3(0.0f, 8.5f, 0.0f), math::vec2(1.0f, 0.5f));
 	mainMenu->addButton(math::vec3(1.0f, 8.5f, 0.0f), math::vec2(15.0f, 0.5f));
 
-	FusionMenu* vertMenu1 = new FusionMenu(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(1.0f, 2.0f), math::vec4(0.5, 0.5, 0.5, 1), menuOff, menuHover, menuNormal,
+	FusionMenu* vertMenu1 = new FusionMenu(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(1.0f, 2.0f), colorOff, colorNormal, colorHover,
 								  MENU_STATE_OFF, MENU_TYPE_VERTICAL, 1, 2, false, fusionUI.windowAt(0)->getWindow());
 	vertMenu1->addButton(math::vec3(0.0f, 8.5f, 0.0f), math::vec2(1.0f, 0.5f));
 	vertMenu1->addButton(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(1.0f, 0.5f));
 
-	FusionMenu* horzMenu1 = new FusionMenu(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(4.0f, 1.0f), math::vec4(0.5, 0.5, 0.5, 1), menuOff, menuHover, menuNormal,
+	FusionMenu* horzMenu1 = new FusionMenu(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(4.0f, 0.5f), colorOff, colorNormal, colorHover,
 								  MENU_STATE_OFF, MENU_TYPE_HORIZONTAL, 0, 2, false, fusionUI.windowAt(0)->getWindow());
-	horzMenu1->addButton(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(1.0f, 1.0f));
-	horzMenu1->addButton(math::vec3(1.0f, 8.0f, 0.0f), math::vec2(3.0f, 1.0f));
+	horzMenu1->addButton(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(1.0f, 0.5f));
+	horzMenu1->addButton(math::vec3(1.0f, 8.0f, 0.0f), math::vec2(3.0f, 0.5f));
 
 	vertMenu1->addSubMenu(horzMenu1);
 	
@@ -96,9 +96,9 @@ int main() {
 
 	std::vector<Renderable2D*> sprites;
 	int flip = 0;
-	for (float y = 0; y < 9.0f; y += 0.05) {
+	for (float y = 0; y < 9.0f; y += 0.5) {
 
-		for (float x = 0; x < 16.0f; x += 0.05) {
+		for (float x = 0; x < 16.0f; x += 0.5) {
 
 			if(!(flip % 2)) sprites.push_back(new Sprite(x, y, 0.9f, 0.9f, tex1));
 			else sprites.push_back(new Sprite(x, y, 0.9f, 0.9f, tex2));

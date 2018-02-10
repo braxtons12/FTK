@@ -4,6 +4,7 @@
 #include "../../src/graphics/fusionbutton.h"
 #include "../../src/graphics/texture.h"
 #include "../../src/graphics/renderable2D.h"
+#include "../../src/graphics/color.h"
 
 #define BUTTON_STATE_ON 3
 
@@ -12,26 +13,27 @@ namespace fusion { namespace core { namespace graphics {
     class FusionToggleButton : public FusionButton {
 
         protected:
-            Texture* m_TextureOn;
+            Color m_ColorOn;
             bool m_On;
 
-            void SetTexture() override {
+            void SetColor() override {
 
-                if(m_State == BUTTON_STATE_OFF) m_Texture = m_TextureOff;
-                else if (m_State == BUTTON_STATE_HOVER && !m_On) m_Texture = m_TextureHover;
-                else if (m_State == BUTTON_STATE_ON || m_On) m_Texture = m_TextureOn;
-                else if (m_State == BUTTON_STATE_NORMAL) m_Texture == m_TextureNormal;
+                if(m_State == BUTTON_STATE_OFF) m_Color = m_ColorOff.getColor();
+                else if (m_State == BUTTON_STATE_NORMAL) m_Color = m_ColorNormal.getColor();
+                else if (m_State == BUTTON_STATE_HOVER && !m_On) m_Color = m_ColorHover.getColor();
+                else if (m_State == BUTTON_STATE_ON || m_On) m_Color = m_ColorOn.getColor();
             }
         
         public:
-            FusionToggleButton(math::vec3 position, math::vec2 size, math::vec4 color, Texture* textureOff, Texture* textureOn,
-                               Texture* textureHover, Texture* textureNormal, int state, window::Window* parentWindow)
-                : FusionButton(position, size, color, textureOff, textureHover, textureNormal, parentWindow), m_TextureOn(textureOn)
+            FusionToggleButton(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
+                               Color colorOn, int state, window::Window* parentWindow)
+                : FusionButton(position, size, colorOff, colorNormal, colorHover, state, parentWindow), m_ColorOn(colorOn)
             {   
                 m_State = state;
                 if(m_State == BUTTON_STATE_ON) m_On = true;
                 else m_On = false;
-                SetTexture();
+                m_Texture = nullptr;
+                SetColor();
             }
 
             ~FusionToggleButton() { }
@@ -45,7 +47,7 @@ namespace fusion { namespace core { namespace graphics {
                 {
 
                     m_State = BUTTON_STATE_ON;
-                    SetTexture();
+                    SetColor();
                     return m_On = true;
                 }
                 else return m_On = false;
@@ -58,7 +60,7 @@ namespace fusion { namespace core { namespace graphics {
                 x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
                 y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
 
-                if(x <= m_Size.m_x && x >= m_Position.m_x) {
+                if(x <= (m_Position.m_x + m_Size.m_x) && x >= m_Position.m_x) {
 
                     if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
 
@@ -78,7 +80,8 @@ namespace fusion { namespace core { namespace graphics {
 
             //functions used to get and set the clicked state
             inline int getState() const { return m_State; }
-            inline void setState(int state) override { if(state == BUTTON_STATE_ON) m_On = true; m_State = state; SetTexture(); }
+            inline void setState(int state) override { if(state == BUTTON_STATE_ON) m_On = true; m_State = state; SetColor(); }
+            inline math::vec4 getColor() { return m_Color; }
         
     };
 }}}

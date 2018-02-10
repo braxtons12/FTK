@@ -4,6 +4,7 @@
 #include "../../src/input/input.h"
 #include "../../src/graphics/window.h"
 #include "../../src/graphics/renderable2D.h"
+#include "../../src/graphics/color.h"
 
 #define BUTTON_STATE_OFF    0
 #define BUTTON_STATE_NORMAL 1
@@ -17,25 +18,25 @@ namespace fusion { namespace core { namespace graphics {
             input::Mouse& m_Mouse = input::Mouse::GetInstance();
             window::Window* m_ParentWindow;
             int m_State;
-            Texture* m_TextureOff;
-            Texture* m_TextureHover;
-            Texture* m_TextureNormal;
+            Color m_ColorOff;
+            Color m_ColorNormal;
+            Color m_ColorHover;
 
-            inline virtual void SetTexture() {
+            inline virtual void SetColor() {
 
-                if (m_State == BUTTON_STATE_OFF) m_Texture = m_TextureOff;
-                else if(m_State == BUTTON_STATE_HOVER) m_Texture = m_TextureHover;
-                else if(m_State == BUTTON_STATE_NORMAL) m_Texture = m_TextureNormal;
+                if (m_State == BUTTON_STATE_OFF) m_Color = m_ColorOff.getColor();
+                else if(m_State == BUTTON_STATE_NORMAL) m_Color = m_ColorNormal.getColor();
+                else if(m_State == BUTTON_STATE_HOVER) m_Color = m_ColorHover.getColor();
             }
 
         public:
-            FusionButton(math::vec3 position, math::vec2 size, math::vec4 color, Texture* textureOff, Texture* textureHover, 
-                         Texture* textureNormal, window::Window* parentWindow)
-                : Renderable2D(position, size, color), m_TextureOff(textureOff), m_TextureHover(textureHover),
-                  m_TextureNormal(textureNormal), m_ParentWindow(parentWindow) 
+            FusionButton(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
+                         int state, window::Window* parentWindow)
+                : Renderable2D(position, size, colorOff.getColor()), m_ColorOff(colorOff), m_ColorNormal(colorNormal),
+                m_ColorHover(colorHover), m_ParentWindow(parentWindow) 
             {
-                m_Texture = textureOff;
-                SetTexture();
+                m_Texture = nullptr;
+                SetColor();
             }
             
             ~FusionButton() { }
@@ -64,7 +65,7 @@ namespace fusion { namespace core { namespace graphics {
                 x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
                 y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
 
-                if(x <= m_Size.m_x && x >= m_Position.m_x) {
+                if(x <= (m_Position.m_x + m_Size.m_x) && x >= m_Position.m_x) {
 
                     if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
 
@@ -82,8 +83,9 @@ namespace fusion { namespace core { namespace graphics {
             }
 
             inline bool getState() const { return m_State; }
-            inline virtual void setState(int state) { m_State = state; SetTexture(); }
+            inline virtual void setState(int state) { m_State = state; SetColor(); }
             inline void submit(Renderer2D* renderer) const override { renderer->submit(this); }
+            inline math::vec4 getColor() { return m_Color; }
     };
 }}}
 
