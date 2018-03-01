@@ -1,6 +1,6 @@
 #include "window.h"
 
-namespace fusion { namespace core { namespace graphics { namespace window {
+namespace fusion { namespace core { namespace graphics {
 	
 
 	WindowUpdateSignal* Window::m_Signal = new WindowUpdateSignal();
@@ -66,4 +66,4 @@ namespace fusion { namespace core { namespace graphics { namespace window {
         return glfwWindowShouldClose(m_Window);
     }
 
-}}}}
+}}}

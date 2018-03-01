@@ -10,7 +10,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-namespace fusion { namespace core { namespace graphics { namespace window {
+namespace fusion { namespace core { namespace graphics {
 
     class Window {
 
@@ -63,6 +63,6 @@ namespace fusion { namespace core { namespace graphics { namespace window {
             inline const WindowUpdateSignal* const getSignalServer() const { return m_Signal; }
             inline void makeContextCurrent() { glfwMakeContextCurrent(m_Window); }
     };
-}}}}
+}}}
 
 #endif

@@ -1,6 +1,6 @@
 #include "fusionwindow.h"
 
-namespace fusion { namespace core { namespace graphics { namespace window {
+namespace fusion { namespace core { namespace graphics { namespace ui { 
 	
 	
 	void FusionWindow::init() {

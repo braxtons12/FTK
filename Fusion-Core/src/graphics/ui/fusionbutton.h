@@ -10,13 +10,13 @@
 #define BUTTON_STATE_NORMAL 1
 #define BUTTON_STATE_HOVER  2
 
-namespace fusion { namespace core { namespace graphics { 
+namespace fusion { namespace core { namespace graphics { namespace ui { 
 
     class FusionButton : public Renderable2D {
 
         protected:
             input::Mouse& m_Mouse = input::Mouse::GetInstance();
-            window::Window* m_ParentWindow;
+            Window* m_ParentWindow;
             int m_State;
             Color m_ColorOff;
             Color m_ColorNormal;
@@ -31,7 +31,7 @@ namespace fusion { namespace core { namespace graphics {
 
         public:
             FusionButton(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
-                         int state, window::Window* parentWindow)
+                         int state, Window* parentWindow)
                 : Renderable2D(position, size, colorOff.getColor()), m_ColorOff(colorOff), m_ColorNormal(colorNormal),
                 m_ColorHover(colorHover), m_ParentWindow(parentWindow) 
             {
@@ -87,6 +87,6 @@ namespace fusion { namespace core { namespace graphics {
             inline void submit(Renderer2D* renderer) const override { renderer->submit(this); }
             inline math::vec4 getColor() { return m_Color; }
     };
-}}}
+}}}}
 
 #endif

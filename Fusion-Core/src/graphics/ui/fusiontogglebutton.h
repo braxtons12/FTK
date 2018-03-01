@@ -8,7 +8,7 @@
 
 #define BUTTON_STATE_ON 3
 
-namespace fusion { namespace core { namespace graphics {
+namespace fusion { namespace core { namespace graphics { namespace ui { 
 
     class FusionToggleButton : public FusionButton {
 
@@ -26,7 +26,7 @@ namespace fusion { namespace core { namespace graphics {
         
         public:
             FusionToggleButton(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
-                               Color colorOn, int state, window::Window* parentWindow)
+                               Color colorOn, int state, Window* parentWindow)
                 : FusionButton(position, size, colorOff, colorNormal, colorHover, state, parentWindow), m_ColorOn(colorOn)
             {   
                 m_State = state;
@@ -84,6 +84,6 @@ namespace fusion { namespace core { namespace graphics {
             inline math::vec4 getColor() { return m_Color; }
         
     };
-}}}
+}}}}
 
 #endif

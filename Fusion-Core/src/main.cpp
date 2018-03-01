@@ -35,7 +35,7 @@ using namespace fusion;
 using namespace core;
 using namespace math;
 using namespace graphics;
-using namespace window;
+using namespace ui;
 using namespace input;
 
 int main() {
