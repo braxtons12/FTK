@@ -7,36 +7,35 @@
  *
  **/
 
-#include "graphics/window.h"
+#include "input/input.h"
 #include "mathLibs/mathLib.h"
 #include "utils/timer.h"
+#include "graphics/color.h"
 #include "graphics/shader.h"
+#include "graphics/texture.h"
+#include "graphics/window.h"
 #include "graphics/buffers/buffer.h"
 #include "graphics/buffers/indexbuffer.h"
 #include "graphics/buffers/vertexarray.h"
-#include "input/input.h"
+#include "graphics/layers/tilelayer.h"
 #include "graphics/renderables/renderable2D.h"
 #include "graphics/renderables/static_sprite.h"
 #include "graphics/renderables/sprite.h"
 #include "graphics/renderers/simple2Drenderer.h"
 #include "graphics/renderers/batchrenderer2D.h"
+#include "graphics/ui/fusionbutton.h"
+#include "graphics/ui/fusionmenu.h"
 #include "graphics/ui/fusionwindow.h"
 #include "graphics/ui/fusionUI.h"
-#include "graphics/layers/tilelayer.h"
-#include "graphics/texture.h"
-#include "graphics/ui/fusionmenu.h"
-#include "graphics/ui/fusionbutton.h"
-#include "graphics/color.h"
 
 #include <ctime>
-#include <pthread.h>
 
 using namespace fusion;
 using namespace core;
 using namespace math;
+using namespace input;
 using namespace graphics;
 using namespace ui;
-using namespace input;
 
 int main() {
 
