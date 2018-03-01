@@ -39,8 +39,8 @@ set ( GRAPHICS
     src/graphics/ui/fusionwindow.cpp
     src/graphics/ui/fusionUI.cpp
     src/graphics/ui/fusionbutton.h
-    src/graphics/ui/fusiontogglebutton.h
-    src/graphics/ui/fusionmenu.h )
+    src/graphics/ui/fusiontogglebutton.cpp
+    src/graphics/ui/fusionmenu.cpp )
 set ( INPUT
     src/input/input.cpp )
 set ( MATH

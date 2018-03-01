@@ -22,7 +22,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             Color m_ColorNormal;
             Color m_ColorHover;
 
-            inline virtual void SetColor() {
+            virtual void SetColor() {
 
                 if (m_State == BUTTON_STATE_OFF) m_Color = m_ColorOff.getColor();
                 else if(m_State == BUTTON_STATE_NORMAL) m_Color = m_ColorNormal.getColor();
