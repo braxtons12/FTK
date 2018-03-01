@@ -26,11 +26,12 @@
                   {
                     "isGenerated": false,
                     "sources": [
-                      "src/graphics/renderable2D.h",
-                      "src/graphics/renderer2D.h",
-                      "src/graphics/fusionbutton.h",
-                      "src/graphics/fusiontogglebutton.h",
-                      "src/graphics/fusionmenu.h",
+                      "src/graphics/renderables/renderable2D.h",
+                      "src/graphics/renderers/renderer2D.h",
+                      "src/graphics/color.h",
+                      "src/graphics/ui/fusionbutton.h",
+                      "src/graphics/ui/fusiontogglebutton.h",
+                      "src/graphics/ui/fusionmenu.h",
                       "src/utils/fileutils.h",
                       "src/utils/imageload.h",
                       "src/utils/timer.h"
@@ -58,6 +59,15 @@
                         "path": "/home/braxton/git/Fusion/Fusion-Core/src/graphics/groups"
                       },
                       {
+                        "path": "/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderers"
+                      },
+                      {
+                        "path": "/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables"
+                      },
+                      {
+                        "path": "/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui"
+                      },
+                      {
                         "path": "/home/braxton/git/Fusion/Fusion-Core/src/input"
                       },
                       {
@@ -79,13 +89,13 @@
                       "src/graphics/layers/layer.cpp",
                       "src/graphics/layers/tilelayer.cpp",
                       "src/graphics/groups/group.cpp",
-                      "src/graphics/static_sprite.cpp",
-                      "src/graphics/sprite.cpp",
-                      "src/graphics/simple2Drenderer.cpp",
-                      "src/graphics/batchrenderer2D.cpp",
+                      "src/graphics/renderables/static_sprite.cpp",
+                      "src/graphics/renderables/sprite.cpp",
+                      "src/graphics/renderers/simple2Drenderer.cpp",
+                      "src/graphics/renderers/batchrenderer2D.cpp",
                       "src/graphics/texture.cpp",
-                      "src/graphics/fusionwindow.cpp",
-                      "src/graphics/fusionUI.cpp",
+                      "src/graphics/ui/fusionwindow.cpp",
+                      "src/graphics/ui/fusionUI.cpp",
                       "src/input/input.cpp",
                       "src/mathLibs/mathLib.cpp",
                       "src/signals/windowupdatesignal.cpp"
@@ -106,7 +116,7 @@
         ]
       }
     ],
-    "cookie": "0.9327996928008742",
+    "cookie": "0.9556969829108977",
     "inReplyTo": "codemodel",
     "type": "reply"
   }

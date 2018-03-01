@@ -1,7 +1,7 @@
 #ifndef _COLOR
 #define _COLOR
 
-#include "../../src/mathLibs/mathLib.h"
+#include "mathLibs/mathLib.h"
 
 namespace fusion { namespace core { namespace graphics { 
 

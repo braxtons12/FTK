@@ -1,8 +1,8 @@
 #ifndef _SHADER
 #define _SHADER
 
-#include "../../src/utils/fileutils.h"
-#include "../../src/mathLibs/mathLib.h"
+#include "utils/fileutils.h"
+#include "mathLibs/mathLib.h"
 
 #include <GL/glew.h>
 #include <vector>

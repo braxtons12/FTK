@@ -1,13 +1,13 @@
 #ifndef _RENDERABLE_2D
 #define _RENDERABLE_2D
 
-#include "../../src/graphics/buffers/buffer.h"
-#include "../../src/graphics/buffers/indexbuffer.h"
-#include "../../src/graphics/buffers/vertexarray.h"
-#include "../../src/mathLibs/mathLib.h"
-#include "../../src/graphics/shader.h"
-#include "../../src/graphics/texture.h"
-#include "../../src/graphics/renderer2D.h"
+#include "graphics/buffers/buffer.h"
+#include "graphics/buffers/indexbuffer.h"
+#include "graphics/buffers/vertexarray.h"
+#include "mathLibs/mathLib.h"
+#include "graphics/shader.h"
+#include "graphics/texture.h"
+#include "graphics/renderers/renderer2D.h"
 
 namespace fusion { namespace core { namespace graphics {
 
@@ -37,7 +37,7 @@ namespace fusion { namespace core { namespace graphics {
             std::vector<math::vec2> m_UV;
             Texture* m_Texture;
 
-			Renderable2D() { setUVDefaults(); }
+			Renderable2D() : m_Texture(nullptr) { setUVDefaults(); }
 
 		public:
             Renderable2D(math::vec3 position, math::vec2 size, math::vec4 color)
@@ -60,7 +60,7 @@ namespace fusion { namespace core { namespace graphics {
             inline const math::vec2& getSize() const { return m_Size; }
             inline const math::vec4& getColor() const { return m_Color; }
             inline const std::vector<math::vec2>& getUV() const { return m_UV; }
-            inline const GLuint getTID() const { return m_Texture == nullptr ? 0 : m_Texture->getID(); }
+            inline const GLuint getTID() const { return m_Texture ? m_Texture->getID() : 0; }
 
     };
 

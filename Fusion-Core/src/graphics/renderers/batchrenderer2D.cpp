@@ -138,6 +138,10 @@ namespace fusion { namespace core { namespace graphics {
 		m_IndexCount += 6;
     }
 
+    void BatchRenderer2D::drawString(const std::string& text, const math::vec3& position, const math::vec4& color) {
+
+    }
+
     void BatchRenderer2D::end() {
 
 		glUnmapBuffer(GL_ARRAY_BUFFER);

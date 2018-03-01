@@ -1,10 +1,10 @@
 #ifndef _FUSION_BUTTON
 #define _FUSION_BUTTON
 
-#include "../../src/input/input.h"
-#include "../../src/graphics/window.h"
-#include "../../src/graphics/renderable2D.h"
-#include "../../src/graphics/color.h"
+#include "input/input.h"
+#include "graphics/window.h"
+#include "graphics/renderables/renderable2D.h"
+#include "graphics/color.h"
 
 #define BUTTON_STATE_OFF    0
 #define BUTTON_STATE_NORMAL 1

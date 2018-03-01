@@ -2,16 +2,16 @@
 #ifndef _FUSION_WINDOW
 #define _FUSION_WINDOW
 
-#include "../../src/graphics/window.h"
-#include "../../src/signals/windowupdatesignal.h"
-#include "../../src/input/input.h"
-#include "../../src/mathLibs/mathLib.h"
-#include "../../src/graphics/shader.h"
-#include "../../src/graphics/renderable2D.h"
-#include "../../src/graphics/static_sprite.h"
-#include "../../src/graphics/renderer2D.h"
-#include "../../src/graphics/batchrenderer2D.h"
-#include "../../src/graphics/fusionmenu.h"
+#include "graphics/window.h"
+#include "signals/windowupdatesignal.h"
+#include "input/input.h"
+#include "mathLibs/mathLib.h"
+#include "graphics/shader.h"
+#include "graphics/renderables/renderable2D.h"
+#include "graphics/renderables/static_sprite.h"
+#include "graphics/renderers/renderer2D.h"
+#include "graphics/renderers/batchrenderer2D.h"
+#include "graphics/ui/fusionmenu.h"
 
 #include <typeinfo>
 #include <vector>

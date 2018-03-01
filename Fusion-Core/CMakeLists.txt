@@ -12,6 +12,9 @@ include_directories (include
                     src/graphics/buffers/
                     src/graphics/layers/
                     src/graphics/groups/
+                    src/graphics/renderers/
+                    src/graphics/renderables/
+                    src/graphics/ui/
                     src/input/
                     src/mathLibs/
                     src/utils/ )
@@ -25,18 +28,19 @@ set ( GRAPHICS
     src/graphics/layers/layer.cpp
     src/graphics/layers/tilelayer.cpp
     src/graphics/groups/group.cpp
-    src/graphics/renderable2D.h
-    src/graphics/renderer2D.h
-    src/graphics/static_sprite.cpp
-    src/graphics/sprite.cpp
-    src/graphics/simple2Drenderer.cpp
-    src/graphics/batchrenderer2D.cpp
+    src/graphics/renderables/renderable2D.h
+    src/graphics/renderers/renderer2D.h
+    src/graphics/renderables/static_sprite.cpp
+    src/graphics/renderables/sprite.cpp
+    src/graphics/renderers/simple2Drenderer.cpp
+    src/graphics/renderers/batchrenderer2D.cpp
     src/graphics/texture.cpp
-    src/graphics/fusionwindow.cpp
-    src/graphics/fusionUI.cpp
-    src/graphics/fusionbutton.h
-    src/graphics/fusiontogglebutton.h
-    src/graphics/fusionmenu.h )
+    src/graphics/color.h
+    src/graphics/ui/fusionwindow.cpp
+    src/graphics/ui/fusionUI.cpp
+    src/graphics/ui/fusionbutton.h
+    src/graphics/ui/fusiontogglebutton.h
+    src/graphics/ui/fusionmenu.h )
 set ( INPUT
     src/input/input.cpp )
 set ( MATH

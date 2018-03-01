@@ -2,8 +2,8 @@
 #ifndef _WINDOW
 #define _WINDOW
 
-#include "../../src/input/input.h"
-#include "../../src/signals/windowupdatesignal.h"
+#include "input/input.h"
+#include "signals/windowupdatesignal.h"
 
 
 #include <iostream>

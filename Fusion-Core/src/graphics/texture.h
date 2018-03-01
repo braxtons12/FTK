@@ -4,7 +4,7 @@
 #include <string>
 #include <GL/glew.h>
 #include <FreeImage.h>
-#include "../../src/utils/imageload.h"
+#include "utils/imageload.h"
 
 namespace fusion { namespace core { namespace graphics {
 

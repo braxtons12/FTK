@@ -1,7 +1,7 @@
 #ifndef _STATIC_SPRITE
 #define _STATIC_SPRITE
 
-#include "renderable2D.h"
+#include "graphics/renderables/renderable2D.h"
 
 namespace fusion { namespace core { namespace graphics {
 	

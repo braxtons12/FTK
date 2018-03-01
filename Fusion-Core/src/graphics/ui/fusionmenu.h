@@ -8,10 +8,10 @@
 #define MENU_TYPE_HORIZONTAL 0
 #define MENU_TYPE_VERTICAL   1
 
-#include "../../src/input/input.h"
-#include "../../src/graphics/window.h"
-#include "../../src/graphics/fusionbutton.h"
-#include "../../src/graphics/color.h"
+#include "input/input.h"
+#include "graphics/window.h"
+#include "graphics/ui/fusionbutton.h"
+#include "graphics/color.h"
 
 
 namespace fusion { namespace core { namespace graphics {

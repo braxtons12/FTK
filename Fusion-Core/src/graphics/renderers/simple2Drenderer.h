@@ -2,8 +2,8 @@
 #define _SIMPLE_2D_RENDERER
 
 #include "renderer2D.h"
-#include "../../src/graphics/renderable2D.h"
-#include "../../src/graphics/static_sprite.h"
+#include "graphics/renderables/renderable2D.h"
+#include "graphics/renderables/static_sprite.h"
 
 #include <deque>
 

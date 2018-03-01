@@ -1,7 +1,7 @@
 #ifndef _FUSION_UI
 #define _FUSION_UI
 
-#include "../../src/graphics/fusionwindow.h"
+#include "graphics/ui/fusionwindow.h"
 
 #include <vector>
 

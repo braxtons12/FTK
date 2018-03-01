@@ -11,7 +11,7 @@
 #ifndef _VERTEX_ARRAY
 #define _VERTEX_ARRAY
 
-#include "../../src/graphics/buffers/buffer.h"
+#include "graphics/buffers/buffer.h"
 
 #include <vector>
 #include <GL/glew.h>

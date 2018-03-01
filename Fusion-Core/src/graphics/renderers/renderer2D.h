@@ -1,7 +1,7 @@
 #ifndef _RENDERER_2D
 #define _RENDERER_2D
 
-#include "../../src/mathLibs/mathLib.h"
+#include "mathLibs/mathLib.h"
 
 #include <GL/glew.h>
 #include <vector>
@@ -38,11 +38,12 @@ namespace fusion { namespace core { namespace graphics {
 				m_TransformationBack = &m_TransformationStack.back();
 			}
 
+            virtual void begin() { }
 			virtual void submit(const Renderable2D* renderable) = 0;
+            virtual void drawString(const std::string& text, const math::vec3& position, const math::vec4& color) { }
+            virtual void end() { }
             virtual void flush() = 0;
-			virtual void begin() {}
-			virtual void end() {}
-			virtual ~Renderer2D() {}
+			virtual ~Renderer2D() { }
     };
 
 }}}

@@ -1,7 +1,7 @@
 #ifndef _SPRITE
 #define _SPRITE
 
-#include "../../src/graphics/renderable2D.h"
+#include "graphics/renderables/renderable2D.h"
 
 namespace fusion { namespace core { namespace graphics {
 

@@ -1,10 +1,10 @@
 #ifndef _FUSION_TOGGLE_BUTTON
 #define _FUSION_TOGGLE_BUTTON
 
-#include "../../src/graphics/fusionbutton.h"
-#include "../../src/graphics/texture.h"
-#include "../../src/graphics/renderable2D.h"
-#include "../../src/graphics/color.h"
+#include "graphics/ui/fusionbutton.h"
+#include "graphics/texture.h"
+#include "graphics/renderables/renderable2D.h"
+#include "graphics/color.h"
 
 #define BUTTON_STATE_ON 3
 

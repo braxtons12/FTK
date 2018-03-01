@@ -12,9 +12,9 @@
 #ifndef _LAYER
 #define _LAYER
 
-#include "../../../src/graphics/renderer2D.h"
-#include "../../../src/graphics/renderable2D.h"
-#include "../../../src/mathLibs/mathLib.h"
+#include "graphics/renderers/renderer2D.h"
+#include "graphics/renderables/renderable2D.h"
+#include "mathLibs/mathLib.h"
 
 namespace fusion { namespace core { namespace graphics {
 

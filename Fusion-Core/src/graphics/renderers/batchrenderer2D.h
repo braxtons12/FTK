@@ -1,12 +1,13 @@
 #ifndef _BATCH_RENDERER_2D
 #define _BATCH_RENDERER_2D
 
-#include "../../src/graphics/renderer2D.h"
-#include "../../src/graphics/renderable2D.h"
-#include "../../src/graphics/buffers/vertexarray.h"
-#include "../../src/graphics/buffers/indexbuffer.h"
+#include "graphics/renderers/renderer2D.h"
+#include "graphics/renderables/renderable2D.h"
+#include "graphics/buffers/vertexarray.h"
+#include "graphics/buffers/indexbuffer.h"
 
 #include <cstddef>
+//#include <FTGL/ftgl.h>
 
 namespace fusion { namespace core { namespace graphics {
 
@@ -39,6 +40,7 @@ namespace fusion { namespace core { namespace graphics {
             ~BatchRenderer2D();
             void begin() override;
             void submit(const Renderable2D* renderable) override;
+            void drawString(const std::string& text, const math::vec3& position, const math::vec4& color) override;
             void end() override;
             void flush() override;
             inline unsigned int getNumTextures() { return m_TextureSlots.size(); }
