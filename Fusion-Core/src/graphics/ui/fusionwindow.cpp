@@ -43,7 +43,16 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 			
 			this->updateSize(m_Window->getWidth(), m_Window->getHeight());
 			m_Signal->resetSignal();
+		}	
+
+		if(m_HasMenu) {
+
+			m_Menu->checkHover();
 		}
+		
+	}
+
+	void FusionWindow::render() {
 
 		m_Window->clear();
 
@@ -54,11 +63,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 			m_Renderables->at(i)->submit(m_Renderer);
 		}
 
-		if(m_HasMenu) {
-
-			m_Menu->checkHover();
-			m_Menu->submit(m_Renderer);
-		}
+		if(m_HasMenu) m_Menu->submit(m_Renderer);
 
 		m_Renderer->end();
 		m_Renderer->flush();
@@ -66,7 +71,6 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		m_Window->update();
 
 		m_Renderables = new std::vector<const Renderable2D*>; 
-		
 	}
 
 }}}}

@@ -65,6 +65,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		inline void setMenu(FusionMenu* menu) { m_Menu = menu; }
 
 		void update();
+		void render();
 
 		inline void setShader(Shader& shader) { *m_Shader = shader; }
 		inline Shader& getShader() { return *m_Shader; }

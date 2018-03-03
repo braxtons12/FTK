@@ -39,8 +39,6 @@ using namespace ui;
 
 int main() {
 
-    math::mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
-
 	FusionUI fusionUI = FusionUI();
 /* no menu
 	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", false));
@@ -51,26 +49,35 @@ int main() {
 
 	FusionWindow* window = fusionUI.windowAt(0);
 
+	math::mat4 ortho = mat4::orthographic(0.0f, window->getWidth(), 0.0f, window->getHeight(), -1.0f, 1.0f);
+
 //create stuff for mainMenu
 	Color colorOff = Color(math::vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	Color colorNormal = Color(math::vec4(0.2f, 0.2f, 0.2f, 1.0f));
 	Color colorHover = Color(math::vec4(0.35f, 0.35f, 0.35f, 1.0f));
 
+	float menuHeight = window->getHeight()/18;
+	float menu1Y = window->getHeight() - menuHeight;
+	float menu2Y = window->getHeight() - (2 * menuHeight);
+	float menuWidth = window->getWidth();
+	float buttonWidth = window->getWidth()/16;
+	float buttonHeight = menuHeight;
+
 //create menus
-	FusionMenu* mainMenu =new FusionMenu(math::vec3(0.0f, 8.5f, 0.0f), math::vec2(16.0f, 0.5f), colorOff, colorNormal, colorHover,
+	FusionMenu* mainMenu = new FusionMenu(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(menuWidth, menuHeight), colorOff, colorNormal, colorHover,
 								  MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, 1, 2, true, fusionUI.windowAt(0)->getWindow());
-	mainMenu->addButton(math::vec3(0.0f, 8.5f, 0.0f), math::vec2(1.0f, 0.5f));
-	mainMenu->addButton(math::vec3(1.0f, 8.5f, 0.0f), math::vec2(15.0f, 0.5f));
+	mainMenu->addButton(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
+	mainMenu->addButton(math::vec3(buttonWidth, menu1Y, 0.0f), math::vec2(menuWidth - buttonWidth, buttonHeight));
 
-	FusionMenu* vertMenu1 = new FusionMenu(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(1.0f, 2.0f), colorOff, colorNormal, colorHover,
+	FusionMenu* vertMenu1 = new FusionMenu(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, 2 * buttonHeight), colorOff, colorNormal, colorHover,
 								  MENU_STATE_OFF, MENU_TYPE_VERTICAL, 1, 2, false, fusionUI.windowAt(0)->getWindow());
-	vertMenu1->addButton(math::vec3(0.0f, 8.5f, 0.0f), math::vec2(1.0f, 0.5f));
-	vertMenu1->addButton(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(1.0f, 0.5f));
+	vertMenu1->addButton(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
+	vertMenu1->addButton(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 
-	FusionMenu* horzMenu1 = new FusionMenu(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(4.0f, 0.5f), colorOff, colorNormal, colorHover,
+	FusionMenu* horzMenu1 = new FusionMenu(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(4 * buttonWidth, buttonHeight), colorOff, colorNormal, colorHover,
 								  MENU_STATE_OFF, MENU_TYPE_HORIZONTAL, 0, 2, false, fusionUI.windowAt(0)->getWindow());
-	horzMenu1->addButton(math::vec3(0.0f, 8.0f, 0.0f), math::vec2(1.0f, 0.5f));
-	horzMenu1->addButton(math::vec3(1.0f, 8.0f, 0.0f), math::vec2(3.0f, 0.5f));
+	horzMenu1->addButton(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
+	horzMenu1->addButton(math::vec3(buttonWidth, menu2Y, 0.0f), math::vec2(3 * buttonWidth, buttonHeight));
 
 	vertMenu1->addSubMenu(horzMenu1);
 	
@@ -87,20 +94,25 @@ int main() {
 
 	srand(time(NULL));
 	Timer timer;
-	float time = 0;
+	float updateTime = 0;
+	float frameTime = 0;
+	float frameTimer = (1.0f / 60.0f);
+
 	int frames = 0;
 
 	Texture* tex1 = new Texture("res/tex1.bmp");
 	Texture* tex2 = new Texture("res/tex2.bmp");
 
+	float spriteY = window->getHeight() / 18;
+	float spriteX = window->getWidth() / 32;
 	std::vector<Renderable2D*> sprites;
 	int flip = 0;
-	for (float y = 0; y < 9.0f; y += 0.5) {
+	for (float y = 0; y < window->getHeight(); y += spriteY) {
 
-		for (float x = 0; x < 16.0f; x += 0.5) {
+		for (float x = 0; x < window->getWidth(); x += spriteX) {
 
-			if(!(flip % 2)) sprites.push_back(new Sprite(x, y, 0.9f, 0.9f, tex1));
-			else sprites.push_back(new Sprite(x, y, 0.9f, 0.9f, tex2));
+			if(!(flip % 2)) sprites.push_back(new Sprite(x, y, 0.9f * spriteX, 0.9f * spriteY, tex1));
+			else sprites.push_back(new Sprite(x, y, 0.9f * spriteX, 0.9f * spriteY, tex2));
 			++flip;
 		}
 		++flip;
@@ -114,6 +126,8 @@ int main() {
 	shader.setUniform1iv("textures", texIDs, 32);
 
 	BatchRenderer2D* renderer = new BatchRenderer2D();
+	
+	shader.setUniform2f("light_pos", math::vec2(window->getWidth() / 2, window->getHeight() / 2 ));
 
 	while (!window->getWindow()->closed()) {
 
@@ -123,21 +137,24 @@ int main() {
 		shader.setUniform2f("light_pos", math::vec2((float)(x * 16.0f/(float)window->getWidth()),
 													(float)(9.0f - y * 9.0f/(float)window->getHeight())));
 	*/
-		shader.setUniform2f("light_pos", math::vec2(8.0f, 4.5f));
-		for(int i = 0; i < sprites.size(); ++i) {
+		
+		window->update();
+		if(timer.elapsed() - updateTime > frameTimer) {
+			for(int i = 0; i < sprites.size(); ++i) {
 
-			window->addElement(sprites[i]);
+				window->addElement(sprites[i]);
+			}
+
+			window->render();
+			updateTime += frameTimer;
+			frames++;
 		}
 
-		window->update();
+		if(timer.elapsed() - frameTime > 1.0f) {
 
-		frames++;
-		if(timer.elapsed() - time > 1.0f) {
-
-			time += 1.0f;
+			frameTime += 1.0f;
 			printf("%dfps\n", frames);
 			frames = 0;
-
 		}
 
     } 

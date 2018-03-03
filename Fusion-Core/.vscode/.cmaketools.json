@@ -36,7 +36,7 @@
                     ]
                   },
                   {
-                    "compileFlags": " -g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g  ",
+                    "compileFlags": " -g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g  ",
                     "includePath": [
                       {
                         "path": "/home/braxton/git/Fusion/Fusion-Core/include"
@@ -104,8 +104,8 @@
                 ],
                 "fullName": "main",
                 "linkFlags": "-lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl   -rdynamic",
-                "linkLanguageFlags": "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g",
-                "linkLibraries": "-lGL -lGLEW -lglfw -lfreeimage -lc",
+                "linkLanguageFlags": "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g",
+                "linkLibraries": "-lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -lc",
                 "linkerLanguage": "CXX",
                 "name": "main",
                 "sourceDirectory": "/home/braxton/git/Fusion/Fusion-Core",
@@ -116,7 +116,7 @@
         ]
       }
     ],
-    "cookie": "0.8435958944586557",
+    "cookie": "0.5564976322212554",
     "inReplyTo": "codemodel",
     "type": "reply"
   }

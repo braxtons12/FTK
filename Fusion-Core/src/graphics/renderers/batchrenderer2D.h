@@ -7,7 +7,8 @@
 #include "graphics/buffers/indexbuffer.h"
 
 #include <cstddef>
-//#include <FTGL/ftgl.h>
+#include <freetype2/ft2build.h>
+#include <FTGL/ftgl.h>
 
 namespace fusion { namespace core { namespace graphics {
 

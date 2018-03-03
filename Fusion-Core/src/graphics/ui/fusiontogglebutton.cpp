@@ -14,8 +14,8 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                 
         double x,y = 0.0f;
         m_Mouse.getMousePosition(x,y);
-        if (m_Mouse.Pressed(0) && (float)(x * 32.0f / m_ParentWindow->getWidth() - 16.0f) == m_Position.m_x &&
-           (float)(9.0f - y * 18.0f / m_ParentWindow->getHeight()) == m_Position.m_y) 
+        if (m_Mouse.Pressed(0) && (x >= m_Position.m_x && x <= (m_Position.m_x + m_Size.m_x)) &&
+           ((m_ParentWindow->getHeight() - y) >= m_Position.m_y && (m_ParentWindow->getHeight() - y) <= (m_Position.m_y + m_Size.m_y))) 
         {
 
             m_State = BUTTON_STATE_ON;
@@ -29,8 +29,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
         double x, y;
         m_Mouse.getMousePosition(x, y);
-        x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
-        y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
+        y = m_ParentWindow->getHeight() - y;
 
         if(x <= (m_Position.m_x + m_Size.m_x) && x >= m_Position.m_x) {
 

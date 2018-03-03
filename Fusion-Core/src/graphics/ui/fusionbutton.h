@@ -45,25 +45,20 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
                 double x,y;
                 m_Mouse.getMousePosition(x,y);
-                x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
-                y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
-                if (m_Mouse.Pressed(0)) {
+                y = (float)(m_ParentWindow->getHeight() - y);
+                if (m_Mouse.Pressed(0) && (x >= m_Position.m_x && x <= (m_Position.m_x + m_Size.m_x)) &&
+                   ((m_ParentWindow->getHeight() - y) >= m_Position.m_y && 
+                    (m_ParentWindow->getHeight() - y) <= (m_Position.m_y + m_Size.m_y)))
+                    return true;
 
-                    if( x <= m_Size.m_x && x >= m_Position.m_x) {
-
-                        if( y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) return true;
-                        else return false;
-                    } else return false;
-
-                } else return false;
+                else return false;
             }
 
             virtual void checkHover() {
 
                 double x, y = 0.0f;
                 m_Mouse.getMousePosition(x, y);
-                x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
-                y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
+                y = m_ParentWindow->getHeight() - y;
 
                 if(x <= (m_Position.m_x + m_Size.m_x) && x >= m_Position.m_x) {
 

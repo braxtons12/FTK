@@ -91,8 +91,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
         double x, y;
         m_Mouse.getMousePosition(x, y);
-        x = (float)(x * 16.0f /((float) m_ParentWindow->getWidth()));
-        y = (float)(9.0f - y * 9.0f / (float)(m_ParentWindow->getHeight()));
+        y = m_ParentWindow->getHeight() - y;
 
         if(m_MenuType == MENU_TYPE_HORIZONTAL) CheckHoverHorizontal(x, y);
         else CheckHoverVertical(x, y);
