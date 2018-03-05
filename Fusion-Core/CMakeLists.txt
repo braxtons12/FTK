@@ -1,6 +1,6 @@
 project(Fusion-Core)
 
-set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl")
+set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/ui -I../src/graphics/renderers -I../src/graphics/renderables -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl")
 set (GCC_COVERAGE_LINKER_FLAGS "-lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl")
 
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )

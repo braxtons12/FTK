@@ -26,10 +26,12 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		init();
 	}
 	
-	void FusionWindow::scale(float x, float y) {
+	void FusionWindow::scale(double x, double y) {
 
 		m_Width *= x;
 		m_Height *= y;
+		m_Window->setWidth(((int)m_Width));
+		m_Window->setHeight(((int)m_Height));
 
 		for(int i = 0; i < m_Renderables->size(); ++i) {
 			m_Renderables->at(i)->scale(x, y);
@@ -49,12 +51,14 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
 	void FusionWindow::update() {
 
-		if (m_Signal->getSignal()) {
+		double x, y = 0.0;
+
+		if (m_Signal->getSignal(x, y)) {
 			
-			float x = m_Window->getWidth();
-			float y = m_Window->getHeight();
 			x /= m_Width;
 			y /= m_Height;
+			m_Window->m_XScaleFactor *= x;
+			m_Window->m_YScaleFactor *= y;
 			this->scale(x, y);
 			m_Signal->resetSignal();
 		}	
@@ -62,6 +66,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		if(m_HasMenu) {
 
 			m_Menu->checkHover();
+			m_Menu->checkClicked();
 		}
 		
 	}

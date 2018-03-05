@@ -36,7 +36,7 @@
                     ]
                   },
                   {
-                    "compileFlags": " -g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g  ",
+                    "compileFlags": " -g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/ui -I../src/graphics/renderers -I../src/graphics/renderables -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g  ",
                     "includePath": [
                       {
                         "path": "/home/braxton/git/Fusion/Fusion-Core/include"
@@ -104,7 +104,7 @@
                 ],
                 "fullName": "main",
                 "linkFlags": "-lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl   -rdynamic",
-                "linkLanguageFlags": "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g",
+                "linkLanguageFlags": "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/ui -I../src/graphics/renderers -I../src/graphics/renderables -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -g",
                 "linkLibraries": "-lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl -lc",
                 "linkerLanguage": "CXX",
                 "name": "main",
@@ -116,7 +116,7 @@
         ]
       }
     ],
-    "cookie": "0.6103348762280154",
+    "cookie": "0.2107713275249894",
     "inReplyTo": "codemodel",
     "type": "reply"
   }

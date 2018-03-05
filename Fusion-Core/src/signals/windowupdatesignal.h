@@ -8,16 +8,16 @@ namespace fusion {
 	
 	private:
 		static bool m_Signal;
-		
+		static int m_Width, m_Height;
 	public:
 		
 		WindowUpdateSignal();
 		
 		~WindowUpdateSignal();
 		
-		inline void sendSignal() const { m_Signal = true; }
+		inline void sendSignal(int width, int height) const { m_Signal = true; m_Width = width; m_Height = height; }
 		
-		inline bool const getSignal() const { return m_Signal; }
+		inline bool const getSignal(double& width, double& height) const { width = m_Width; height = m_Height; return m_Signal; }
 		
 		inline void resetSignal() const { m_Signal = false; }
 		

@@ -7,7 +7,8 @@ namespace fusion { namespace core { namespace graphics {
 	
     bool Window::init() {
 		
-        
+        m_XScaleFactor = 1.0;
+        m_YScaleFactor = 1.0;
         if(!glfwInit()) {
             std::cout << "Failed to initialize GLFW!" << std::endl;
             return false;
@@ -64,6 +65,12 @@ namespace fusion { namespace core { namespace graphics {
 
     bool Window::closed() const {
         return glfwWindowShouldClose(m_Window);
+    }
+
+    void Window::convertCoords(double& x, double& y) {
+
+        x /= m_XScaleFactor;
+        y /= m_YScaleFactor;
     }
 
 }}}

@@ -6,6 +6,8 @@
 #include "graphics/renderables/renderable2D.h"
 #include "graphics/color.h"
 
+#include <iostream>
+
 #define BUTTON_STATE_OFF    0
 #define BUTTON_STATE_NORMAL 1
 #define BUTTON_STATE_HOVER  2
@@ -46,18 +48,24 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                 double x,y;
                 m_Mouse.getMousePosition(x,y);
                 y = m_ParentWindow->getHeight() - y;
+                m_ParentWindow->convertCoords(x, y);
+
                 if (m_Mouse.Pressed(0) && (x >= m_Position.m_x && x <= (m_Position.m_x + m_Size.m_x)) &&
                    (y >= m_Position.m_y && y<= (m_Position.m_y + m_Size.m_y)))
-                    return true;
+                   {
+                       std::cout << "clicked" << std::endl;
+                       return true;
+                   }
 
                 else return false;
             }
 
             virtual void checkHover() {
 
-                double x, y = 0.0f;
+                double x, y;
                 m_Mouse.getMousePosition(x, y);
                 y = m_ParentWindow->getHeight() - y;
+                m_ParentWindow->convertCoords(x, y);
 
                 if(x <= (m_Position.m_x + m_Size.m_x) && x >= m_Position.m_x) {
 

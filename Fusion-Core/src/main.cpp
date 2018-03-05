@@ -131,15 +131,16 @@ int main() {
 	shader.setUniform2f("light_pos", math::vec2(window->getWidth() / 2, window->getHeight() / 2 ));
 
 	while (!window->getWindow()->closed()) {
-
-    	/*    
+		
+		/*
 		double x, y;
 		Mouse mouse = input::Mouse::GetInstance();
         mouse.getMousePosition(x, y);
-		shader.setUniform2f("light_pos", math::vec2((float)(x * 16.0f/(float)window->getWidth()),
-													(float)(9.0f - y * 9.0f/(float)window->getHeight())));
+		y = window->getHeight() - y;
+		window->getWindow()->convertCoords(x, y);
+		shader.setUniform2f("light_pos", math::vec2(x, y));
 		*/
-		
+
 		window->update();
 		//if(timer.elapsed() - updateTime > frameTimer) {
 			for(int i = 0; i < sprites.size(); ++i) {

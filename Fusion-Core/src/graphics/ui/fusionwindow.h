@@ -23,7 +23,6 @@
 
 namespace fusion { namespace core { namespace graphics { namespace ui { 
 
-
 	class FusionWindow {
 
 	private:
@@ -31,8 +30,8 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		Window* m_Window;
 		const WindowUpdateSignal* m_Signal;
 		const char* m_Name;
-		int m_Width;
-		int m_Height;
+		double m_Width;
+		double m_Height;
 		input::Mouse* m_Mouse;
 		input::Keyboard* m_Keyboard;
 		const char* m_VertexShaderPath;
@@ -52,7 +51,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		inline const char* const getName() { return m_Name; }
 		inline int const getHeight() { return m_Height; }
 		inline int const getWidth() { return m_Width; }
-		void scale(float x, float y);
+		void scale(double x, double y);
 
 		inline void addElement(Renderable2D* renderable) {
 			//if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader);

@@ -27,6 +27,9 @@ namespace fusion { namespace core { namespace graphics {
             bool init();
 
         public:
+            double m_XScaleFactor;
+		    double m_YScaleFactor;
+
             Window(const char *name, int width, int height);
             ~Window();
             void clear() const;
@@ -54,14 +57,18 @@ namespace fusion { namespace core { namespace graphics {
 
 			static void WindowResizeCallBack(GLFWwindow *window, int width, int height) {
 
-				m_Signal->sendSignal();
+				m_Signal->sendSignal(width, height);
 				glViewport(0, 0, width, height);
 			}
 
             inline int getWidth() const { return m_width; }
+            inline void setWidth(int width) { m_width = width; }
             inline int getHeight() const { return m_height; }
+            inline void setHeight(int height) { m_height = height; }
             inline const WindowUpdateSignal* const getSignalServer() const { return m_Signal; }
             inline void makeContextCurrent() { glfwMakeContextCurrent(m_Window); }
+
+            void convertCoords(double& x, double& y);
     };
 }}}
 

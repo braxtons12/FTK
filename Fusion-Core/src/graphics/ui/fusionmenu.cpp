@@ -92,10 +92,18 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         double x, y;
         m_Mouse.getMousePosition(x, y);
         y = m_ParentWindow->getHeight() - y;
+        m_ParentWindow->convertCoords(x, y);
 
         if(m_MenuType == MENU_TYPE_HORIZONTAL) CheckHoverHorizontal(x, y);
         else CheckHoverVertical(x, y);
                 
+    }
+
+    void FusionMenu::checkClicked() {
+
+        for(int i = 0; i < m_Buttons.size(); ++i) {
+            if(m_Buttons.at(i)->getState() != BUTTON_STATE_OFF) m_Buttons.at(i)->clicked();
+        }
     }
 
     void FusionMenu::submit(Renderer2D* renderer) const {

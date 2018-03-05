@@ -9,12 +9,13 @@
 #define MENU_TYPE_VERTICAL   1
 
 #include "input/input.h"
-#include "graphics/window.h"
 #include "graphics/ui/fusionbutton.h"
 #include "graphics/color.h"
+#include "graphics/window.h"
 
 
 namespace fusion { namespace core { namespace graphics { namespace ui { 
+
 
     class FusionMenu : public Renderable2D {
 
@@ -72,6 +73,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             }
 
             void checkHover();
+            void checkClicked();
 
             void submit(Renderer2D* renderer) const override;
 
