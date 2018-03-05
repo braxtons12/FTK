@@ -1,3 +1,10 @@
+/**
+ * Fixed sprites used with the simple renderer
+ * Deprecated
+ * 
+ * C 2018 Braxton Salyer
+ **/
+
 #ifndef _STATIC_SPRITE
 #define _STATIC_SPRITE
 

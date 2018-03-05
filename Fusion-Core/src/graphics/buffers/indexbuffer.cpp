@@ -4,7 +4,7 @@
  * Implementation
  * 
  * Version: 0.0.1
- * 0 2017 Braxton Salyer and Logan Tibbetts
+ * C 2018 Braxton Salyer
  * 
  **/
 

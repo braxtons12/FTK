@@ -34,7 +34,8 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         public:
             FusionButton(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
                          int state, Window* parentWindow)
-                : Renderable2D(position, size, colorOff.getColor()), m_ColorOff(colorOff), m_ColorNormal(colorNormal),
+                : Renderable2D(math::vec3(position.m_x, parentWindow->getHeight() - position.m_y, position.m_z), size, 
+                colorOff.getColor()), m_ColorOff(colorOff), m_ColorNormal(colorNormal),
                 m_ColorHover(colorHover), m_ParentWindow(parentWindow) 
             {
                 m_Texture = nullptr;
@@ -51,7 +52,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                 m_ParentWindow->convertCoords(x, y);
 
                 if (m_Mouse.Pressed(0) && (x >= m_Position.m_x && x <= (m_Position.m_x + m_Size.m_x)) &&
-                   (y >= m_Position.m_y && y<= (m_Position.m_y + m_Size.m_y)))
+                   (y >= m_Position.m_y && y <= (m_Position.m_y + m_Size.m_y)))
                    {
                        std::cout << "clicked" << std::endl;
                        return true;

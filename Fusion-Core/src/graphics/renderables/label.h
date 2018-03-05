@@ -1,3 +1,12 @@
+/**
+ * Basic Label class used for text rendering
+ * 
+ * Header File
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/ 
+
 #ifndef _LABEL
 #define _LABEL
 
@@ -11,8 +20,17 @@ namespace fusion { namespace core { namespace graphics {
             std::string m_Text;
 
         public:
+            /**
+             * Constructor
+             * Takes in the actual text, a position, and the color
+             * 
+             **/
             Label(std::string text, float x, float y, math::vec4 color);
 
+            /**
+             * Submit the label for rendering
+             *
+             **/
             void submit(Renderer2D* renderer) const override;
     };
 }}}

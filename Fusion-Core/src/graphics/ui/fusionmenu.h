@@ -43,7 +43,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         public:
             FusionMenu(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
                        int state, int menuType,  int numMenus, int numEntries, bool alwaysVisible, Window* parentWindow)
-                : Renderable2D(position, size, colorOff.getColor()),
+                : Renderable2D(math::vec3(position.m_x, parentWindow->getHeight() - position.m_y, position.m_z), size, colorOff.getColor()),
                 m_ColorOff(colorOff), m_ColorNormal(colorNormal), m_ColorHover(colorHover), m_State(state),
                 m_MenuType(menuType), m_NumMenus(numMenus), m_NumEntries(numEntries), m_AlwaysVisible(alwaysVisible),
                 m_ParentWindow(parentWindow)

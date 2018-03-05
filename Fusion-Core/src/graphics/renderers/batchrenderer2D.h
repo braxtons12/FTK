@@ -1,3 +1,12 @@
+/**
+ * Batchrenderer used to quickly and efficiently draw all graphics.
+ * 
+ * Header File
+ * 
+ * C 2018 Braxton Salyer
+ *
+ **/
+
 #ifndef _BATCH_RENDERER_2D
 #define _BATCH_RENDERER_2D
 
@@ -12,6 +21,7 @@
 
 namespace fusion { namespace core { namespace graphics {
 
+//define necessary macros
 #define RENDERER_MAX_SPRITES    60000
 #define RENDERER_VERTEX_SIZE    sizeof(VertexData)
 #define RENDERER_SPRITE_SIZE    RENDERER_VERTEX_SIZE * 4
@@ -34,17 +44,65 @@ namespace fusion { namespace core { namespace graphics {
             GLsizei m_IndexCount;
             std::vector<GLuint> m_TextureSlots;
 
+            /**
+             * Initialize the Renderer
+             * 
+             **/
             void init();
 
         public:
+            /**
+             * Constructor
+             * 
+             **/
             BatchRenderer2D();
+
+            /**
+             * Destructor
+             * 
+             **/
             ~BatchRenderer2D();
+
+            /**
+             * Start the renderer
+             * 
+             **/
             void begin() override;
+
+            /**
+             * Submit a renderable for rendering
+             *
+             **/
             void submit(const Renderable2D* renderable) override;
+
+            /**
+             * "Submit" a text item
+             * 
+             **/
             void drawString(const std::string& text, const math::vec3& position, const math::vec4& color) override;
+
+            /**
+             * End submissions
+             *
+             **/
             void end() override;
+
+            /**
+             * Draw all the renderables
+             * 
+             **/
             void flush() override;
+
+            /**
+             * Get the number of active textures
+             * 
+             **/
             inline unsigned int getNumTextures() { return m_TextureSlots.size(); }
+
+            /**
+             * Get the active OpenGL Texture IDs
+             * 
+             **/
             inline std::vector<GLuint>& getTextureIDs() { return m_TextureSlots; }
     };
 }}}

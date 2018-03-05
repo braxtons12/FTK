@@ -58,8 +58,8 @@ int main() {
 	Color colorHover = Color(math::vec4(0.35f, 0.35f, 0.35f, 1.0f));
 
 	float menuHeight = window->getHeight()/18;	
-	float menu1Y = window->getHeight() - menuHeight;
-	float menu2Y = window->getHeight() - (2 * menuHeight);
+	float menu1Y = menuHeight;
+	float menu2Y = 2 * menuHeight;
 	float menuWidth = window->getWidth();
 	float buttonWidth = window->getWidth()/16;
 	float buttonHeight = menuHeight;

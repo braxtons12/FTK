@@ -1,3 +1,10 @@
+/**
+ * Fixed sprites used with the simple renderer
+ * Deprecated
+ * 
+ * C 2018 Braxton Salyer
+ **/
+
 #include "static_sprite.h"
 
 namespace fusion { namespace core { namespace graphics {
