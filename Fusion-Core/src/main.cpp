@@ -40,42 +40,43 @@ using namespace ui;
 int main() {
 
 	FusionUI fusionUI = FusionUI();
-/* no menu
-	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", false));
-*/
 
-//create window
+	/* no menu
+	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", false));
+	*/
+
+	//create window
 	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag",true));
 
 	FusionWindow* window = fusionUI.windowAt(0);
 
 	math::mat4 ortho = mat4::orthographic(0.0f, window->getWidth(), 0.0f, window->getHeight(), -1.0f, 1.0f);
 
-//create stuff for mainMenu
+	//create stuff for mainMenu
 	Color colorOff = Color(math::vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	Color colorNormal = Color(math::vec4(0.2f, 0.2f, 0.2f, 1.0f));
 	Color colorHover = Color(math::vec4(0.35f, 0.35f, 0.35f, 1.0f));
 
-	float menuHeight = window->getHeight()/18;
+	float menuHeight = window->getHeight()/18;	
 	float menu1Y = window->getHeight() - menuHeight;
 	float menu2Y = window->getHeight() - (2 * menuHeight);
 	float menuWidth = window->getWidth();
 	float buttonWidth = window->getWidth()/16;
 	float buttonHeight = menuHeight;
 
-//create menus
+	//create menus
 	FusionMenu* mainMenu = new FusionMenu(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(menuWidth, menuHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, 1, 2, true, fusionUI.windowAt(0)->getWindow());
+								  MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, 1, 2, true, window->getWindow());
 	mainMenu->addButton(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	mainMenu->addButton(math::vec3(buttonWidth, menu1Y, 0.0f), math::vec2(menuWidth - buttonWidth, buttonHeight));
 
 	FusionMenu* vertMenu1 = new FusionMenu(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, 2 * buttonHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_OFF, MENU_TYPE_VERTICAL, 1, 2, false, fusionUI.windowAt(0)->getWindow());
+								  MENU_STATE_OFF, MENU_TYPE_VERTICAL, 1, 2, false, window->getWindow());
 	vertMenu1->addButton(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	vertMenu1->addButton(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 
 	FusionMenu* horzMenu1 = new FusionMenu(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(4 * buttonWidth, buttonHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_OFF, MENU_TYPE_HORIZONTAL, 0, 2, false, fusionUI.windowAt(0)->getWindow());
+								  MENU_STATE_OFF, MENU_TYPE_HORIZONTAL, 0, 2, false, window->getWindow());
 	horzMenu1->addButton(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	horzMenu1->addButton(math::vec3(buttonWidth, menu2Y, 0.0f), math::vec2(3 * buttonWidth, buttonHeight));
 
@@ -83,10 +84,10 @@ int main() {
 	
 	mainMenu->addSubMenu(vertMenu1);
 
-//add menu to window
+	//add menu to window
 	window->setMenu(mainMenu);
 
-//activate renderer
+	//activate renderer
 	window->activateRenderer();
 
 	Shader& shader = window->getShader();
@@ -131,15 +132,16 @@ int main() {
 
 	while (!window->getWindow()->closed()) {
 
-    /*    double x, y;
+    	/*    
+		double x, y;
 		Mouse mouse = input::Mouse::GetInstance();
         mouse.getMousePosition(x, y);
 		shader.setUniform2f("light_pos", math::vec2((float)(x * 16.0f/(float)window->getWidth()),
 													(float)(9.0f - y * 9.0f/(float)window->getHeight())));
-	*/
+		*/
 		
 		window->update();
-		if(timer.elapsed() - updateTime > frameTimer) {
+		//if(timer.elapsed() - updateTime > frameTimer) {
 			for(int i = 0; i < sprites.size(); ++i) {
 
 				window->addElement(sprites[i]);
@@ -148,7 +150,7 @@ int main() {
 			window->render();
 			updateTime += frameTimer;
 			frames++;
-		}
+		//}
 
 		if(timer.elapsed() - frameTime > 1.0f) {
 

@@ -142,6 +142,8 @@ namespace fusion { namespace core { namespace math {
             vec4 multiply(const vec4& right) const;
             friend vec4 operator*(const mat4& left, const vec4& right);
 
+            mat4 operator=(const mat4& right);
+
 
     };
 }}}

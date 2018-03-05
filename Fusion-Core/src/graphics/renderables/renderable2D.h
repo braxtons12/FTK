@@ -62,6 +62,15 @@ namespace fusion { namespace core { namespace graphics {
             inline const std::vector<math::vec2>& getUV() const { return m_UV; }
             inline const GLuint getTID() const { return m_Texture ? m_Texture->getID() : 0; }
 
+            virtual void scale(float x, float y) {
+
+                m_Position.m_x *= x;
+                m_Position.m_y *= y;
+                
+                m_Size.m_x *= x;
+                m_Size.m_y *= y;
+            }
+
     };
 
 }}}

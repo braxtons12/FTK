@@ -17,8 +17,8 @@
 #include <vector>
 #include <GL/glew.h>
 
-#define WINDOW_HAS_MENU 1
 #define WINDOW_NO_MENU  0
+#define WINDOW_HAS_MENU 1
 #define MAX_SHADERS 1000
 
 namespace fusion { namespace core { namespace graphics { namespace ui { 
@@ -41,7 +41,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		Renderer2D* m_Renderer;
 		bool m_HasMenu;
 		FusionMenu* m_Menu;
-		std::vector<const Renderable2D*>* m_Renderables;
+		std::vector<Renderable2D*>* m_Renderables;
 
 		void init();
 
@@ -52,9 +52,9 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		inline const char* const getName() { return m_Name; }
 		inline int const getHeight() { return m_Height; }
 		inline int const getWidth() { return m_Width; }
-		inline void updateSize(int width, int height) { m_Width = width; m_Height = height; }
+		void scale(float x, float y);
 
-		inline void addElement(const Renderable2D* renderable) {
+		inline void addElement(Renderable2D* renderable) {
 			//if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader);
 			m_Renderables->push_back(renderable);
 		}

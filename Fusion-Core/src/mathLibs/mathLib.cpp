@@ -454,6 +454,17 @@ namespace fusion { namespace core { namespace math {
         return result;
     }
 
+    mat4 mat4::operator=(const mat4& right) {
+
+        mat4 result(1);
+
+        for(int i = 0; i < 16; ++i) {
+            result.elements[i] = right.elements[i];
+        }
+
+        return result;
+    }
+
 #endif
 
 }}}

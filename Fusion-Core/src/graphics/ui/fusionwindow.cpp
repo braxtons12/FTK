@@ -14,7 +14,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		m_Shader = new Shader(m_VertexShaderPath, m_FragmentShaderPath);
 		m_Shader->enable();
 
-		m_Renderables = new std::vector<const Renderable2D*>;
+		m_Renderables = new std::vector<Renderable2D*>;
 
 		m_Shader->enable();
 	}
@@ -26,6 +26,16 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		init();
 	}
 	
+	void FusionWindow::scale(float x, float y) {
+
+		m_Width *= x;
+		m_Height *= y;
+
+		for(int i = 0; i < m_Renderables->size(); ++i) {
+			m_Renderables->at(i)->scale(x, y);
+		} 
+	}
+
 	void FusionWindow::setMenu(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover, 
 							   int state, int menuType, int numMenus, int numEntries, bool alwaysVisible,
 							   std::vector<FusionMenu*> subMenus) 
@@ -41,7 +51,11 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
 		if (m_Signal->getSignal()) {
 			
-			this->updateSize(m_Window->getWidth(), m_Window->getHeight());
+			float x = m_Window->getWidth();
+			float y = m_Window->getHeight();
+			x /= m_Width;
+			y /= m_Height;
+			this->scale(x, y);
 			m_Signal->resetSignal();
 		}	
 
@@ -70,7 +84,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
 		m_Window->update();
 
-		m_Renderables = new std::vector<const Renderable2D*>; 
+		m_Renderables = new std::vector<Renderable2D*>; 
 	}
 
 }}}}

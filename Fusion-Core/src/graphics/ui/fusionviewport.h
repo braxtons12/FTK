@@ -21,10 +21,6 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
     class FusionViewport : public Group {
 
         private:
-            //position and size for overall container
-            math::vec3 m_Position;
-            math::vec2 m_Size;
-
             //position and size for outer bound of viewport including inner panels
             math::vec3 m_ViewportOuterPosition;
             math::vec2 m_ViewportOuterSize;
@@ -35,13 +31,19 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
             Color m_BackgroundColor;
 
+            //left panels
             FusionPanel* m_LeftOuterPanel;
             FusionPanel* m_LeftInnerPanel;
+
+            //right panels
             FusionPanel* m_RightOuterPanel;
             FusionPanel* m_RightInnerPanel;
 
+            //top panels
             FusionPanel* m_TopOuterPanel;
             FusionPanel* m_TopInnerPanel;
+
+            //bottom panels
             FusionPanel* m_BottomOuterPanel;
             FusionPanel* m_BottomInnerPanel;
 

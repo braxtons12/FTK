@@ -79,8 +79,6 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             inline void setVisible(bool visibile) { m_Visible = visibile; }
             inline bool getVisible() { return m_Visible; }
             inline math::vec4 getColor() { return m_Color; }
-
-
     };
 }}}}
 
