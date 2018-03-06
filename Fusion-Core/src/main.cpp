@@ -3,7 +3,7 @@
  * Used to test general component functionality
  *
  * Version: 0.0.1
- * Copyright 2017 Braxton Salyer
+ * C 2018 Braxton Salyer
  *
  **/
 
@@ -46,7 +46,7 @@ int main() {
 	*/
 
 	//create window
-	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag",true));
+	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag"));
 
 	FusionWindow* window = fusionUI.windowAt(0);
 
@@ -66,17 +66,17 @@ int main() {
 
 	//create menus
 	FusionMenu* mainMenu = new FusionMenu(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(menuWidth, menuHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, 1, 2, true, window->getWindow());
+								  MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, true, window->getWindow());
 	mainMenu->addButton(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	mainMenu->addButton(math::vec3(buttonWidth, menu1Y, 0.0f), math::vec2(menuWidth - buttonWidth, buttonHeight));
 
 	FusionMenu* vertMenu1 = new FusionMenu(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, 2 * buttonHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_OFF, MENU_TYPE_VERTICAL, 1, 2, false, window->getWindow());
+								  MENU_STATE_OFF, MENU_TYPE_VERTICAL, false, window->getWindow());
 	vertMenu1->addButton(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	vertMenu1->addButton(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 
 	FusionMenu* horzMenu1 = new FusionMenu(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(4 * buttonWidth, buttonHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_OFF, MENU_TYPE_HORIZONTAL, 0, 2, false, window->getWindow());
+								  MENU_STATE_OFF, MENU_TYPE_HORIZONTAL, false, window->getWindow());
 	horzMenu1->addButton(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	horzMenu1->addButton(math::vec3(buttonWidth, menu2Y, 0.0f), math::vec2(3 * buttonWidth, buttonHeight));
 
@@ -119,16 +119,11 @@ int main() {
 		++flip;
 	}
 
-    shader.setUniform2f("light_pos", math::vec2(4.0f, 1.5f));
 	GLint* texIDs = new GLint[32];
 	for(int i = 0; i < 32; ++i) {
 		texIDs[i] = i;
 	}
 	shader.setUniform1iv("textures", texIDs, 32);
-
-	BatchRenderer2D* renderer = new BatchRenderer2D();
-	
-	shader.setUniform2f("light_pos", math::vec2(window->getWidth() / 2, window->getHeight() / 2 ));
 
 	while (!window->getWindow()->closed()) {
 		

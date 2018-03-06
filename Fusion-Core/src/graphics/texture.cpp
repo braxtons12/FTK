@@ -1,7 +1,20 @@
+/**
+ * Datatype encapsulating texture data and OpenGL texture functionality
+ * 
+ * Implementation File
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #include "texture.h"
 
 namespace fusion { namespace core { namespace graphics {
 
+	/**
+	 * Constructor
+	 * 
+	 **/
 	Texture::Texture(const std::string& path)
 		: m_Path(path)
 	{
@@ -9,10 +22,18 @@ namespace fusion { namespace core { namespace graphics {
 		m_TID = load();
 	}
 
+	/**
+	 * Destructor
+	 * 
+	 **/
 	Texture::~Texture() {
 
 	}
 
+	/**
+	 * Load the texture from file
+	 * 
+	 **/
 	GLuint Texture::load() {
 
 		BYTE* pixels = utils::load_image(m_Path.c_str(), &m_Width, &m_Height);
@@ -30,13 +51,4 @@ namespace fusion { namespace core { namespace graphics {
 		return result;
 	}
 
-	void Texture::bind() const {
-
-		glBindTexture(GL_TEXTURE_2D, m_TID);
-	}
-
-	void Texture::unbind() const {
-
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
 }}}

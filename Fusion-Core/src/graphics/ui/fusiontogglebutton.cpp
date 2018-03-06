@@ -1,7 +1,21 @@
+/**
+ * UI ToggleButton class
+ * Enhances the base button class by adding toggle functionality
+ * 
+ * Implementation File
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #include "fusiontogglebutton.h"
 
 namespace fusion { namespace core { namespace graphics { namespace ui {
    
+    /**
+     * Set the color based on the current state
+     * 
+     **/
     void FusionToggleButton::SetColor() {
 
         if(m_State == BUTTON_STATE_OFF) m_Color = m_ColorOff.getColor();
@@ -10,6 +24,11 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         else if (m_State == BUTTON_STATE_ON || m_On) m_Color = m_ColorOn.getColor();
     }
 
+    /**
+     * Checks if the button has been clicked.
+     * Updates the state accordingly
+     * 
+     **/
     bool FusionToggleButton::clicked() {
                 
         double x, y;
@@ -21,14 +40,21 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             (y >= m_Position.m_y && y<= (m_Position.m_y + m_Size.m_y))) 
         {
 
-            m_State = BUTTON_STATE_ON;
+            if(m_State == BUTTON_STATE_ON) m_State = BUTTON_STATE_OFF;
+            else m_State = BUTTON_STATE_ON;
+            m_On = !m_On;
             SetColor();
-            return m_On = true;
+            return true;
         }
-        else return m_On = false;
+        else return false;
     }
 
-    void FusionToggleButton::checkHover() {
+    /**
+     * Checks if the mouse if hovering over the button
+     * Updates the state accordingly
+     * 
+     **/
+    bool FusionToggleButton::checkHover() {
 
         double x, y;
         m_Mouse.getMousePosition(x, y);
@@ -40,6 +66,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
 
                 setState(BUTTON_STATE_HOVER);
+                return true;
             }
             else {
                 if(m_On) setState(BUTTON_STATE_ON);

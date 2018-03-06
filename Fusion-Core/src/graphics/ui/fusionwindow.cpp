@@ -1,8 +1,22 @@
+/**
+ * Wrapper for the basic Window class.
+ * Enables more UI-friendly operations
+ * DOES NOT extend Window, but rather serves as a container for it
+ * 
+ * Implementation File
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #include "fusionwindow.h"
 
 namespace fusion { namespace core { namespace graphics { namespace ui { 
 	
-	
+	/**
+	 * Initialize the window
+	 * 
+	 **/
 	void FusionWindow::init() {
 		
 		m_Window = new Window(m_Name, m_Width, m_Height);
@@ -19,13 +33,21 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		m_Shader->enable();
 	}
 	
-	FusionWindow::FusionWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath, bool hasMenu)
+	/**
+	 * Constructor
+	 * 
+	 **/
+	FusionWindow::FusionWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath)
 		: m_Name(name), m_Width(width), m_Height(height), m_VertexShaderPath(vertexShaderPath), m_FragmentShaderPath(fragmentShaderPath),
-		m_HasMenu(hasMenu)
+		m_HasMenu(false)
 	{
 		init();
 	}
 	
+	/**
+	 * Used to scale the container when the Window is resized
+	 * 
+	 **/
 	void FusionWindow::scale(double x, double y) {
 
 		m_Width *= x;
@@ -38,17 +60,24 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		} 
 	}
 
+	/**
+	 * Create the window menu from the given parameters
+	 * 
+	 **/
 	void FusionWindow::setMenu(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover, 
-							   int state, int menuType, int numMenus, int numEntries, bool alwaysVisible,
-							   std::vector<FusionMenu*> subMenus) 
+							   int state, int menuType, int numMenus, bool alwaysVisible, std::vector<FusionMenu*> subMenus) 
 	{
-		m_Menu = new FusionMenu(position, size, colorOff, colorNormal, colorHover, state, menuType, numMenus, 
-								numEntries, alwaysVisible, m_Window);
+		m_Menu = new FusionMenu(position, size, colorOff, colorNormal, colorHover, state, menuType, alwaysVisible, m_Window);
 		for (int i = 0; i < numMenus; ++i) {
 			m_Menu->addSubMenu(subMenus.at(i));
 		}
+		m_HasMenu = true;
 	}
 
+	/**
+	 * Update the state of the window content
+	 * 
+	 **/
 	void FusionWindow::update() {
 
 		double x, y = 0.0;
@@ -66,11 +95,14 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		if(m_HasMenu) {
 
 			m_Menu->checkHover();
-			m_Menu->checkClicked();
 		}
 		
 	}
 
+	/**
+	 * Render the contents of the window
+	 * 
+	 **/
 	void FusionWindow::render() {
 
 		m_Window->clear();

@@ -1,3 +1,11 @@
+/**
+ * Simple renderer that draws static sprites one by one
+ * Deprecated
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #ifndef _SIMPLE_2D_RENDERER
 #define _SIMPLE_2D_RENDERER
 

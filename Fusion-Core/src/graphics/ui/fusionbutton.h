@@ -1,3 +1,11 @@
+/**
+ * UI Button class
+ * Forms the base functionality for any other button-type ui elements
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #ifndef _FUSION_BUTTON
 #define _FUSION_BUTTON
 
@@ -6,13 +14,15 @@
 #include "graphics/renderables/renderable2D.h"
 #include "graphics/color.h"
 
+//temporary for testing purposes only
 #include <iostream>
 
-#define BUTTON_STATE_OFF    0
-#define BUTTON_STATE_NORMAL 1
-#define BUTTON_STATE_HOVER  2
-
 namespace fusion { namespace core { namespace graphics { namespace ui { 
+
+    //define button states
+    #define BUTTON_STATE_OFF    0
+    #define BUTTON_STATE_NORMAL 1
+    #define BUTTON_STATE_HOVER  2
 
     class FusionButton : public Renderable2D {
 
@@ -24,6 +34,10 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             Color m_ColorNormal;
             Color m_ColorHover;
 
+            /**
+             * Set the button color based on the state of the button
+             *
+             **/
             virtual void SetColor() {
 
                 if (m_State == BUTTON_STATE_OFF) m_Color = m_ColorOff.getColor();
@@ -32,6 +46,12 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             }
 
         public:
+            /**
+             * Constructor
+             * 
+             * Takes in a position, size, colors for each state, the initial state, and a parent Window
+             * 
+             **/
             FusionButton(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
                          int state, Window* parentWindow)
                 : Renderable2D(math::vec3(position.m_x, parentWindow->getHeight() - position.m_y, position.m_z), size, 
@@ -42,8 +62,16 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                 SetColor();
             }
             
+            /**
+             * Destructor
+             * 
+             **/
             ~FusionButton() { }
 
+            /**
+             * Checks if the button is clicked
+             * 
+             **/
             virtual bool clicked() {
 
                 double x,y;
@@ -61,7 +89,11 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                 else return false;
             }
 
-            virtual void checkHover() {
+            /**
+             * Checks if the mouse is hovering over the button
+             * 
+             **/
+            virtual bool checkHover() {
 
                 double x, y;
                 m_Mouse.getMousePosition(x, y);
@@ -73,6 +105,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                     if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
 
                         setState(BUTTON_STATE_HOVER);
+                        return true;
                     }
                     else {
 
@@ -85,10 +118,15 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                 }
             }
 
+            //get and set the state
             inline bool getState() const { return m_State; }
             inline virtual void setState(int state) { m_State = state; SetColor(); }
-            inline void submit(Renderer2D* renderer) const override { renderer->submit(this); }
+
+            //get the current color
             inline math::vec4 getColor() { return m_Color; }
+
+            //submit the button for rendering
+            inline void submit(Renderer2D* renderer) const override { renderer->submit(this); }
     };
 }}}}
 

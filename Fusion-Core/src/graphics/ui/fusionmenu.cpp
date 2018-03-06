@@ -1,7 +1,18 @@
+/**
+ * UI Menu class
+ * Used for creating any kind of traditional dropdown or cascading menu
+ * 
+ * Implementation File
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #include "fusionmenu.h"
 
 namespace fusion { namespace core { namespace graphics { namespace ui {
 
+    //set the color based on the current state
     void FusionMenu::SetColor() {
 
         if(m_State == MENU_STATE_OFF) { m_Color = m_ColorOff.getColor(); m_Visible = false; }
@@ -9,11 +20,13 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         else if (m_State == MENU_STATE_HOVER) { m_Visible = true; checkHover(); }
     }
 
+    //check if the menu hierarchy is hovered and the mouse is in bounds of the current menu
     void FusionMenu::CheckHoverInBounds() {
 
         m_State = MENU_STATE_HOVER;
         m_Color = m_ColorHover.getColor();
         m_Visible = true;
+        checkClicked();
         for(int i = 0; i < m_NumMenus; ++i) {
 
             m_SubMenus.at(i)->checkHover();
@@ -24,6 +37,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         }
     }
 
+    //check if the menu hierarchy is hovered and the mouse is not in bounds of the current menu
     void FusionMenu::CheckHoverOutOfBounds() {
 
         bool temp = false;
@@ -49,6 +63,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         }
     }
 
+    //check if the menu hierarchy is hovered and the menu is a vertical menu
     void FusionMenu::CheckHoverVertical(double x, double y) {
 
         if(y <= (m_Position.m_y + m_Size.m_y) && y >= m_Position.m_y) {
@@ -67,7 +82,8 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             CheckHoverOutOfBounds();
         }
     } 
-            
+    
+    //check if the menu hierarchy is hovered and the menu is a horizontal menu
     void FusionMenu::CheckHoverHorizontal(double x, double y) {
 
         if(x <= (m_Position.m_x + m_Size.m_x) && x >= m_Position.m_x) {
@@ -87,6 +103,10 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         }
     }
 
+    /**
+     * check if the menu is currently being hovered by the mouse
+     *
+     **/
     void FusionMenu::checkHover() {
 
         double x, y;
@@ -99,6 +119,10 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                 
     }
 
+    /**
+     * check if the menu has been clicked
+     * 
+     **/
     void FusionMenu::checkClicked() {
 
         for(int i = 0; i < m_Buttons.size(); ++i) {
@@ -106,6 +130,10 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         }
     }
 
+    /**
+     * Submit the menu for rendering
+     * 
+     **/
     void FusionMenu::submit(Renderer2D* renderer) const {
 
         for(int i = 0; i < m_NumMenus; ++i) {

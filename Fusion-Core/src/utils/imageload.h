@@ -1,3 +1,10 @@
+/**
+ * Utility class used to load an image to an OpenGL BYTE array
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #ifndef _IMAGE_LOAD
 #define _IMAGE_LOAD
 

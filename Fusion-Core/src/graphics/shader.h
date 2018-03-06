@@ -1,3 +1,12 @@
+/**
+ * Datatype encapsulating an OpenGL Shader
+ * 
+ * Header File
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #ifndef _SHADER
 #define _SHADER
 
@@ -17,12 +26,26 @@ namespace fusion { namespace core { namespace graphics {
             GLuint m_ShaderID;
             const char *m_VertPath, *m_FragPath;
 
+            /**
+             * Get the memory location of the requested uniform
+             * 
+             **/
             inline GLint getUniformLocation(const GLchar* name) { return glGetUniformLocation(m_ShaderID, name);}
 
         public:
+            /**
+             * Constructor
+             * 
+             **/
             Shader(const char* vertPath, const char* fragPath);
+
+            /**
+             * Destructor
+             * 
+             **/
             ~Shader();
 
+            //setters for various uniforms of types float or int, and vectors (c-arrays) of floats or ints
             inline void setUniform1f(const GLchar* name, float value)
                 { glUniform1f(getUniformLocation(name), value); }
 
@@ -47,10 +70,22 @@ namespace fusion { namespace core { namespace graphics {
             inline void setUniformMat4(const GLchar* name, const math::mat4& matrix)
                 { glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements); }
 
-
+            /**
+             * Enable the Shader
+             * 
+             **/
             inline void enable() const { glUseProgram(m_ShaderID); }
+
+            /**
+             * Disable the Shader
+             * 
+             **/
             inline void disable() const { glUseProgram(0); }
 
+            /**
+             * Load the Shader from a file
+             * 
+             **/
             GLuint load();
     };
 

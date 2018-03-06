@@ -1,3 +1,10 @@
+/**
+ * Utility class to get the time in milliseconds
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #ifndef _TIMER
 #define _TIMER
 

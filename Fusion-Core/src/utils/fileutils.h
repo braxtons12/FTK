@@ -1,3 +1,10 @@
+/**
+ * Utility class used to load in a file to a string
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #ifndef _FILEUTILS
 #define _FILEUTILS
 

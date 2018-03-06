@@ -1,3 +1,11 @@
+/**
+ * Small library of mathematical data types and operations
+ * 
+ * Implementation File
+ * 
+ * C 2018 Braxton Salyer
+ **/
+
 #include "mathLib.h"
 #include <string.h>
 

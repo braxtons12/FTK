@@ -1,3 +1,12 @@
+/**
+ * Window Signal class
+ * Signals to the UI window container to update its relevant attributes
+ * 
+ * Header File
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
 
 #ifndef _WINDOW_UPDATE_SIGNAL
 #define _WINDOW_UPDATE_SIGNAL

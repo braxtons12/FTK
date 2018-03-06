@@ -1,23 +1,44 @@
+/**
+ * Base Window class
+ * Maintains an OpenGL context through GLFW and glew
+ * 
+ * Implementation File
+ * 
+ * C 2018 Braxton Salyer
+ **/
+
 #include "window.h"
 
 namespace fusion { namespace core { namespace graphics {
 	
-
+    //initialize the window update signal
 	WindowUpdateSignal* Window::m_Signal = new WindowUpdateSignal();
 	
+    /**
+     * Initialize the Window
+     * 
+     **/
     bool Window::init() {
 		
         m_XScaleFactor = 1.0;
         m_YScaleFactor = 1.0;
+
+        //start glfw and make sure glfw started properly
         if(!glfwInit()) {
             std::cout << "Failed to initialize GLFW!" << std::endl;
             return false;
         }
+
+        //create the window
         m_Window = glfwCreateWindow(m_width, m_height, m_name, NULL, NULL);
+
+        //make sure glfw created our window
         if (!m_Window) {
             std::cout << "Failed to create GLFW window!" << std::endl;
             return false;
         }
+
+        //make this the current OpenGL context and set our callbacks
         glfwMakeContextCurrent(m_Window);
         glfwSetWindowUserPointer(m_Window, this);
         glfwSetWindowSizeCallback(m_Window, WindowResizeCallBack);
@@ -27,14 +48,21 @@ namespace fusion { namespace core { namespace graphics {
 		glfwSwapInterval(0.0f);
 
 		glewExperimental = GL_TRUE;
+
+        //start glew and make sure glew started properly
         if(glewInit() != GLEW_OK) {
             std::cout << "Could not initialize GLEW!" << std::endl;
             return false;
         }
 
+        //if everything went well, return true
         return true;
     }
 
+    /**
+     * Constructor
+     * 
+     **/
     Window::Window(const char *name, int width, int height) {
 
         m_name = name;
@@ -44,14 +72,18 @@ namespace fusion { namespace core { namespace graphics {
 
     }
 
+    /**
+     * Destructor
+     * 
+     **/
     Window::~Window() {
 
     }
 
-    void Window::clear() const {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
-
+    /**
+     * Update the Window State
+     * 
+     **/
     void Window::update() {
 
         GLenum error = glGetError();
@@ -63,10 +95,10 @@ namespace fusion { namespace core { namespace graphics {
 
     }
 
-    bool Window::closed() const {
-        return glfwWindowShouldClose(m_Window);
-    }
-
+    /**
+     * Convert mouse coordinates to framebuffer coordinates
+     * 
+     **/
     void Window::convertCoords(double& x, double& y) {
 
         x /= m_XScaleFactor;
