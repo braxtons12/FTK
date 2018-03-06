@@ -1,3 +1,11 @@
+/**
+ * Simple renderer that draws static sprites one by one
+ * Deprecated
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #include "simple2Drenderer.h"
 
 namespace fusion { namespace core { namespace graphics {

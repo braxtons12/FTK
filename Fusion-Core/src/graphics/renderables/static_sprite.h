@@ -1,7 +1,14 @@
+/**
+ * Fixed sprites used with the simple renderer
+ * Deprecated
+ * 
+ * C 2018 Braxton Salyer
+ **/
+
 #ifndef _STATIC_SPRITE
 #define _STATIC_SPRITE
 
-#include "renderable2D.h"
+#include "graphics/renderables/renderable2D.h"
 
 namespace fusion { namespace core { namespace graphics {
 	
@@ -19,6 +26,7 @@ namespace fusion { namespace core { namespace graphics {
 			inline const VertexArray* getVAO() const { return m_VertexArray; }
 			inline const IndexBuffer* getIBO() const { return m_IndexBuffer; }
 			inline Shader& getShader() const { return m_Shader; }
+			inline void setShader(Shader& shader) { m_Shader = shader; }
 		
 		
 	};

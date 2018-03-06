@@ -1,6 +1,15 @@
-#include "mathLib.h"
+/**
+ * Small library of mathematical data types and operations
+ * 
+ * Implementation File
+ * 
+ * C 2018 Braxton Salyer
+ **/
 
-namespace fusion { namespace math {
+#include "mathLib.h"
+#include <string.h>
+
+namespace fusion { namespace core { namespace math {
 
 #ifndef _VEC2
 #define _VEC2
@@ -278,7 +287,7 @@ namespace fusion { namespace math {
     }
 
     bool vec4::operator==(const vec4& right) {
-        if ((m_x - right.m_x < 0.00001) && (m_y - right.m_y < 0.00001) && 
+        if ((m_x - right.m_x < 0.00001) && (m_y - right.m_y < 0.00001) &&
             (m_z - right.m_z < 0.00001) && (m_w - right.m_w < 0.00001)) {
             return true;
         } else return false;
@@ -315,20 +324,22 @@ namespace fusion { namespace math {
 
     mat4 mat4::multiply(const mat4& right) {
 
-        mat4 result;
+		float data[16];
 
-        for(int y = 0; y < 4; ++y) { 
+        for(int y = 0; y < 4; ++y) {
             for (int x = 0; x < 4; ++x) {
 
-                float sum = 0.0;
+                float sum = 0.0f;
                 for(int e = 0; e < 4; ++e) {
                     sum += elements[x + e * 4] * right.elements[e + y * 4];
                 }
-                result.elements[x + y * 4] = sum;
+                data[x + y * 4] = sum;
             }
         }
 
-        return result;
+        memcpy(elements, data, 16 * sizeof(float));
+
+        return *this;
     }
 
     mat4 operator*(mat4 left, const mat4& right) {
@@ -337,6 +348,33 @@ namespace fusion { namespace math {
 
     mat4 mat4::operator*=(const mat4& right) {
         return multiply(right);
+    }
+
+	vec3 mat4::multiply(const vec3& right) const {
+
+        return vec3(
+            columns[0].m_x * right.m_x + columns[1].m_x * right.m_y + columns[2].m_x * right.m_z + columns[3].m_x,
+            columns[0].m_y * right.m_x + columns[1].m_y * right.m_y + columns[2].m_y * right.m_z + columns[3].m_y,
+            columns[0].m_z * right.m_x + columns[1].m_z * right.m_y + columns[2].m_z * right.m_z + columns[3].m_z
+        );
+    }
+
+	vec3 operator*(const mat4& left, const vec3& right) {
+        return left.multiply(right);
+    }
+
+    vec4 mat4::multiply(const vec4& right) const {
+
+        return vec4(
+            columns[0].m_x * right.m_x + columns[1].m_x * right.m_y + columns[2].m_x * right.m_z + columns[3].m_x * right.m_w,
+            columns[0].m_y * right.m_x + columns[1].m_y * right.m_y + columns[2].m_y * right.m_z + columns[3].m_y * right.m_w,
+            columns[0].m_z * right.m_x + columns[1].m_z * right.m_y + columns[2].m_z * right.m_z + columns[3].m_z * right.m_w,
+            columns[0].m_w * right.m_x + columns[1].m_w * right.m_y + columns[2].m_w * right.m_z + columns[3].m_w * right.m_w
+        );
+    }
+
+	vec4 operator*(const mat4& left, const vec4& right) {
+        return left.multiply(right);
     }
 
     mat4 mat4::orthographic(float left, float right, float bottom, float top, float near, float far) {
@@ -349,7 +387,7 @@ namespace fusion { namespace math {
 
         result.elements[0 + 3 * 4] = (left + right) / (left - right);
         result.elements[1 + 3 * 4] = (bottom + top) / (bottom - top);
-        result.elements[2 + 3 * 4] = (far + near) / (far - near);\
+        result.elements[2 + 3 * 4] = (far + near) / (far - near);
 
         return result;
     }
@@ -374,7 +412,7 @@ namespace fusion { namespace math {
     }
 
     mat4 mat4::translation(const vec3& translation) {
-        
+
         mat4 result(1);
 
         result.elements[0 + 3 * 4] = translation.m_x;
@@ -424,8 +462,17 @@ namespace fusion { namespace math {
         return result;
     }
 
+    mat4 mat4::operator=(const mat4& right) {
 
+        mat4 result(1);
+
+        for(int i = 0; i < 16; ++i) {
+            result.elements[i] = right.elements[i];
+        }
+
+        return result;
+    }
 
 #endif
 
-}}
+}}}

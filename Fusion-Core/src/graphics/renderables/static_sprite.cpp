@@ -1,3 +1,10 @@
+/**
+ * Fixed sprites used with the simple renderer
+ * Deprecated
+ * 
+ * C 2018 Braxton Salyer
+ **/
+
 #include "static_sprite.h"
 
 namespace fusion { namespace core { namespace graphics {
@@ -25,7 +32,7 @@ namespace fusion { namespace core { namespace graphics {
 		m_VertexArray->addBuffer(new Buffer(vertices, 4 * 3, 3), 0);
 		m_VertexArray->addBuffer(new Buffer(colors, 4 * 4, 4), 1);
 		
-		GLushort indices[] = { 0, 1, 2, 2, 3, 0};
+		GLuint indices[] = { 0, 1, 2, 2, 3, 0};
 		m_IndexBuffer = new IndexBuffer(indices, 6);
 	}
 	

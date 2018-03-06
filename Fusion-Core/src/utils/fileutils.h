@@ -1,10 +1,18 @@
+/**
+ * Utility class used to load in a file to a string
+ * 
+ * C 2018 Braxton Salyer
+ * 
+ **/
+
 #ifndef _FILEUTILS
 #define _FILEUTILS
 
 #include <cstring>
 #include <fstream>
+#include <iostream>
 
-namespace fusion { 
+namespace fusion { namespace core { namespace utils {
 
     class FileUtils {
 
@@ -12,6 +20,7 @@ namespace fusion {
         static std::string read_file(const char* filepath) {
 
                 FILE* file = fopen(filepath, "rt");
+                if(file == NULL) std::cout << "FILE IS NULL" << std::endl;
                 fseek(file, (long)0, SEEK_END);
                 unsigned long length = ftell(file);
                 char *data = new char[length + 1];
@@ -25,6 +34,6 @@ namespace fusion {
                 return result;
             }
     };
-}
+}}}
 
 #endif
