@@ -8,15 +8,15 @@
 
 #include <vector>
 
-#define OUTER_PANEL  0
-#define INNER_PANEL  1
-
-#define TOP_PANEL    0
-#define RIGHT_PANEL  1
-#define BOTTOM_PANEL 2
-#define LEFT_PANEL   3
-
 namespace fusion { namespace core { namespace graphics { namespace ui {
+
+    #define OUTER_PANEL  0
+    #define INNER_PANEL  1
+
+    #define TOP_PANEL    0
+    #define RIGHT_PANEL  1
+    #define BOTTOM_PANEL 2
+    #define LEFT_PANEL   3
 
     class FusionViewport : public Group {
 
@@ -62,8 +62,6 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             void update();
             void submit() const;
 
-            inline math::vec3 getPosition() { return m_Position; }
-            inline math::vec2 getSize() { return m_Size; }
             inline math::vec3 getViewportOuterPosition() { return m_ViewportOuterPosition; }
             inline math::vec2 getViewportOuterSize() { return m_ViewportOuterSize; }
             inline math::vec3 getViewportInnerPosition() { return m_ViewportInnerPosition; }
