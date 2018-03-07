@@ -14,8 +14,8 @@ namespace fusion { namespace core { namespace math {
 #ifndef _VEC2
 #define _VEC2
     vec2::vec2() {
-        m_x = 0.0;
-        m_y = 0.0;
+        m_x = 0.0f;
+        m_y = 0.0f;
     }
 
     vec2::vec2(const float &x, const float &y) {
@@ -91,7 +91,7 @@ namespace fusion { namespace core { namespace math {
     }
 
     bool vec2::operator==(const vec2& right) {
-        if ((m_x - right.m_x < 0.00001) && (m_y - right.m_y < 0.00001)) {
+        if ((m_x - right.m_x < 0.00001f) && (m_y - right.m_y < 0.00001f)) {
             return true;
         } else return false;
     }
@@ -99,14 +99,79 @@ namespace fusion { namespace core { namespace math {
     bool vec2::operator!= (const vec2& right) {
         return !(*this == right);
     }
+
+    bool vec2::operator<(const vec2& right) {
+        return (m_x < right.m_x && m_y < right.m_y);
+    }
+
+    bool vec2::operator<=(const vec2& right) {
+        return (*this < right || *this == right);
+    }
+
+    bool vec2::operator>(const vec2& right) {
+        return (m_x > right.m_x && m_y > right.m_y);
+    }
+
+    bool vec2::operator>=(const vec2& right) {
+        return (*this > right || *this == right);
+    }
+
+    vec2 vec2::operator+(const vec3& right) {
+        vec2 vec(m_x, m_y);
+        vec.m_x += right.m_x;
+        vec.m_y += right.m_y;
+
+        return vec;
+    }
+
+    vec2 vec2::operator+=(const vec3& right) {
+        return *this = *this + right;
+    }
+
+    vec2 vec2::operator-(const vec3& right) {
+        vec2 vec(m_x, m_y);
+        vec.m_x -= right.m_x;
+        vec.m_y -= right.m_y;
+
+        return vec;
+    }
+
+    vec2 vec2::operator-=(const vec3& right) {
+        return *this = *this - right;
+    }
+
+    vec2 vec2::operator*(const vec3& right) {
+        vec2 vec(m_x, m_y);
+        vec.m_x *= right.m_x;
+        vec.m_y *= right.m_y;
+
+        return vec;
+    }
+
+    vec2 vec2::operator*=(const vec3& right) {
+        return *this = *this * right;
+    }
+
+    vec2 vec2::operator/(const vec3& right) {
+        vec2 vec(m_x, m_y);
+        vec.m_x /= right.m_x;
+        vec.m_y /= right.m_y;
+
+        return vec;
+    }
+
+    vec2 vec2::operator/=(const vec3& right) {
+        return *this = *this / right;
+    }
+
 #endif
 
 #ifndef _VEC3
 #define _VEC3
     vec3::vec3() {
-       m_x = 0.0;
-       m_y = 0.0;
-       m_z = 0.0;
+       m_x = 0.0f;
+       m_y = 0.0f;
+       m_z = 0.0f;
     }
 
     vec3::vec3(const float &x, const float &y, const float &z) {
@@ -188,7 +253,7 @@ namespace fusion { namespace core { namespace math {
     }
 
     bool vec3::operator==(const vec3& right) {
-        if ((m_x - right.m_x < 0.00001) && (m_y - right.m_y < 0.00001) && ( m_z - right.m_z < 0.00001)) {
+        if ((m_x - right.m_x < 0.00001f) && (m_y - right.m_y < 0.00001f) && ( m_z - right.m_z < 0.00001f)) {
             return true;
         } else return false;
     }
@@ -196,6 +261,71 @@ namespace fusion { namespace core { namespace math {
     bool vec3::operator!= (const vec3& right) {
         return !(*this == right);
     }
+
+    bool vec3::operator<(const vec3& right) {
+        return (m_x < right.m_x && m_y < right.m_y && m_z < right.m_z);
+    }
+
+    bool vec3::operator<=(const vec3& right) {
+        return (*this < right || *this == right);
+    }
+
+    bool vec3::operator>(const vec3& right) {
+        return (m_x > right.m_x && m_y > right.m_y && m_z > right.m_z);
+    }
+
+    bool vec3::operator>=(const vec3& right) {
+        return (*this > right || *this == right);
+    }
+
+    vec3 vec3::operator+(const vec2& right) {
+        vec3 vec(m_x, m_y, m_z);
+        vec.m_x += right.m_x;
+        vec.m_y += right.m_y;
+        
+        return vec;
+    }
+
+    vec3 vec3::operator+=(const vec2& right) {
+        return *this = *this + right;
+    }
+
+    vec3 vec3::operator-(const vec2& right) {
+        vec3 vec(m_x, m_y, m_z);
+        vec.m_x -= right.m_x;
+        vec.m_y -= right.m_y;
+
+        return vec;
+    }
+
+    vec3 vec3::operator-=(const vec2& right) {
+        return *this = *this - right;
+    }
+
+    vec3 vec3::operator*(const vec2& right) {
+        vec3 vec(m_x, m_y, m_z);
+        vec.m_x *= right.m_x;
+        vec.m_y *= right.m_y;
+
+        return vec;
+    }
+
+    vec3 vec3::operator*=(const vec2& right) {
+        return *this = *this * right;
+    }
+
+    vec3 vec3::operator/(const vec2& right) {
+        vec3 vec(m_x, m_y, m_z);
+        vec.m_x /= right.m_x;
+        vec.m_y /= right.m_y;
+
+        return vec;
+    }
+
+    vec3 vec3::operator/=(const vec2& right) {
+        return *this = *this / right;
+    }
+    
 #endif
 
 #ifndef _VEC4
@@ -287,8 +417,8 @@ namespace fusion { namespace core { namespace math {
     }
 
     bool vec4::operator==(const vec4& right) {
-        if ((m_x - right.m_x < 0.00001) && (m_y - right.m_y < 0.00001) &&
-            (m_z - right.m_z < 0.00001) && (m_w - right.m_w < 0.00001)) {
+        if ((m_x - right.m_x < 0.00001f) && (m_y - right.m_y < 0.00001f) &&
+            (m_z - right.m_z < 0.00001f) && (m_w - right.m_w < 0.00001f)) {
             return true;
         } else return false;
     }
@@ -303,13 +433,13 @@ namespace fusion { namespace core { namespace math {
     mat4::mat4() {
 
         for(int i = 0; i < 4 * 4; i ++) {
-            elements[i] = 0.0;
+            elements[i] = 0.0f;
         }
     }
 
     mat4::mat4(float diagonal) {
         for(int i = 0; i < 4 * 4; i ++) {
-            elements[i] = 0.0;
+            elements[i] = 0.0f;
         }
 
         elements[0 + 0 * 4] = diagonal;
@@ -319,7 +449,7 @@ namespace fusion { namespace core { namespace math {
     }
 
     mat4 mat4::identity() {
-        return mat4(1);
+        return mat4(1.0f);
     }
 
     mat4 mat4::multiply(const mat4& right) {
@@ -379,7 +509,7 @@ namespace fusion { namespace core { namespace math {
 
     mat4 mat4::orthographic(float left, float right, float bottom, float top, float near, float far) {
 
-        mat4 result(1);
+        mat4 result(1.0f);
 
         result.elements[0 + 0 * 4] = 2.0 / (right - left);
         result.elements[1 + 1 * 4] = 2.0 / (top - bottom);
@@ -394,18 +524,18 @@ namespace fusion { namespace core { namespace math {
 
     mat4 mat4::perspective(float fov, float aspectRatio, float near, float far) {
 
-        mat4 result(1);
+        mat4 result(1.0f);
 
-        float q = 1 / tan((0.5*fov)*(M_PI/180.0));
+        float q = 1.0f / tan((0.5f*fov)*(M_PI/180.0f));
         float a = q / aspectRatio;
 
         float b = (near + far) / ( near - far);
-        float c = (2.0 * near * far) / (near - far);
+        float c = (2.0f * near * far) / (near - far);
 
         result.elements[0 + 0 * 4] = a;
         result.elements[1 + 1 * 4] = q;
         result.elements[2 + 2 * 4] = b;
-        result.elements[3 + 2 * 4] = -1.0;
+        result.elements[3 + 2 * 4] = -1.0f;
         result.elements[2 + 3 * 4] = c;
 
         return result;
@@ -413,7 +543,7 @@ namespace fusion { namespace core { namespace math {
 
     mat4 mat4::translation(const vec3& translation) {
 
-        mat4 result(1);
+        mat4 result(1.0f);
 
         result.elements[0 + 3 * 4] = translation.m_x;
         result.elements[1 + 3 * 4] = translation.m_y;
@@ -424,12 +554,12 @@ namespace fusion { namespace core { namespace math {
 
     mat4 mat4::rotation(float angle, const vec3& axis) {
 
-        mat4 result(1);
+        mat4 result(1.0f);
 
-        float r = angle * (M_PI/180.0);
+        float r = angle * (M_PI/180.0f);
         float c = cos(r);
         float s = sin(r);
-        float omc = 1 - c;
+        float omc = 1.0f - c;
 
         float x = axis.m_x;
         float y = axis.m_y;
@@ -453,7 +583,7 @@ namespace fusion { namespace core { namespace math {
 
     mat4 mat4::scale(const vec3& scale) {
 
-        mat4 result(1);
+        mat4 result(1.0f);
 
         result.elements[0 + 0 * 4] = scale.m_x;
         result.elements[1 + 1 * 4] = scale.m_y;
@@ -464,7 +594,7 @@ namespace fusion { namespace core { namespace math {
 
     mat4 mat4::operator=(const mat4& right) {
 
-        mat4 result(1);
+        mat4 result(1.0f);
 
         for(int i = 0; i < 16; ++i) {
             result.elements[i] = right.elements[i];

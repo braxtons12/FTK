@@ -96,13 +96,10 @@ namespace fusion { namespace core { namespace graphics {
              * Used by ui containers when the window is resized
              *
              **/
-            virtual void scale(float x, float y) {
+            virtual void scale(math::vec2 scale) {
 
-                m_Position.m_x *= x;
-                m_Position.m_y *= y;
-                
-                m_Size.m_x *= x;
-                m_Size.m_y *= y;
+                m_Position *= scale;
+                m_Size *= scale;
             }
 
     };

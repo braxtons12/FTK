@@ -74,7 +74,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		 * Used to scale the container when the Window is resized
 		 * 
 		 **/
-		void scale(double x, double y);
+		void scale(math::vec2 scale);
 
 		/**
 		 * Add a Renderable to the window
@@ -120,6 +120,12 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		 **/
 		inline void activateRenderer() { m_Renderer = new BatchRenderer2D(); }
 
+		//wrap some base window functions
+		inline void clear() { m_Window->clear(); }
+
+		inline bool closed() const { return m_Window->closed(); }
+
+		inline void convertCoords(double& x, double& y) { m_Window->convertCoords(x, y); }
 
 
 	};

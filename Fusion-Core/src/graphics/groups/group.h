@@ -38,7 +38,7 @@ namespace fusion { namespace core { namespace graphics {
 			 * Submit the group for renderering
 			 * 
 			 **/
-			void submit(Renderer2D* renderer) const override;
+			virtual void submit(Renderer2D* renderer) const override;
 	};
 }}}
 

@@ -48,15 +48,15 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 	 * Used to scale the container when the Window is resized
 	 * 
 	 **/
-	void FusionWindow::scale(double x, double y) {
+	void FusionWindow::scale(math::vec2 scale) {
 
-		m_Width *= x;
-		m_Height *= y;
+		m_Width *= scale.m_x;
+		m_Height *= scale.m_y;
 		m_Window->setWidth(((int)m_Width));
 		m_Window->setHeight(((int)m_Height));
 
 		for(int i = 0; i < m_Renderables->size(); ++i) {
-			m_Renderables->at(i)->scale(x, y);
+			m_Renderables->at(i)->scale(scale);
 		} 
 	}
 
@@ -88,7 +88,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 			y /= m_Height;
 			m_Window->m_XScaleFactor *= x;
 			m_Window->m_YScaleFactor *= y;
-			this->scale(x, y);
+			this->scale(math::vec2(x, y));
 			m_Signal->resetSignal();
 		}	
 
@@ -105,7 +105,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 	 **/
 	void FusionWindow::render() {
 
-		m_Window->clear();
+		clear();
 
 		m_Renderer->begin();
 

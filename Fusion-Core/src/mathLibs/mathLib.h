@@ -16,6 +16,10 @@
 
 namespace fusion { namespace core { namespace math {
 
+    class vec3;
+    class vec4;
+    class mat4;
+
     class vec2{
 
         public:
@@ -44,6 +48,20 @@ namespace fusion { namespace core { namespace math {
             vec2& operator=(const vec2& right);
             bool operator==(const vec2& right);
             bool operator!=(const vec2& right);
+
+            bool operator<(const vec2& right);
+            bool operator<=(const vec2& right);
+            bool operator>(const vec2& right);
+            bool operator>=(const vec2& right);
+
+            vec2 operator+(const vec3& right);
+            vec2 operator+=(const vec3& right);
+            vec2 operator-(const vec3& right);
+            vec2 operator-=(const vec3& right);
+            vec2 operator*(const vec3& right);
+            vec2 operator*=(const vec3& right);
+            vec2 operator/(const vec3& right);
+            vec2 operator/=(const vec3& right);
 
             friend std::ostream& operator<<(std::ostream& stream, const vec2& vector) {
                 stream << "vec2: (" << vector.m_x << ", " << vector.m_y << ")";
@@ -81,6 +99,21 @@ namespace fusion { namespace core { namespace math {
             vec3& operator=(const vec3& right);
             bool operator==(const vec3& right);
             bool operator!=(const vec3& right);
+
+            bool operator<(const vec3& right);
+            bool operator<=(const vec3& right);
+            bool operator>(const vec3& right);
+            bool operator>=(const vec3& right);
+
+            vec3 operator+(const vec2& right);
+            vec3 operator+=(const vec2& right);
+            vec3 operator-(const vec2& right);
+            vec3 operator-=(const vec2& right);
+            vec3 operator*(const vec2& right);
+            vec3 operator*=(const vec2& right);
+            vec3 operator/(const vec2& right);
+            vec3 operator/=(const vec2& right);
+            
 
             friend std::ostream& operator<<(std::ostream& stream, const vec3& vector) {
                 stream << "vec3: (" << vector.m_x << ", " << vector.m_y << ", " << vector.m_z << ")";

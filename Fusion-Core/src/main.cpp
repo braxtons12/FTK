@@ -125,7 +125,7 @@ int main() {
 	}
 	shader.setUniform1iv("textures", texIDs, 32);
 
-	while (!window->getWindow()->closed()) {
+	while (!window->closed()) {
 		
 		/*
 		double x, y;
