@@ -40,7 +40,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             inline math::vec3 const getPosition() const { return m_Position; }
             inline math::vec2 const getSize() const { return m_Size; }
             
-
+            inline void dummyforcommit():
 
     };
     
