@@ -28,7 +28,8 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             void checkBounds(Renderable2D* renderable);
 
         public:
-            FusionPanel(math::vec3 position, math::vec2 size, Sprite background, Color backgroundColor, math::mat4 projectionMatrix);
+            FusionPanel(math::vec3 position, math::vec2 size, Sprite background, Color backgroundColor, math::mat4 projectionMatrix,
+                        ViewportSizeSignal* viewportSignal);
             ~FusionPanel();
 
             void update();
@@ -39,6 +40,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
             inline math::vec3 const getPosition() const { return m_Position; }
             inline math::vec2 const getSize() const { return m_Size; }
+            inline PanelSizeSignal* const getSignal() const { return m_PanelSignal; }
 
     };
     

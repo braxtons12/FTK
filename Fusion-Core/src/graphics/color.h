@@ -27,6 +27,14 @@ namespace fusion { namespace core { namespace graphics {
             { }
 
             /**
+             * Constructor
+             *
+             **/
+            Color(float r, float g, float b, float a) 
+                : m_Color(math::vec4(r,g,b,a))
+            { }
+
+            /**
              * Destructor
              * 
              **/

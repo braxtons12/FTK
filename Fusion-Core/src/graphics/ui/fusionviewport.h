@@ -24,42 +24,46 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
         private:
             //position and size for outer bound of viewport including inner panels
-            math::vec3 m_ViewportOuterPosition;
-            math::vec2 m_ViewportOuterSize;
+            math::vec3 m_OuterPosition;
+            math::vec2 m_OuterSize;
             ViewportSizeSignal* m_ViewportSignal;
 
             //position and size for outer bound of viewport only
-            math::vec3 m_ViewportInnerPosition;
-            math::vec2 m_ViewportInnerSize;
+            math::vec3 m_InnerPosition;
+            math::vec2 m_InnerSize;
 
-            Sprite m_Backround;
+            Sprite m_Background;
             Color m_BackgroundColor;
 
             //left panels
             FusionPanel* m_LeftOuterPanel;
             FusionPanel* m_LeftInnerPanel;
-            PanelSizeSignal* m_LeftPanelSignal;
+            PanelSizeSignal* m_LeftInnerPanelSignal;
+            PanelSizeSignal* m_LeftOuterPanelSignal;
 
             //right panels
             FusionPanel* m_RightOuterPanel;
             FusionPanel* m_RightInnerPanel;
-            PanelSizeSignal* m_RightPanelSignal;
+            PanelSizeSignal* m_RightInnerPanelSignal;
+            PanelSizeSignal* m_RightOuterPanelSignal;
 
             //top panels
             FusionPanel* m_TopOuterPanel;
             FusionPanel* m_TopInnerPanel;
-            PanelSizeSignal* m_TopPanelSignal;
+            PanelSizeSignal* m_TopInnerPanelSignal;
+            PanelSizeSignal* m_TopOuterPanelSignal;
 
             //bottom panels
             FusionPanel* m_BottomOuterPanel;
             FusionPanel* m_BottomInnerPanel;
-            PanelSizeSignal* m_BottomPanelSignal;
+            PanelSizeSignal* m_BottomInnerPanelSignal;
+            PanelSizeSignal* m_BottomOuterPanelSignal;
 
-            void checkBounds(Renderable2D* renderable);
-            void submitPanels();
+            bool checkBounds(Renderable2D* renderable);
+            void submitPanels(Renderer2D* renderer);
         
         public:
-            FusionViewport(math::vec3 m_Position, math::vec2 m_Size, Sprite background, Color backgroundColor);
+            FusionViewport(math::vec3 position, math::vec2 size, Color backgroundColor);
             ~FusionViewport();
 
             void addPanel(bool panelType, int panelPosition, FusionPanel* panel);
