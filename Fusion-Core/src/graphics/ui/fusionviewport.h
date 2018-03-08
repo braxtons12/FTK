@@ -3,6 +3,7 @@
 
 #include "mathLibs/mathLib.h"
 #include "signals/panelsizesignal.h"
+#include "signals/panelpositionsignal.h"
 #include "signals/viewportsizesignal.h"
 #include "graphics/color.h"
 #include "graphics/renderables/sprite.h"
@@ -26,38 +27,47 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             //position and size for outer bound of viewport including inner panels
             math::vec3 m_OuterPosition;
             math::vec2 m_OuterSize;
-            ViewportSizeSignal* m_ViewportSignal;
+
+            //position signal for our viewport
+            ViewportSizeSignal* m_ViewportSizeSignal;
 
             //position and size for outer bound of viewport only
             math::vec3 m_InnerPosition;
             math::vec2 m_InnerSize;
 
-            Sprite m_Background;
             Color m_BackgroundColor;
 
             //left panels
             FusionPanel* m_LeftOuterPanel;
             FusionPanel* m_LeftInnerPanel;
-            PanelSizeSignal* m_LeftInnerPanelSignal;
-            PanelSizeSignal* m_LeftOuterPanelSignal;
+            PanelSizeSignal* m_LeftInnerPanelSizeSignal;
+            PanelSizeSignal* m_LeftOuterPanelSizeSignal;
+            PanelPositionSignal* m_LeftInnerPanelPositionSignal;
+            PanelPositionSignal* m_LeftOuterPanelPositionSignal;
 
             //right panels
             FusionPanel* m_RightOuterPanel;
             FusionPanel* m_RightInnerPanel;
-            PanelSizeSignal* m_RightInnerPanelSignal;
-            PanelSizeSignal* m_RightOuterPanelSignal;
+            PanelSizeSignal* m_RightInnerPanelSizeSignal;
+            PanelSizeSignal* m_RightOuterPanelSizeSignal;
+            PanelPositionSignal* m_RightInnerPanelPositionSignal;
+            PanelPositionSignal* m_RightOuterPanelPositionSignal;
 
             //top panels
             FusionPanel* m_TopOuterPanel;
             FusionPanel* m_TopInnerPanel;
-            PanelSizeSignal* m_TopInnerPanelSignal;
-            PanelSizeSignal* m_TopOuterPanelSignal;
+            PanelSizeSignal* m_TopInnerPanelSizeSignal;
+            PanelSizeSignal* m_TopOuterPanelSizeSignal;
+            PanelPositionSignal* m_TopInnerPanelPositionSignal;
+            PanelPositionSignal* m_TopOuterPanelPositionSignal;
 
             //bottom panels
             FusionPanel* m_BottomOuterPanel;
             FusionPanel* m_BottomInnerPanel;
-            PanelSizeSignal* m_BottomInnerPanelSignal;
-            PanelSizeSignal* m_BottomOuterPanelSignal;
+            PanelSizeSignal* m_BottomInnerPanelSizeSignal;
+            PanelSizeSignal* m_BottomOuterPanelSizeSignal;
+            PanelPositionSignal* m_BottomInnerPanelPositionSignal;
+            PanelPositionSignal* m_BottomOuterPanelPositionSignal;
 
             bool checkBounds(Renderable2D* renderable);
             void submitPanels(Renderer2D* renderer);
@@ -73,16 +83,15 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
             void update();
             void scale(math::vec2 scale);
-            void reposition(math::vec2 newPosition);
 
             void submit(Renderer2D* renderer) const override;
 
-            inline math::vec3 const getPosition() const { return m_Position; }
-            inline math::vec2 const getSize() const { return m_Size; }
-            inline math::vec3 const getViewportOuterPosition() const { return m_ViewportOuterPosition; }
-            inline math::vec2 const getViewportOuterSize() const { return m_ViewportOuterSize; }
-            inline math::vec3 const getViewportInnerPosition() const { return m_ViewportInnerPosition; }
-            inline math::vec2 const getViewportInnerSize() const { return m_ViewportInnerSize; }
+            inline math::vec3 const getOuterPosition() const { return m_OuterPosition; }
+            inline math::vec2 const getOuterSize() const { return m_OuterSize; }
+            inline math::vec3 const getInnerPosition() const { return m_InnerPosition; }
+            inline math::vec2 const getInnerSize() const { return m_InnerSize; }
+            inline ViewportSizeSignal* const getSizeSignal() const { return m_ViewportSizeSignal; }
+
     };
 
 }}}}

@@ -104,8 +104,8 @@ int main() {
 	Texture* tex1 = new Texture("res/tex1.bmp");
 	Texture* tex2 = new Texture("res/tex2.bmp");
 
-	float spriteY = window->getHeight() / 18;
-	float spriteX = window->getWidth() / 32;
+	float spriteY = window->getHeight() / 36;
+	float spriteX = window->getWidth() / 64;
 	std::vector<Renderable2D*> sprites;
 	int flip = 0;
 	for (float y = 0; y < window->getHeight(); y += spriteY) {

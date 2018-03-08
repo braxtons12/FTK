@@ -88,7 +88,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 			y /= m_Height;
 			m_Window->m_XScaleFactor *= x;
 			m_Window->m_YScaleFactor *= y;
-			this->scale(math::vec2(x, y));
+			scale(math::vec2(x, y));
 			m_Signal->resetSignal();
 		}	
 

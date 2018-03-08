@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/braxton/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.4548.31/bin/cmake/bin/cmake
+CMAKE_COMMAND = /home/braxton/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.4674.29/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /home/braxton/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.4548.31/bin/cmake/bin/cmake -E remove -f
+RM = /home/braxton/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.4674.29/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/braxton/git/Fusion/Fusion-Core
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/braxton/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.4548.31/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/braxton/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.4674.29/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/braxton/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.4548.31/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/braxton/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.4674.29/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -124,21 +124,6 @@ main/fast:
 .PHONY : main/fast
 
 # target to build an object file
-src/graphics/batchrenderer2D.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/batchrenderer2D.o
-.PHONY : src/graphics/batchrenderer2D.o
-
-# target to preprocess a source file
-src/graphics/batchrenderer2D.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/batchrenderer2D.i
-.PHONY : src/graphics/batchrenderer2D.i
-
-# target to generate assembly for a file
-src/graphics/batchrenderer2D.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/batchrenderer2D.s
-.PHONY : src/graphics/batchrenderer2D.s
-
-# target to build an object file
 src/graphics/buffers/buffer.o:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/buffers/buffer.o
 .PHONY : src/graphics/buffers/buffer.o
@@ -182,36 +167,6 @@ src/graphics/buffers/vertexarray.i:
 src/graphics/buffers/vertexarray.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/buffers/vertexarray.s
 .PHONY : src/graphics/buffers/vertexarray.s
-
-# target to build an object file
-src/graphics/fusionUI.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/fusionUI.o
-.PHONY : src/graphics/fusionUI.o
-
-# target to preprocess a source file
-src/graphics/fusionUI.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/fusionUI.i
-.PHONY : src/graphics/fusionUI.i
-
-# target to generate assembly for a file
-src/graphics/fusionUI.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/fusionUI.s
-.PHONY : src/graphics/fusionUI.s
-
-# target to build an object file
-src/graphics/fusionwindow.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/fusionwindow.o
-.PHONY : src/graphics/fusionwindow.o
-
-# target to preprocess a source file
-src/graphics/fusionwindow.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/fusionwindow.i
-.PHONY : src/graphics/fusionwindow.i
-
-# target to generate assembly for a file
-src/graphics/fusionwindow.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/fusionwindow.s
-.PHONY : src/graphics/fusionwindow.s
 
 # target to build an object file
 src/graphics/groups/group.o:
@@ -259,6 +214,66 @@ src/graphics/layers/tilelayer.s:
 .PHONY : src/graphics/layers/tilelayer.s
 
 # target to build an object file
+src/graphics/renderables/sprite.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderables/sprite.o
+.PHONY : src/graphics/renderables/sprite.o
+
+# target to preprocess a source file
+src/graphics/renderables/sprite.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderables/sprite.i
+.PHONY : src/graphics/renderables/sprite.i
+
+# target to generate assembly for a file
+src/graphics/renderables/sprite.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderables/sprite.s
+.PHONY : src/graphics/renderables/sprite.s
+
+# target to build an object file
+src/graphics/renderables/static_sprite.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderables/static_sprite.o
+.PHONY : src/graphics/renderables/static_sprite.o
+
+# target to preprocess a source file
+src/graphics/renderables/static_sprite.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderables/static_sprite.i
+.PHONY : src/graphics/renderables/static_sprite.i
+
+# target to generate assembly for a file
+src/graphics/renderables/static_sprite.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderables/static_sprite.s
+.PHONY : src/graphics/renderables/static_sprite.s
+
+# target to build an object file
+src/graphics/renderers/batchrenderer2D.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderers/batchrenderer2D.o
+.PHONY : src/graphics/renderers/batchrenderer2D.o
+
+# target to preprocess a source file
+src/graphics/renderers/batchrenderer2D.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderers/batchrenderer2D.i
+.PHONY : src/graphics/renderers/batchrenderer2D.i
+
+# target to generate assembly for a file
+src/graphics/renderers/batchrenderer2D.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderers/batchrenderer2D.s
+.PHONY : src/graphics/renderers/batchrenderer2D.s
+
+# target to build an object file
+src/graphics/renderers/simple2Drenderer.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderers/simple2Drenderer.o
+.PHONY : src/graphics/renderers/simple2Drenderer.o
+
+# target to preprocess a source file
+src/graphics/renderers/simple2Drenderer.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderers/simple2Drenderer.i
+.PHONY : src/graphics/renderers/simple2Drenderer.i
+
+# target to generate assembly for a file
+src/graphics/renderers/simple2Drenderer.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/renderers/simple2Drenderer.s
+.PHONY : src/graphics/renderers/simple2Drenderer.s
+
+# target to build an object file
 src/graphics/shader.o:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/shader.o
 .PHONY : src/graphics/shader.o
@@ -274,51 +289,6 @@ src/graphics/shader.s:
 .PHONY : src/graphics/shader.s
 
 # target to build an object file
-src/graphics/simple2Drenderer.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/simple2Drenderer.o
-.PHONY : src/graphics/simple2Drenderer.o
-
-# target to preprocess a source file
-src/graphics/simple2Drenderer.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/simple2Drenderer.i
-.PHONY : src/graphics/simple2Drenderer.i
-
-# target to generate assembly for a file
-src/graphics/simple2Drenderer.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/simple2Drenderer.s
-.PHONY : src/graphics/simple2Drenderer.s
-
-# target to build an object file
-src/graphics/sprite.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/sprite.o
-.PHONY : src/graphics/sprite.o
-
-# target to preprocess a source file
-src/graphics/sprite.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/sprite.i
-.PHONY : src/graphics/sprite.i
-
-# target to generate assembly for a file
-src/graphics/sprite.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/sprite.s
-.PHONY : src/graphics/sprite.s
-
-# target to build an object file
-src/graphics/static_sprite.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/static_sprite.o
-.PHONY : src/graphics/static_sprite.o
-
-# target to preprocess a source file
-src/graphics/static_sprite.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/static_sprite.i
-.PHONY : src/graphics/static_sprite.i
-
-# target to generate assembly for a file
-src/graphics/static_sprite.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/static_sprite.s
-.PHONY : src/graphics/static_sprite.s
-
-# target to build an object file
 src/graphics/texture.o:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/texture.o
 .PHONY : src/graphics/texture.o
@@ -332,6 +302,66 @@ src/graphics/texture.i:
 src/graphics/texture.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/texture.s
 .PHONY : src/graphics/texture.s
+
+# target to build an object file
+src/graphics/ui/fusionUI.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionUI.o
+.PHONY : src/graphics/ui/fusionUI.o
+
+# target to preprocess a source file
+src/graphics/ui/fusionUI.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionUI.i
+.PHONY : src/graphics/ui/fusionUI.i
+
+# target to generate assembly for a file
+src/graphics/ui/fusionUI.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionUI.s
+.PHONY : src/graphics/ui/fusionUI.s
+
+# target to build an object file
+src/graphics/ui/fusionmenu.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionmenu.o
+.PHONY : src/graphics/ui/fusionmenu.o
+
+# target to preprocess a source file
+src/graphics/ui/fusionmenu.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionmenu.i
+.PHONY : src/graphics/ui/fusionmenu.i
+
+# target to generate assembly for a file
+src/graphics/ui/fusionmenu.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionmenu.s
+.PHONY : src/graphics/ui/fusionmenu.s
+
+# target to build an object file
+src/graphics/ui/fusiontogglebutton.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusiontogglebutton.o
+.PHONY : src/graphics/ui/fusiontogglebutton.o
+
+# target to preprocess a source file
+src/graphics/ui/fusiontogglebutton.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusiontogglebutton.i
+.PHONY : src/graphics/ui/fusiontogglebutton.i
+
+# target to generate assembly for a file
+src/graphics/ui/fusiontogglebutton.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusiontogglebutton.s
+.PHONY : src/graphics/ui/fusiontogglebutton.s
+
+# target to build an object file
+src/graphics/ui/fusionwindow.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionwindow.o
+.PHONY : src/graphics/ui/fusionwindow.o
+
+# target to preprocess a source file
+src/graphics/ui/fusionwindow.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionwindow.i
+.PHONY : src/graphics/ui/fusionwindow.i
+
+# target to generate assembly for a file
+src/graphics/ui/fusionwindow.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/graphics/ui/fusionwindow.s
+.PHONY : src/graphics/ui/fusionwindow.s
 
 # target to build an object file
 src/graphics/window.o:
@@ -417,9 +447,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
-	@echo "... src/graphics/batchrenderer2D.o"
-	@echo "... src/graphics/batchrenderer2D.i"
-	@echo "... src/graphics/batchrenderer2D.s"
 	@echo "... src/graphics/buffers/buffer.o"
 	@echo "... src/graphics/buffers/buffer.i"
 	@echo "... src/graphics/buffers/buffer.s"
@@ -429,12 +456,6 @@ help:
 	@echo "... src/graphics/buffers/vertexarray.o"
 	@echo "... src/graphics/buffers/vertexarray.i"
 	@echo "... src/graphics/buffers/vertexarray.s"
-	@echo "... src/graphics/fusionUI.o"
-	@echo "... src/graphics/fusionUI.i"
-	@echo "... src/graphics/fusionUI.s"
-	@echo "... src/graphics/fusionwindow.o"
-	@echo "... src/graphics/fusionwindow.i"
-	@echo "... src/graphics/fusionwindow.s"
 	@echo "... src/graphics/groups/group.o"
 	@echo "... src/graphics/groups/group.i"
 	@echo "... src/graphics/groups/group.s"
@@ -444,21 +465,36 @@ help:
 	@echo "... src/graphics/layers/tilelayer.o"
 	@echo "... src/graphics/layers/tilelayer.i"
 	@echo "... src/graphics/layers/tilelayer.s"
+	@echo "... src/graphics/renderables/sprite.o"
+	@echo "... src/graphics/renderables/sprite.i"
+	@echo "... src/graphics/renderables/sprite.s"
+	@echo "... src/graphics/renderables/static_sprite.o"
+	@echo "... src/graphics/renderables/static_sprite.i"
+	@echo "... src/graphics/renderables/static_sprite.s"
+	@echo "... src/graphics/renderers/batchrenderer2D.o"
+	@echo "... src/graphics/renderers/batchrenderer2D.i"
+	@echo "... src/graphics/renderers/batchrenderer2D.s"
+	@echo "... src/graphics/renderers/simple2Drenderer.o"
+	@echo "... src/graphics/renderers/simple2Drenderer.i"
+	@echo "... src/graphics/renderers/simple2Drenderer.s"
 	@echo "... src/graphics/shader.o"
 	@echo "... src/graphics/shader.i"
 	@echo "... src/graphics/shader.s"
-	@echo "... src/graphics/simple2Drenderer.o"
-	@echo "... src/graphics/simple2Drenderer.i"
-	@echo "... src/graphics/simple2Drenderer.s"
-	@echo "... src/graphics/sprite.o"
-	@echo "... src/graphics/sprite.i"
-	@echo "... src/graphics/sprite.s"
-	@echo "... src/graphics/static_sprite.o"
-	@echo "... src/graphics/static_sprite.i"
-	@echo "... src/graphics/static_sprite.s"
 	@echo "... src/graphics/texture.o"
 	@echo "... src/graphics/texture.i"
 	@echo "... src/graphics/texture.s"
+	@echo "... src/graphics/ui/fusionUI.o"
+	@echo "... src/graphics/ui/fusionUI.i"
+	@echo "... src/graphics/ui/fusionUI.s"
+	@echo "... src/graphics/ui/fusionmenu.o"
+	@echo "... src/graphics/ui/fusionmenu.i"
+	@echo "... src/graphics/ui/fusionmenu.s"
+	@echo "... src/graphics/ui/fusiontogglebutton.o"
+	@echo "... src/graphics/ui/fusiontogglebutton.i"
+	@echo "... src/graphics/ui/fusiontogglebutton.s"
+	@echo "... src/graphics/ui/fusionwindow.o"
+	@echo "... src/graphics/ui/fusionwindow.i"
+	@echo "... src/graphics/ui/fusionwindow.s"
 	@echo "... src/graphics/window.o"
 	@echo "... src/graphics/window.i"
 	@echo "... src/graphics/window.s"

@@ -3,6 +3,7 @@
 
 #include "mathLibs/mathLib.h"
 #include "signals/panelsizesignal.h"
+#include "signals/panelpositionsignal.h"
 #include "signals/viewportsizesignal.h"
 #include "graphics/color.h"
 #include "graphics/groups/group.h"
@@ -17,7 +18,9 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         private:
             math::vec3 m_Position;
             math::vec2 m_Size;
-            PanelSizeSignal* m_PanelSignal;
+            math::vec2 m_ShownSize;
+            PanelSizeSignal* m_PanelSizeSignal;
+            PanelPositionSignal* m_PanelPositionSignal;
             ViewportSizeSignal* m_ViewportSignal;
 
             FusionButton m_DragHandle;
@@ -40,7 +43,9 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
             inline math::vec3 const getPosition() const { return m_Position; }
             inline math::vec2 const getSize() const { return m_Size; }
-            inline PanelSizeSignal* const getSignal() const { return m_PanelSignal; }
+            inline math::vec2 const getShownSize() const { return m_Size; }
+            inline PanelSizeSignal* const getSizeSignal() const { return m_PanelSizeSignal; }
+            inline PanelPositionSignal* const getPositionSignal() const { return m_PanelPositionSignal; }
 
     };
     
