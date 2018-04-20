@@ -41,10 +41,6 @@ int main() {
 
 	FusionUI fusionUI = FusionUI();
 
-	/* no menu
-	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag", false));
-	*/
-
 	//create window
 	fusionUI.addWindow(new FusionWindow("Fusion", 800, 600, "src/shaders/basic.vert", "src/shaders/basic.frag"));
 
@@ -97,7 +93,7 @@ int main() {
 	Timer timer;
 	float updateTime = 0;
 	float frameTime = 0;
-	float frameTimer = (1.0f / 60.0f);
+	float frameTimer = (1.0f / 120.0f);
 
 	int frames = 0;
 
@@ -144,6 +140,7 @@ int main() {
 			}
 
 			window->render();
+			
 			updateTime += frameTimer;
 			frames++;
 		//}

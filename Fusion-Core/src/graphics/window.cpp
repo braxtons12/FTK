@@ -45,7 +45,7 @@ namespace fusion { namespace core { namespace graphics {
         glfwSetKeyCallback(m_Window, keyCallback);
         glfwSetMouseButtonCallback(m_Window, mouseButtonCallback);
         glfwSetCursorPosCallback(m_Window, mousePositionCallback);
-		glfwSwapInterval(0.0f);
+		glfwSwapInterval(1.0f);
 
 		glewExperimental = GL_TRUE;
 

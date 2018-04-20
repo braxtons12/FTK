@@ -71,6 +71,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
             bool checkBounds(Renderable2D* renderable);
             void submitPanels(Renderer2D* renderer);
+            void scalePanels(math::vec2 scale);
         
         public:
             FusionViewport(math::vec3 position, math::vec2 size, Color backgroundColor);

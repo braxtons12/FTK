@@ -36,7 +36,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             ~FusionPanel();
 
             void update();
-            void scale();
+            void scale(math::vec2 scale);
             void repositon(math::vec2 newPostion);
 
             void submit(Renderer2D* renderer) const override;

@@ -21,8 +21,7 @@ namespace fusion { namespace core { namespace graphics {
             GLuint m_BufferID;
             GLuint m_ComponentCount;
 
-        public:
-            
+		public:
             /*
              * Constructor
             */ 

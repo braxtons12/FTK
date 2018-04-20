@@ -36,96 +36,96 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
 	class FusionWindow {
 
-	private:
-		Window* m_Window;
-		const WindowUpdateSignal* m_Signal;
-		const char* m_Name;
-		double m_Width;
-		double m_Height;
-		input::Mouse* m_Mouse;
-		input::Keyboard* m_Keyboard;
-		const char* m_VertexShaderPath;
-		const char* m_FragmentShaderPath;
-		Shader* m_Shader;
-		Renderer2D* m_Renderer;
-		bool m_HasMenu;
-		FusionMenu* m_Menu;
-		std::vector<Renderable2D*>* m_Renderables;
+		private:
+			Window* m_Window;
+			const WindowUpdateSignal* m_Signal;
+			const char* m_Name;
+			double m_Width;
+			double m_Height;
+			input::Mouse* m_Mouse;
+			input::Keyboard* m_Keyboard;
+			const char* m_VertexShaderPath;
+			const char* m_FragmentShaderPath;
+			Shader* m_Shader;
+			Renderer2D* m_Renderer;
+			bool m_HasMenu;
+			FusionMenu* m_Menu;
+			std::vector<Renderable2D*>* m_Renderables;
 
-		/**
-		 * Initialize the window
-		 * 
-		 **/
-		void init();
+			/**
+			* Initialize the window
+			* 
+			**/
+			void init();
 
-	public:
-		/**
-		 * Constructor
-		 * 
-		 **/
-		FusionWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath);
+		public:
+			/**
+			* Constructor
+			* 
+			**/
+			FusionWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath);
 
-		//getters
-		inline const char* const getName() { return m_Name; }
-		inline int const getHeight() { return m_Height; }
-		inline int const getWidth() { return m_Width; }
+			//getters
+			inline const char* const getName() { return m_Name; }
+			inline int const getHeight() { return m_Height; }
+			inline int const getWidth() { return m_Width; }
 
-		/**
-		 * Used to scale the container when the Window is resized
-		 * 
-		 **/
-		void scale(math::vec2 scale);
+			/**
+			* Used to scale the container when the Window is resized
+			* 
+			**/
+			void scale(math::vec2 scale);
 
-		/**
-		 * Add a Renderable to the window
-		 * 
-		 **/
-		inline void addElement(Renderable2D* renderable) {
-			//if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader); deprecated with static sprites
-			m_Renderables->push_back(renderable);
-		}
+			/**
+			* Add a Renderable to the window
+			* 
+			**/
+			inline void addElement(Renderable2D* renderable) {
+				//if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader); deprecated with static sprites
+				m_Renderables->push_back(renderable);
+			}
 
-		/**
-		 * Create the window menu from the given parameters
-		 * 
-		 **/
-		void setMenu(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover, int state, 
-					 int menuType, int numMenus, bool alwaysVisible, std::vector<FusionMenu*> subMenus);
+			/**
+			* Create the window menu from the given parameters
+			* 
+			**/
+			void setMenu(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover, int state, 
+						int menuType, int numMenus, bool alwaysVisible, std::vector<FusionMenu*> subMenus);
 
-		inline void setMenu(FusionMenu* menu) { m_Menu = menu; m_HasMenu = true; }
+			inline void setMenu(FusionMenu* menu) { m_Menu = menu; m_HasMenu = true; }
 
-		/**
-		 * Update the state of the window content
-		 * 
-		 **/
-		void update();
+			/**
+			* Update the state of the window content
+			* 
+			**/
+			void update();
 
-		/**
-		 * Render the contents of the window
-		 * 
-		 **/
-		void render();
+			/**
+			* Render the contents of the window
+			* 
+			**/
+			void render();
 
-		//getters and setters
-		inline void setShader(Shader& shader) { *m_Shader = shader; }
-		inline Shader& getShader() { return *m_Shader; }
-		inline Window* const getWindow() { return m_Window; }
-		inline input::Mouse* const getMouse() { return m_Mouse; }
-		inline input::Keyboard* const getKeyboard() { return m_Keyboard; }
-		inline FusionMenu* const getMenu() { return m_Menu; }
+			//getters and setters
+			inline void setShader(Shader& shader) { *m_Shader = shader; }
+			inline Shader& getShader() { return *m_Shader; }
+			inline Window* const getWindow() { return m_Window; }
+			inline input::Mouse* const getMouse() { return m_Mouse; }
+			inline input::Keyboard* const getKeyboard() { return m_Keyboard; }
+			inline FusionMenu* const getMenu() { return m_Menu; }
 
-		/**
-		 * Activate the window's renderer
-		 * 
-		 **/
-		inline void activateRenderer() { m_Renderer = new BatchRenderer2D(); }
+			/**
+			* Activate the window's renderer
+			* 
+			**/
+			inline void activateRenderer() { m_Renderer = new BatchRenderer2D(); }
 
-		//wrap some base window functions
-		inline void clear() { m_Window->clear(); }
+			//wrap some base window functions
+			inline void clear() { m_Window->clear(); }
 
-		inline bool closed() const { return m_Window->closed(); }
+			inline bool closed() const { return m_Window->closed(); }
 
-		inline void convertCoords(double& x, double& y) { m_Window->convertCoords(x, y); }
+			inline void convertCoords(double& x, double& y) { m_Window->convertCoords(x, y); }
 
 
 	};

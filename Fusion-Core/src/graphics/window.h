@@ -23,7 +23,6 @@ namespace fusion { namespace core { namespace graphics {
     class Window {
 
         private:
-
             friend struct GLFWwindow;
             const char *m_name;
             int m_width, m_height;

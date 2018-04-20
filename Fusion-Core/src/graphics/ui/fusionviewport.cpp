@@ -393,12 +393,14 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
                         break;
                 }
             }
+            m_ViewportSizeSignal->resetSignal();
         }
         else if(m_ViewportSizeSignal->getSignal(width, height)) {
 
             width /= m_Size.m_x;
             height /= m_Size.m_y;
             scale(math::vec2(width, height));
+            m_ViewportSizeSignal->resetSignal();
         }
 
         if(m_TopInnerPanel) m_TopInnerPanel->update();
@@ -410,6 +412,17 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
         if(m_RightOuterPanel) m_RightOuterPanel->update();
         if(m_BottomOuterPanel) m_BottomOuterPanel->update();
         if(m_LeftOuterPanel) m_LeftOuterPanel->update();
+    }
+
+    void FusionViewport::scale(math::vec2 scale) {
+
+        math::vec2 outerSize = math::vec2(m_Size.m_x * scale.m_x, m_Size.m_y * scale.m_y);
+        math::vec2 innerSize = math::vec2(m_InnerSize.m_x * scale.m_x, m_InnerSize.m_x * scale.m_y);
+
+        if(m_TopInnerPanel) m_TopInnerPanel->scale(scale);
+        if(m_TopOuterPanel) m_TopOuterPanel->scale(scale);
+        if(m_RightInnerPanel) m_RightInnerPanel->scale(scale);
+        if(m_RightOuterPanel) m_RightOuterPanel->scale(scale);
     }
 
 
