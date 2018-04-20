@@ -36,7 +36,7 @@ namespace fusion { namespace core { namespace graphics {
 	 **/
 	GLuint Texture::load() {
 
-		BYTE* pixels = utils::load_image(m_Path.c_str(), &m_Width, &m_Height);
+		BYTE* pixels = utils::ImageLoad::load_image(m_Path.c_str(), &m_Width, &m_Height);
 
 		GLuint result;
 		glGenTextures(1, &result);

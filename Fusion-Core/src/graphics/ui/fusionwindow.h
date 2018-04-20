@@ -13,7 +13,7 @@
 #define _FUSION_WINDOW
 
 #include "graphics/window.h"
-#include "signals/windowupdatesignal.h"
+#include "signals/signal.h"
 #include "input/input.h"
 #include "mathLibs/mathLib.h"
 #include "graphics/shader.h"
@@ -25,6 +25,7 @@
 
 #include <typeinfo>
 #include <vector>
+#include <array>
 #include <GL/glew.h>
 
 namespace fusion { namespace core { namespace graphics { namespace ui { 
@@ -38,7 +39,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
 		private:
 			Window* m_Window;
-			const WindowUpdateSignal* m_Signal;
+			Signal<Window, FusionWindow, std::array<int, 3>, void, std::array<int, 3>>* m_Signal;
 			const char* m_Name;
 			double m_Width;
 			double m_Height;
@@ -127,7 +128,21 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 
 			inline void convertCoords(double& x, double& y) { m_Window->convertCoords(x, y); }
 
-
+			
+			//slot for Window::updateSignal
+			void on_WindowUpdate(std::array<int, 3> sig) {
+				
+				if(sig[0]) {
+					
+					double x = sig[1], y = sig[2];
+					
+					x /= m_Width;
+					y /= m_Height;
+					m_Window->m_XScaleFactor *= x;
+					m_Window->m_YScaleFactor *= y;
+					scale(math::vec2(x, y));
+				}
+			}
 	};
 }}}}
 

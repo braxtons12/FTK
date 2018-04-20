@@ -11,8 +11,8 @@
 
 namespace fusion { namespace core { namespace graphics {
 	
-    //initialize the window update signal
-	WindowUpdateSignal* Window::m_Signal = new WindowUpdateSignal();
+	Signal<Window, ui::FusionWindow, std::array<int, 3>, void, std::array<int, 3>>* Window::m_Signal = 
+	new Signal<Window, ui::FusionWindow, std::array<int, 3>, void, std::array<int, 3>>();
 	
     /**
      * Initialize the Window

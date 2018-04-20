@@ -22,6 +22,8 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 		m_Window = new Window(m_Name, m_Width, m_Height);
 		m_Signal = m_Window->getSignalServer();
 		
+		m_Signal->connect(m_Window, &Window::updateSignal, this, &FusionWindow::on_WindowUpdate);
+		
 		m_Mouse = &input::Mouse::GetInstance();
 		m_Keyboard = &input::Keyboard::GetInstance();
 		
@@ -79,18 +81,6 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
 	 * 
 	 **/
 	void FusionWindow::update() {
-
-		double x, y = 0.0;
-
-		if (m_Signal->getSignal(x, y)) {
-			
-			x /= m_Width;
-			y /= m_Height;
-			m_Window->m_XScaleFactor *= x;
-			m_Window->m_YScaleFactor *= y;
-			scale(math::vec2(x, y));
-			m_Signal->resetSignal();
-		}	
 
 		if(m_HasMenu) {
 

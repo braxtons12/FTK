@@ -83,7 +83,7 @@ namespace fusion { namespace core { namespace graphics { namespace ui {
             void removePanel(bool panelType, int panelPosition);
 
             void update();
-            void scale(math::vec2 scale);
+            void scale(math::vec2 scale) override;
 
             void submit(Renderer2D* renderer) const override;
 

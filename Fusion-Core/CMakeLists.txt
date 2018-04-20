@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.0)
 project(Fusion-Core)
 
 set (GCC_COVERAGE_LINKER_FLAGS "-lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl")
@@ -46,7 +47,7 @@ set ( INPUT
 set ( MATH
     src/mathLibs/mathLib.cpp )
 set ( SIGNALS
-    src/signals/windowupdatesignal.cpp )
+    src/signals/signal.h )
 set ( UTILS
     src/utils/fileutils.h
     src/utils/imageload.h

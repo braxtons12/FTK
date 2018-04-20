@@ -11,14 +11,19 @@
 #define _WINDOW
 
 #include "input/input.h"
-#include "signals/windowupdatesignal.h"
+#include "signals/signal.h"
 
-
+#include <array>
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 namespace fusion { namespace core { namespace graphics {
+	
+	namespace ui {
+		
+		class FusionWindow;
+	}
 
     class Window {
 
@@ -29,8 +34,8 @@ namespace fusion { namespace core { namespace graphics {
             GLFWwindow *m_Window;
             bool m_closed;
 
-			static WindowUpdateSignal* m_Signal;
-
+			static Signal<Window, ui::FusionWindow, std::array<int, 3>, void, std::array<int, 3>>* m_Signal;
+			
             /**
              * Initialize the Window
              * 
@@ -107,8 +112,9 @@ namespace fusion { namespace core { namespace graphics {
              * 
              **/
 			static void WindowResizeCallBack(GLFWwindow *window, int width, int height) {
-
-				m_Signal->sendSignal(width, height);
+				
+				std::array<int, 3> size = {1, width, height};
+				(*m_Signal)(size);
 				glViewport(0, 0, width, height);
 			}
 
@@ -117,7 +123,8 @@ namespace fusion { namespace core { namespace graphics {
             inline void setWidth(int width) { m_width = width; }
             inline int getHeight() const { return m_height; }
             inline void setHeight(int height) { m_height = height; }
-            inline const WindowUpdateSignal* const getSignalServer() const { return m_Signal; }
+            inline Signal<Window, ui::FusionWindow, std::array<int, 3>, void, std::array<int, 3>>* 
+				getSignalServer() { return m_Signal; }
 
             /**
              * Make this the current OpenGL context
@@ -130,6 +137,17 @@ namespace fusion { namespace core { namespace graphics {
              * 
              **/
             void convertCoords(double& x, double& y);
+			
+			/**
+			 * Signal to FusionWindow to update itself
+			 * 
+			 **/
+			std::array<int, 3> updateSignal(std::array<int, 3> sig) {
+				
+				return sig;
+			}
+			
+			
     };
 }}}
 
