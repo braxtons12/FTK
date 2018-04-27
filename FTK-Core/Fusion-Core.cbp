@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Fusion-Core"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/braxton/git/Fusion/Fusion-Core"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/braxton/git/Fusion/Fusion-Core"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="main">
+				<Option output="/home/braxton/git/Fusion/Fusion-Core/bin/main" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/include"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/buffers"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/layers"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/groups"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderers"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/input"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/mathLibs"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/utils"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../include/c++/7.3.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../include/c++/7.3.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../include/c++/7.3.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 main"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="main/fast">
+				<Option output="/home/braxton/git/Fusion/Fusion-Core/bin/main" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/include"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/buffers"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/layers"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/groups"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderers"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/input"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/mathLibs"/>
+					<Add directory="/home/braxton/git/Fusion/Fusion-Core/src/utils"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../include/c++/7.3.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../include/c++/7.3.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../include/c++/7.3.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 main/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/braxton/git/Fusion/Fusion-Core"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/braxton/git/Fusion/Fusion-Core/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/buffers/buffer.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/buffers/buffer.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/buffers/indexbuffer.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/buffers/indexbuffer.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/buffers/vertexarray.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/buffers/vertexarray.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/color.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/groups/group.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/groups/group.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/layers/layer.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/layers/layer.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/layers/tilelayer.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/layers/tilelayer.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/nativewindow.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/nativewindow.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables/label.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables/label.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables/renderable2D.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables/sprite.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables/sprite.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables/static_sprite.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderables/static_sprite.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderers/batchrenderer2D.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderers/batchrenderer2D.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderers/renderer2D.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderers/simple2Drenderer.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/renderers/simple2Drenderer.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/shader.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/shader.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/texture.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/texture.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusionUI.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusionUI.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusionbutton.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusionmenu.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusionmenu.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusiontogglebutton.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusiontogglebutton.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusionwindow.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/graphics/ui/fusionwindow.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/input/input.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/input/input.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/main.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/mathLibs/mathLib.cpp">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/mathLibs/mathLib.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/signals/signal.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/utils/fileutils.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/utils/imageload.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/src/utils/timer.h">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/home/braxton/git/Fusion/Fusion-Core/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

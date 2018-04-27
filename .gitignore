@@ -1,11 +1,11 @@
-Fusion-Core/.vscode/cquery_cached_index
+FTK-Core/.vscode/cquery_cached_index
 
-Fusion-Core/build
-Fusion-Core/CMakeFiles
-Fusion-Core/Makefile
-Fusion-Core/cmake_install.cmake
-Fusion-Core/CMakeCache.txt
-Fusion-Core/.idea/
-Fusion-Core/Fusion-Core.cbp
-Fusion-Core/bin/main
-
+FTK-Core/build
+FTK-Core/CMakeFiles
+FTK-Core/Makefile
+FTK-Core/cmake_install.cmake
+FTK-Core/CMakeCache.txt
+FTK-Core/.idea/
+FTK-Core/FTK-Core.cbp
+FTK-Core/bin/main
+FTK-Core/ext/ftgl/build
