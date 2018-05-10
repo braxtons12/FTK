@@ -18,7 +18,7 @@
 namespace ftk { namespace core { namespace graphics { namespace ui { 
 
 
-	class FtkUI {
+	class FtkUI : public FTKObject {
 
 		private:
 			std::vector<FtkWindow*>* m_Windows;

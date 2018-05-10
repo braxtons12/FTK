@@ -1,8 +1,8 @@
 /**
  * Batchrenderer used to quickly and efficiently draw all graphics.
- * 
+ *
  * Implementation File
- * 
+ *
  * C 2018 Braxton Salyer
  *
  **/
@@ -13,7 +13,7 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * Constructor
-     * 
+     *
      **/
     BatchRenderer2D::BatchRenderer2D() {
 
@@ -22,7 +22,7 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * Destructor
-     * 
+     *
      **/
     BatchRenderer2D::~BatchRenderer2D() {
 
@@ -32,7 +32,7 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * Initialize the Renderer
-     * 
+     *
      **/
     void BatchRenderer2D::init() {
 
@@ -55,13 +55,10 @@ namespace ftk { namespace core { namespace graphics {
 
         //tell OpenGL where our attribues are at in our VertexData
         glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*) 0);
-        glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE,
-							 (const GLvoid*)(offsetof(VertexData, VertexData::uv)));
-        glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE,
-							 (const GLvoid*)(offsetof(VertexData, VertexData::tid)));
-        glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE,
-							 (const GLvoid*)(offsetof(VertexData, VertexData::color)));
-        
+        glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::uv)));
+        glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::tid)));
+        glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::color)));
+
         //unbind our vertex data buffer
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -86,14 +83,14 @@ namespace ftk { namespace core { namespace graphics {
 
         //unbind our vertex array
         glBindVertexArray(0);
-		
+
 		//m_FTAtlas = ftgl::texture_atlas_new(512, 512, 1);
 		//m_FTFont = ftgl::texture_font_new_from_file(m_FTAtlas, 20, "res/fonts/arial.ttf");
     }
 
     /**
      * Start the renderer
-     * 
+     *
      **/
     void BatchRenderer2D::begin() {
 
@@ -190,26 +187,26 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * "Submit" a text item
-     * 
+     *
      **/
     void BatchRenderer2D::drawString(const std::string& text, const math::vec3& position, const math::vec4& color) {
 		/*
 		float ts = 0.0f;
 		bool found = false;
 		for (int i = 0; 9 < m_TextureSlots.size(); ++i) {
-			
+
 			if(m_TextureSlots[i] == tid) {
-				
+
 				ts = (float)(i + 1);
 				found = true;
 				break;
 			}
 		}
-		
+
 		if (!found) {
-			
+
 			if(m_TextureSlots.size() >= 32) {
-				
+
 				end();
 				flush();
 				begin();
@@ -217,7 +214,7 @@ namespace ftk { namespace core { namespace graphics {
 			m_TextureSlots.push_back(m_FTAtlas->id);
 			ts = (float)(m_TextureSlots.size());
 		}
-		
+
 		*/
     }
 
@@ -232,7 +229,7 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * Draw all the renderables
-     * 
+     *
      **/
     void BatchRenderer2D::flush() {
 

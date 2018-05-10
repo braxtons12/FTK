@@ -1,6 +1,7 @@
 #ifndef _FTK_PANEL
 #define _FTK_PANEL
 
+#include "base/ftkobject.h"
 #include "mathLibs/mathLib.h"
 #include "signals/signal.h"
 #include "graphics/color.h"
@@ -14,7 +15,7 @@
 namespace ftk { namespace core { namespace graphics { namespace ui {
 
 	#define NO_PANEL	 0 //used for signals
-	
+
     #define OUTER_PANEL  1
     #define INNER_PANEL  2
 
@@ -22,23 +23,22 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
     #define RIGHT_PANEL  2
     #define BOTTOM_PANEL 3
     #define LEFT_PANEL   4
-	
+
 	class FtkViewport;
-	
-    class FtkPanel : Group {
+
+    class FtkPanel : public Group, public FTKObject {
 
         private:
             math::vec3 m_Position;
             math::vec2 m_Size;
             math::vec2 m_ShownSize;
-			
+
 			int m_Type;
-			
+			int m_LayoutPosition;
+
 			FtkViewport* m_ParentViewport;
 			NativeWindow* m_ParentWindow;
-			Signal<FtkViewport, FtkPanel, math::vec2, void, math::vec2>* m_SizeSignal;
-			Signal<FtkViewport, FtkPanel, math::vec2, void, math::vec2>* m_PositionSignal;
-			Signal<FtkViewport, FtkPanel, std::array<float, 5>, void, std::array<float, 5>>* m_ViewportSignal;
+			int m_ViewportSizeSignal;
 
             FtkButton m_DragHandle;
 
@@ -48,8 +48,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
             void checkBounds(Renderable2D* renderable);
 
         public:
-            FtkPanel(math::vec3 position, math::vec2 size, Sprite background, Color backgroundColor, 
-						math::mat4 projectionMatrix, int type, FtkViewport* parentViewport, 
+            FtkPanel(math::vec3 position, math::vec2 size, Sprite background, Color backgroundColor,
+						math::mat4 projectionMatrix, int type, int layoutPosition, FtkViewport* parentViewport,
 						NativeWindow* parentWindow);
             ~FtkPanel();
 
@@ -64,20 +64,20 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
             inline math::vec2 const getShownSize() const { return m_Size; }
             inline NativeWindow* const getNativeWindow() const { return m_ParentWindow; }
             inline FtkViewport* const getParentViewport() const { return m_ParentViewport; }
-            inline Signal<FtkViewport, FtkPanel, math::vec2, void, math::vec2>* const getSizeSignal() const { return m_SizeSignal; }
-            inline Signal<FtkViewport, FtkPanel, math::vec2, void, math::vec2>* const getPositionSignal() const { return m_PositionSignal; }
-            
-            void on_PositionChanged(math::vec2 pos);
-			
-			void on_SizeChanged(math::vec2 size);
-			
-			std::array<float, 5> updateViewportSize(std::array<float, 5> sig) {
-				
+			inline void setUpdateViewportSizeSignalIndex(int index) { m_ViewportSizeSignal = index; }
+
+			//signals
+			std::array<float, 6> updateViewportSize(std::array<float, 6> sig) {
+
 				return sig;
 			}
 
+			//slots
+            void on_PositionChanged(math::vec2 sig);
+			void on_SizeChanged(math::vec2 sig);
+			void on_HandleClicked(bool sig);
     };
-    
+
 }}}}
 
 #endif

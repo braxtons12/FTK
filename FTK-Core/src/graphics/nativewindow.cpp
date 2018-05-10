@@ -11,9 +11,7 @@
 
 namespace ftk { namespace core { namespace graphics {
 	
-	Signal<NativeWindow, ui::FtkWindow, std::array<int, 2>, void, std::array<int, 2>>* NativeWindow::m_Signal = 
-	new Signal<NativeWindow, ui::FtkWindow, std::array<int, 2>, void, std::array<int, 2>>();
-	
+	int NativeWindow::m_Signal = 0;
     /**
      * Initialize the Window
      * 
@@ -78,6 +76,7 @@ namespace ftk { namespace core { namespace graphics {
      **/
     NativeWindow::~NativeWindow() {
 
+		disconnect(INT_SIGNAL, m_Signal);
     }
 
     /**

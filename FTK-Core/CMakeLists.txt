@@ -1,11 +1,18 @@
 cmake_minimum_required(VERSION 3.0)
 project(FTK-Core)
-
-set (GCC_COVERAGE_LINKER_FLAGS "-lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl")
-set (GCC_COVERAGE_COMPILE_FLAGS "-g -std=gnu++11 -I../src -I../src/input -I../src/graphics -I../src/graphics/ui -I../src/graphics/renderers -I../src/graphics/renderables -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -I../ext ${GCC_COVERAGE_LINKER_FLAGS}")
-
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
-SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINKER_FLAGS}" )
+set(cxxClang FALSE)
+#set(CMAKE_EXPORT_COMPILE_COMMANDS YES)
+if(cxxClang)
+	set(CMAKE_CXX_COMPILER clang++)
+	set (COVERAGE_LINKER_FLAGS "-lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl")
+	set (COVERAGE_COMPILE_FLAGS "-g -std=c++17 -I../src -I../src/input -I../src/graphics -I../src/graphics/ui -I../src/graphics/renderers -I../src/graphics/renderables -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -I../ext ${COVERAGE_LINKER_FLAGS}")
+else(cxxClang)
+	set(CMAKE_CXX_COMPILER g++)
+	set(COVERAGE_LINKER_FLAGS "-lc -lGL -lGLEW -lglfw -lfreeimage -lfreetype -lftgl")
+	set(COVERAGE_COMPILE_FLAGS "-g -std=gnu++17 -Wno-invalid-offsetof -I../src -I../src/input -I../src/graphics -I../src/graphics/ui -I../src/graphics/renderers -I../src/graphics/renderables -I../src/graphics/buffers -I../src/graphics/layers -I../src/graphics/groups -I../src/mathLibs -I../src/utils -I../src/signals -I/usr/include/freetype2 -I../ext ${COVERAGE_LINKER_FLAGS}")
+endif(cxxClang)
+SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${COVERAGE_COMPILE_FLAGS}" )
+SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${COVERAGE_LINKER_FLAGS}" )
 
 include_directories (include
                     src/
@@ -19,7 +26,8 @@ include_directories (include
                     src/input/
                     src/mathLibs/
                     src/utils/ )
-
+set ( BASE
+	src/base/ftkobject.cpp )
 set ( GRAPHICS
     src/graphics/nativewindow.cpp
     src/graphics/shader.cpp
@@ -57,7 +65,7 @@ set ( MAIN
     src/main.cpp )
 
 set(EXECUTABLE_OUTPUT_PATH bin)
-add_executable ( main ${MAIN} ${GRAPHICS} ${INPUT} ${MATH} ${SIGNALS} ${UTILS} )
+add_executable ( main ${MAIN} ${BASE} ${GRAPHICS} ${INPUT} ${MATH} ${SIGNALS} ${UTILS} )
 
 target_link_libraries( main
                     GL

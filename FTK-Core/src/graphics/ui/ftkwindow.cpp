@@ -20,9 +20,9 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 	void FtkWindow::init() {
 		
 		m_Window = new NativeWindow(m_Name, m_Width, m_Height);
-		m_Signal = m_Window->getSignalServer();
 		
-		m_Signal->connect(m_Window, &NativeWindow::updateSignal, this, &FtkWindow::on_WindowUpdate);
+		m_Window->setSignalIndex(connect(m_Window, (math::vec2 (FTKObject::*)(math::vec2))&NativeWindow::updateSignal, 
+				this, (void (FTKObject::*)(math::vec2))&FtkWindow::on_WindowUpdate));
 		
 		m_Mouse = &input::Mouse::GetInstance();
 		m_Keyboard = &input::Keyboard::GetInstance();
@@ -81,7 +81,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 		if(m_HasMenu) {
 
-			m_Menu->checkHover();
+			m_Menu->update();
 		}
 		
 	}

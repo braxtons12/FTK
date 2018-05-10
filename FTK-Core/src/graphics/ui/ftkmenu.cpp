@@ -17,7 +17,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
         if(m_State == MENU_STATE_OFF) { m_Color = m_ColorOff.getColor(); m_Visible = false; }
         else if (m_State == MENU_STATE_NORMAL) { m_Color = m_ColorNormal.getColor(); m_Visible = true; }
-        else if (m_State == MENU_STATE_HOVER) { m_Visible = true; checkHover(); }
+        else if (m_State == MENU_STATE_HOVER) { m_Visible = true; update(); }
     }
 
     //check if the menu hierarchy is hovered and the mouse is in bounds of the current menu
@@ -26,14 +26,14 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
         m_State = MENU_STATE_HOVER;
         m_Color = m_ColorHover.getColor();
         m_Visible = true;
-        checkClicked();
+		
         for(int i = 0; i < m_NumMenus; ++i) {
 
-            m_SubMenus.at(i)->checkHover();
+            m_SubMenus.at(i)->update();
         }
         for(int i = 0; i < m_NumEntries; ++i) {
 
-            m_Buttons.at(i)->checkHover();
+            m_Buttons.at(i)->update();
         }
     }
 
@@ -52,12 +52,12 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
         for(int i = 0; i < m_NumMenus; ++i) {
 
-            if(m_State == MENU_STATE_HOVER) m_SubMenus.at(i)->checkHover();
+            if(m_State == MENU_STATE_HOVER) m_SubMenus.at(i)->update();
             else m_SubMenus.at(i)->setState(MENU_STATE_OFF);
         }
         for(int i = 0; i < m_NumEntries; ++i) {
 
-            if(m_State == MENU_STATE_HOVER) m_Buttons.at(i)->checkHover();
+            if(m_State == MENU_STATE_HOVER) m_Buttons.at(i)->update();
             else if(m_AlwaysVisible) m_Buttons.at(i)->setState(BUTTON_STATE_NORMAL);
             else m_Buttons.at(i)->setState(BUTTON_STATE_OFF);
         }
@@ -119,17 +119,11 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
                 
     }
 
-    /**
-     * check if the menu has been clicked
-     * 
-     **/
-    void FtkMenu::checkClicked() {
-
-        for(int i = 0; i < m_Buttons.size(); ++i) {
-            if(m_Buttons.at(i)->getState() != BUTTON_STATE_OFF) m_Buttons.at(i)->clicked();
-        }
-    }
-
+    void FtkMenu::update() {
+		
+		checkHover();
+	}
+	
     /**
      * Submit the menu for rendering
      * 

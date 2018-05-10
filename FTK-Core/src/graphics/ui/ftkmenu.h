@@ -1,23 +1,24 @@
 /**
  * UI Menu class
  * Used for creating any kind of traditional dropdown or cascading menu
- * 
+ *
  * Header File
- * 
+ *
  * C 2018 Braxton Salyer
- * 
+ *
  **/
 
 #ifndef _FTK_MENU
 #define _FTK_MENU
 
+#include "base/ftkobject.h"
 #include "input/input.h"
 #include "graphics/color.h"
 #include "graphics/nativewindow.h"
 #include "graphics/ui/ftkbutton.h"
 
 
-namespace ftk { namespace core { namespace graphics { namespace ui { 
+namespace ftk { namespace core { namespace graphics { namespace ui {
 
     //define menu states
     #define MENU_STATE_OFF       0
@@ -28,7 +29,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
     #define MENU_TYPE_HORIZONTAL 0
     #define MENU_TYPE_VERTICAL   1
 
-    class FtkMenu : public Renderable2D {
+    class FtkMenu : public Renderable2D, public FTKObject {
 
         private:
             input::Mouse& m_Mouse = input::Mouse::GetInstance();
@@ -44,9 +45,16 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
             std::vector<FtkButton*> m_Buttons;
             bool m_AlwaysVisible;
             bool m_Visible;
+			int m_EntryClickedSignal;
 
             //set the color based on the current state
             void SetColor();
+
+			/**
+             * check if the menu is currently being hovered by the mouse
+             *
+             **/
+            void checkHover();
 
             //check if the menu hierarchy is hovered and the mouse is in bounds of the current menu
             void CheckHoverInBounds();
@@ -63,11 +71,11 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
         public:
             /**
              * Constructor
-             * 
+             *
              * Huge. :/
-             * takes in position, size, colors for ever state, an initial state, whether it should always be visible, 
+             * takes in position, size, colors for ever state, an initial state, whether it should always be visible,
              * and a parent Window pointer
-             * 
+             *
              **/
             FtkMenu(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
                        int state, int menuType,  bool alwaysVisible, NativeWindow* parentWindow)
@@ -82,13 +90,13 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
             /**
              * Destructor
-             * 
+             *
              **/
             ~FtkMenu() { }
 
             /**
              * Add a not-yet-created subMenu from the given parameters
-             * 
+             *
              **/
             inline void addSubMenu(math::vec3 position, math::vec2 size, int menuType, bool alwaysVisible) {
 
@@ -99,7 +107,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
             /**
              * Add a subMenu
-             * 
+             *
              **/
             inline void addSubMenu(FtkMenu* menu) {
 
@@ -109,7 +117,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
             /**
              * Add a not-yet-created button from the given parameters
-             * 
+             *
              **/
             inline void addButton(math::vec3 position, math::vec2 size) {
 
@@ -118,21 +126,11 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
                 m_NumEntries++;
             }
 
-            /**
-             * check if the menu is currently being hovered by the mouse
-             *
-             **/
-            void checkHover();
-
-            /**
-             * check if the menu has been clicked
-             * 
-             **/
-            void checkClicked();
+			void update();
 
             /**
              * Submit the menu for rendering
-             * 
+             *
              **/
             void submit(Renderer2D* renderer) const override;
 

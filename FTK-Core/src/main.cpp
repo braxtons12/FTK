@@ -53,7 +53,7 @@ int main() {
 	Color colorNormal = Color(math::vec4(0.2f, 0.2f, 0.2f, 1.0f));
 	Color colorHover = Color(math::vec4(0.35f, 0.35f, 0.35f, 1.0f));
 
-	float menuHeight = window->getHeight()/18;	
+	float menuHeight = window->getHeight()/18;
 	float menu1Y = menuHeight;
 	float menu2Y = 2 * menuHeight;
 	float menuWidth = window->getWidth();
@@ -62,22 +62,22 @@ int main() {
 
 	//create menus
 	FtkMenu* mainMenu = new FtkMenu(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(menuWidth, menuHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, true, window->getWindow());
+								  											 MENU_STATE_NORMAL, MENU_TYPE_HORIZONTAL, true, window->getWindow());
 	mainMenu->addButton(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	mainMenu->addButton(math::vec3(buttonWidth, menu1Y, 0.0f), math::vec2(menuWidth - buttonWidth, buttonHeight));
 
 	FtkMenu* vertMenu1 = new FtkMenu(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, 2 * buttonHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_OFF, MENU_TYPE_VERTICAL, false, window->getWindow());
+								  											 MENU_STATE_OFF, MENU_TYPE_VERTICAL, false, window->getWindow());
 	vertMenu1->addButton(math::vec3(0.0f, menu1Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	vertMenu1->addButton(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 
 	FtkMenu* horzMenu1 = new FtkMenu(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(4 * buttonWidth, buttonHeight), colorOff, colorNormal, colorHover,
-								  MENU_STATE_OFF, MENU_TYPE_HORIZONTAL, false, window->getWindow());
+  																			 MENU_STATE_OFF, MENU_TYPE_HORIZONTAL, false, window->getWindow());
 	horzMenu1->addButton(math::vec3(0.0f, menu2Y, 0.0f), math::vec2(buttonWidth, buttonHeight));
 	horzMenu1->addButton(math::vec3(buttonWidth, menu2Y, 0.0f), math::vec2(3 * buttonWidth, buttonHeight));
 
 	vertMenu1->addSubMenu(horzMenu1);
-	
+
 	mainMenu->addSubMenu(vertMenu1);
 
 	//add menu to window
@@ -122,7 +122,7 @@ int main() {
 	shader.setUniform1iv("textures", texIDs, 32);
 
 	while (!window->closed()) {
-		
+
 		/*
 		double x, y;
 		Mouse mouse = input::Mouse::GetInstance();
@@ -140,11 +140,11 @@ int main() {
 			}
 			window->clear();
 			window->beginRender();
-			
+
 			ortho = mat4::orthographic(0.0f, window->getWidth(), 0.0f, window->getHeight(), -1.0f, 1.0f);
 			shader.setUniformMat4("pr_matrix", ortho);
 			window->render();
-			
+
 			updateTime += frameTimer;
 			frames++;
 		//}
@@ -156,7 +156,7 @@ int main() {
 			frames = 0;
 		}
 
-    } 
+    }
 
     return 0;
 }

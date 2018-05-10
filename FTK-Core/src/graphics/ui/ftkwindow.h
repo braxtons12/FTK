@@ -13,7 +13,7 @@
 #define _FTK_WINDOW
 
 //#include "graphics/nativewindow.h"
-#include "signals/signal.h"
+#include "base/ftkobject.h"
 #include "input/input.h"
 #include "mathLibs/mathLib.h"
 #include "graphics/shader.h"
@@ -36,11 +36,10 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 	#define WINDOW_HAS_MENU    1
 	//#define MAX_SHADERS     1000 deprecated with static sprites
 
-	class FtkWindow {
+	class FtkWindow : public FTKObject {
 
 		private:
 			NativeWindow* m_Window;
-			Signal<NativeWindow, FtkWindow, std::array<int, 2>, void, std::array<int, 2>>* m_Signal;
 			const char* m_Name;
 			double m_Width;
 			double m_Height;
@@ -132,10 +131,10 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 			
 			//slot for Window::updateSignal
-			void on_WindowUpdate(std::array<int, 2> sig) {
+			void on_WindowUpdate(math::vec2 sig) {
 				
-				double x = sig[0];
-				double y = sig[1];
+				double x = sig.m_x;
+				double y = sig.m_y;
 				
 				x /= m_Width;
 				y /= m_Height;

@@ -11,7 +11,7 @@
 #define _NATIVE_WINDOW
 
 #include "input/input.h"
-#include "signals/signal.h"
+#include "base/ftkobject.h"
 
 #include <array>
 #include <iostream>
@@ -25,7 +25,7 @@ namespace ftk { namespace core { namespace graphics {
 		class FtkWindow;
 	}
 	
-    class NativeWindow {
+    class NativeWindow : public FTKObject {
 
         private:
             friend struct GLFWwindow;
@@ -34,7 +34,7 @@ namespace ftk { namespace core { namespace graphics {
             GLFWwindow *m_Window;
             bool m_closed;
 
-			static Signal<NativeWindow, ui::FtkWindow, std::array<int, 2>, void, std::array<int, 2>>* m_Signal;
+			static int m_Signal;
 			
             /**
              * Initialize the Window
@@ -113,8 +113,8 @@ namespace ftk { namespace core { namespace graphics {
              **/
 			static void WindowResizeCallBack(GLFWwindow *window, int width, int height) {
 				
-				std::array<int, 2> size = {width, height};
-				(*m_Signal)(size);
+				math::vec2 size = math::vec2(width, height);
+				emitVec2(m_Signal, size);
 				glViewport(0, 0, width, height);
 			}
 
@@ -123,9 +123,8 @@ namespace ftk { namespace core { namespace graphics {
             inline void setWidth(int width) { m_width = width; }
             inline int getHeight() const { return m_height; }
             inline void setHeight(int height) { m_height = height; }
-            inline Signal<NativeWindow, ui::FtkWindow, std::array<int, 2>, void, std::array<int, 2>>* 
-				getSignalServer() { return m_Signal; }
-
+            inline int getSignalIndex() { return m_Signal; }
+			inline void setSignalIndex(int index) { m_Signal = index; }
             /**
              * Make this the current OpenGL context
              * 
@@ -142,7 +141,7 @@ namespace ftk { namespace core { namespace graphics {
 			 * Signal to FtkWindow to update itself
 			 * 
 			 **/
-			std::array<int, 2> updateSignal(std::array<int, 2> sig) {
+			math::vec2 updateSignal(math::vec2 sig) {
 				
 				return sig;
 			}
