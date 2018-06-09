@@ -2,12 +2,12 @@
 
 namespace ftk { namespace core { namespace graphics { namespace ui {
 
-	FtkPanel::FtkPanel(math::vec3 position, math::vec2 size, Sprite background, Color backgroundColor,
+	FtkPanel::FtkPanel(math::vec3 position, math::vec2 size, Color backgroundColor,
 						math::mat4 projectionMatrix, int type, int layoutPosition, FtkViewport* parentViewport,
 						NativeWindow* parentWindow)
-		: Group(projectionMatrix), m_Position(position), m_Size(size), m_Background(background),
-		m_BackgroundColor(backgroundColor), m_Type(type), m_LayoutPosition(layoutPosition),
-		m_ParentViewport(parentViewport), m_ParentWindow(parentWindow),
+		: FtkGroup(position, size, backgroundColor.getColor(), projectionMatrix), m_Type(type),
+		m_LayoutPosition(layoutPosition), m_ParentViewport(parentViewport),
+		m_ParentWindow(parentWindow),
 		m_DragHandle(FtkButton(math::vec3(0.0f, 0.0f, 0.0f), math::vec2(0.0f, 0.0f),
 									   backgroundColor, backgroundColor, backgroundColor,
 									   BUTTON_STATE_OFF, m_ParentWindow))
@@ -46,6 +46,34 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 	FtkPanel::~FtkPanel() {
 
 		disconnect(FA6_SIGNAL, m_ViewportSizeSignal);
+	}
+
+	bool FtkPanel::checkBounds(FtkObject* renderable) {
+
+		return checkBounds((Renderable2D*)renderable);
+	}
+
+	bool FtkPanel::checkBounds(Renderable2D* renderable) {
+
+		if(renderable->getPosition().m_x < m_Position.m_x) return false;
+		else if(renderable->getPosition().m_y < m_Position.m_y) return false;
+		else if(renderable->getPosition().m_x + renderable->getSize().m_x < m_Position.m_x + m_Size.m_x) return false;
+		else if(renderable->getPosition().m_y + renderable->getSize().m_y < m_Position.m_y + m_Size.m_y) return false;
+		return true;
+	}
+
+	void FtkPanel::submit(Renderer2D* renderer) const {
+
+		renderer->push(getTransform());
+		for (const Renderable2D* renderable : getRenderables()) {
+
+			renderable->submit(renderer);
+		}
+		for(const FtkObject* element : getElements()) {
+			if(element->isEnabled()) element->submit(renderer);
+		}
+
+		renderer->pop();
 	}
 
 	/****************************

@@ -1,19 +1,18 @@
 #ifndef _FTK_VIEWPORT
 #define _FTK_VIEWPORT
 
-#include "base/ftkobject.h"
 #include "mathLibs/mathLib.h"
 #include "signals/signal.h"
 #include "graphics/color.h"
 #include "graphics/renderables/sprite.h"
-#include "graphics/groups/group.h"
+#include "graphics/ui/ftkgroup.h"
 #include "graphics/ui/ftkpanel.h"
 
 #include <array>
 
 namespace ftk { namespace core { namespace graphics { namespace ui {
 
-    class FtkViewport : public Group, public FtkObject {
+    class FtkViewport : public FtkGroup {
 
         private:
             //position and size for outer bound of viewport including inner panels
@@ -58,18 +57,20 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
             int m_BottomInnerPanelPositionSignal;
             int m_BottomOuterPanelPositionSignal;
 
-            bool checkBounds(Renderable2D* renderable);
             void submitPanels(Renderer2D* renderer);
             void scalePanels(math::vec2 scale);
 
         public:
-            FtkViewport(math::vec3 position, math::vec2 size, Color backgroundColor);
+            FtkViewport(math::vec3 position, math::vec2 size, Color backgroundColor, const math::mat4& transformationMatrix);
             ~FtkViewport();
 
             void addPanel(bool panelType, int panelPosition, FtkPanel* panel);
             void hidePanel(bool panelType, int panelPosition);
             void showPanel(bool panelType, int panelPosition);
             void removePanel(bool panelType, int panelPosition);
+
+			virtual bool checkBounds(FtkObject* renderable) override;
+			virtual bool checkBounds(Renderable2D* renderable) override;
 
             void update();
             void scale(math::vec2 scale) override;

@@ -22,7 +22,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
     #define BUTTON_STATE_NORMAL 1
     #define BUTTON_STATE_HOVER  2
 
-    class FtkButton : public Renderable2D, public FtkObject {
+    class FtkButton : public FtkObject {
 
         protected:
             input::Mouse& m_Mouse = input::Mouse::GetInstance();
@@ -108,7 +108,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
              **/
             FtkButton(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover,
                          int state, NativeWindow* parentWindow)
-                : Renderable2D(math::vec3(position.m_x, parentWindow->getHeight() - position.m_y, position.m_z), size,
+                : FtkObject(math::vec3(position.m_x, parentWindow->getHeight() - position.m_y, position.m_z), size,
                 colorOff.getColor()), m_State(state), m_ColorOff(colorOff), m_ColorNormal(colorNormal),
                 m_ColorHover(colorHover), m_ParentWindow(parentWindow)
             {
@@ -144,6 +144,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 			inline void setClickedSignalIndex(int index) { m_ClickedSignal = index; }
 			inline void setHoverSignalIndex(int index) { m_HoverSignal = index; }
 
+			inline void setParent(FtkObject* parent) { m_Parent = parent; }
+
             //get the current color
             inline math::vec4 getColor() { return m_Color; }
 			inline NativeWindow* const getNativeWindow() const { return m_ParentWindow; }
@@ -162,10 +164,27 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 			virtual void update() {
 
-				if(checkHover()) {
-					emitBool(m_HoverSignal, true);
-					if(clicked()) emitBool(m_ClickedSignal, true);
+				if(m_Parent) m_Enabled = m_Parent->checkBounds(this);
+				if(m_Enabled) {
+					if(checkHover()) {
+						emitBool(m_HoverSignal, true);
+						if(clicked()) emitBool(m_ClickedSignal, true);
+					}
 				}
+			}
+
+			virtual bool checkBounds(FtkObject* renderable) override {
+
+				return checkBounds((Renderable2D*)renderable);
+			}
+
+			virtual bool checkBounds(Renderable2D* renderable) override {
+
+				if(renderable->getPosition().m_x < m_Position.m_x) return false;
+				else if(renderable->getPosition().m_y < m_Position.m_y) return false;
+				else if(renderable->getPosition().m_x + renderable->getSize().m_x < m_Position.m_x + m_Size.m_x) return false;
+				else if(renderable->getPosition().m_y + renderable->getSize().m_y < m_Position.m_y + m_Size.m_y) return false;
+				return true;
 			}
     };
 }}}}

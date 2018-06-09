@@ -1,13 +1,12 @@
 #ifndef _FTK_PANEL
 #define _FTK_PANEL
 
-#include "base/ftkobject.h"
 #include "mathLibs/mathLib.h"
 #include "signals/signal.h"
 #include "graphics/color.h"
 #include "graphics/nativewindow.h"
-#include "graphics/groups/group.h"
 #include "graphics/renderables/sprite.h"
+#include "graphics/ui/ftkgroup.h"
 #include "graphics/ui/ftkbutton.h"
 
 #include <array>
@@ -24,11 +23,9 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 	class FtkViewport;
 
-    class FtkPanel : public Group, public FtkObject {
+    class FtkPanel : public FtkGroup {
 
         private:
-            math::vec3 m_Position;
-            math::vec2 m_Size;
             math::vec2 m_ShownSize;
 
 			int m_Type;
@@ -40,15 +37,9 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
             FtkButton m_DragHandle;
 
-            Sprite m_Background;
-            Color m_BackgroundColor;
-
-            void checkBounds(Renderable2D* renderable);
-
         public:
-            FtkPanel(math::vec3 position, math::vec2 size, Sprite background, Color backgroundColor,
-						math::mat4 projectionMatrix, int type, int layoutPosition, FtkViewport* parentViewport,
-						NativeWindow* parentWindow);
+            FtkPanel(math::vec3 position, math::vec2 size, Color backgroundColor, math::mat4 projectionMatrix,
+							  int type, int layoutPosition, FtkViewport* parentViewport, NativeWindow* parentWindow);
             ~FtkPanel();
 
             void update();
@@ -63,6 +54,9 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
             inline NativeWindow* const getNativeWindow() const { return m_ParentWindow; }
             inline FtkViewport* const getParentViewport() const { return m_ParentViewport; }
 			inline void setUpdateViewportSizeSignalIndex(int index) { m_ViewportSizeSignal = index; }
+
+			virtual bool checkBounds(FtkObject* renderable) override;
+			virtual bool checkBounds(Renderable2D* renderable) override;
 
 			//signals
 			std::array<float, 6> updateViewportSize(std::array<float, 6> sig) {

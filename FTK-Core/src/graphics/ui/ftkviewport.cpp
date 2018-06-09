@@ -2,9 +2,14 @@
 
 namespace ftk { namespace core { namespace graphics { namespace ui {
 
-    bool FtkViewport::checkBounds(Renderable2D* renderable) {
+    bool FtkViewport::checkBounds(FtkObject* renderable) {
 
-        math::vec3 position = renderable->getPosition();
+        return checkBounds((Renderable2D*)renderable);
+    }
+
+	bool FtkViewport::checkBounds(Renderable2D* renderable) {
+
+		math::vec3 position = renderable->getPosition();
         math::vec2 size = renderable->getSize();
 
         if(position.m_x > (m_InnerPosition.m_x + m_InnerSize.m_x)) return false;
@@ -16,7 +21,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
         else if((position.m_y + size.m_y) < m_OuterPosition.m_y) return false;
         else if((position.m_y + size.m_y) < m_InnerPosition.m_y) return false;
         else return true;
-    }
+	}
 
     void FtkViewport::submitPanels(Renderer2D* renderer) {
 
@@ -30,8 +35,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
         if(m_BottomOuterPanel) m_BottomOuterPanel->submit(renderer);
     }
 
-    FtkViewport::FtkViewport(math::vec3 position, math::vec2 size, Color backgroundColor)
-        : Group(math::mat4::identity()), m_OuterPosition(position), m_OuterSize(size), m_BackgroundColor(backgroundColor),
+    FtkViewport::FtkViewport(math::vec3 position, math::vec2 size, Color backgroundColor, const math::mat4& transformationMatrix)
+        : FtkGroup(position, size, backgroundColor.getColor(), transformationMatrix), m_OuterPosition(position), m_OuterSize(size), m_BackgroundColor(backgroundColor),
         m_InnerPosition(m_OuterPosition), m_InnerSize(m_OuterSize)
     {
         m_Position = m_OuterPosition;
@@ -294,7 +299,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
                 case TOP_PANEL:
                     size = m_TopOuterPanel->getShownSize();
-					position = math::vec2(m_TopInnerPanel->getPosition().m_x, m_TopInnerPanel->getPosition().m_y - m_TopOuterPanel->getShownSize().m_y);
+					position = math::vec2(m_TopInnerPanel->getPosition().m_x, m_TopInnerPanel->getPosition().m_y -
+																																		m_TopOuterPanel->getShownSize().m_y);
                     m_InnerSize.m_y -= size.m_y;
                     m_OuterSize.m_y -= size.m_y;
 					emitVec2(m_TopOuterPanelSizeSignal, size);
@@ -303,7 +309,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
                 case RIGHT_PANEL:
                     size = m_RightOuterPanel->getShownSize();
-					position = math::vec2(m_RightInnerPanel->getPosition().m_x - m_RightOuterPanel->getShownSize().m_x, m_RightInnerPanel->getPosition().m_y);
+					position = math::vec2(m_RightInnerPanel->getPosition().m_x - m_RightOuterPanel->getShownSize().m_x,
+															  m_RightInnerPanel->getPosition().m_y);
                     m_InnerSize.m_x -= size.m_x;
                     m_OuterSize.m_x -= size.m_x;
 					emitVec2(m_RightOuterPanelSizeSignal, size);
@@ -312,7 +319,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
                 case BOTTOM_PANEL:
                     size = m_BottomOuterPanel->getShownSize();
-					position = math::vec2(m_BottomInnerPanel->getPosition().m_x, m_BottomInnerPanel->getPosition().m_y - m_BottomOuterPanel->getShownSize().m_y);
+					position = math::vec2(m_BottomInnerPanel->getPosition().m_x, m_BottomInnerPanel->getPosition().m_y -
+																																				m_BottomOuterPanel->getShownSize().m_y);
                     m_InnerSize.m_y -= size.m_y;
                     m_InnerPosition.m_y += size.m_y;
                     m_OuterSize.m_y -= size.m_y;
@@ -323,7 +331,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
                 case LEFT_PANEL:
                     size = m_LeftOuterPanel->getShownSize();
-					position = math::vec2(m_LeftInnerPanel->getPosition().m_x - m_LeftOuterPanel->getShownSize().m_x, m_LeftInnerPanel->getPosition().m_y);
+					position = math::vec2(m_LeftInnerPanel->getPosition().m_x - m_LeftOuterPanel->getShownSize().m_x,
+															  m_LeftInnerPanel->getPosition().m_y);
                     m_InnerSize.m_x -= size.m_x;
                     m_InnerPosition.m_x += size.m_x;
                     m_OuterSize.m_x -= size.m_x;
@@ -418,6 +427,20 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
         if(m_BottomOuterPanel) m_BottomOuterPanel->update();
         if(m_LeftOuterPanel) m_LeftOuterPanel->update();
     }
+
+	void FtkPanel::submit(Renderer2D* renderer) const {
+
+		renderer->push(getTransform());
+		for (const Renderable2D* renderable : getRenderables()) {
+
+			renderable->submit(renderer);
+		}
+		for(const FtkObject* element : getElements()) {
+			if(element->isEnabled()) element->submit(renderer);
+		}
+
+		renderer->pop();
+	}
 
     void FtkViewport::scale(math::vec2 scale) {
 

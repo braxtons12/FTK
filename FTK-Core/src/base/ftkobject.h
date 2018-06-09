@@ -1,6 +1,7 @@
 /*
  * Macro class for all Ftk UI elements
  * Provides signal/slot macro functionality similar to Qt
+ * Also provides bounds checking to allow easy enable/disablement of child UI elements.
  *
  * Header File
  *
@@ -13,10 +14,11 @@
 
 #include "mathLibs/mathLib.h"
 #include "signals/signal.h"
+#include "graphics/renderables/renderable2D.h"
 #include <vector>
 #include <array>
 
-namespace ftk { namespace core {
+namespace ftk { namespace core { namespace graphics {
 
 	//signal types
 	#define BOOL_SIGNAL   0
@@ -69,9 +71,20 @@ namespace ftk { namespace core {
 			(*m_SignalsFA6.at(index))(signal); \
 		}
 
-	class FtkObject {
+	class FtkObject : public Renderable2D {
+
+	protected:
+			FtkObject* m_Parent;
+			bool m_Enabled;
 
 		public:
+			FtkObject(math::vec3 position, math::vec2 size, math::vec4 color)
+				: Renderable2D(position, size, color), m_Parent(nullptr), m_Enabled(true)
+			{
+
+			}
+
+			//static vectors storing all of the signal relationships in the UI
 			static std::vector<Signal<FtkObject, FtkObject, bool, void, bool>*> m_SignalsBool;
 			static std::vector<Signal<FtkObject, FtkObject, int, void, int>*> m_SignalsInt;
 			static std::vector<Signal<FtkObject, FtkObject, float, void, float>*> m_SignalsFloat;
@@ -81,6 +94,7 @@ namespace ftk { namespace core {
 			static std::vector<Signal<FtkObject, FtkObject, std::array<float, 5>, void, std::array<float, 5>>*> m_SignalsFA5;
 			static std::vector<Signal<FtkObject, FtkObject, std::array<float, 6>, void, std::array<float, 6>>*> m_SignalsFA6;
 
+			//functions to connect the senders' singals to the recievers' slots
 			int connect(FtkObject* sender, bool (FtkObject::*signal)(bool), FtkObject* receiver,
 						void (FtkObject::*slot)(bool));
 
@@ -105,7 +119,14 @@ namespace ftk { namespace core {
 			int connect(FtkObject* sender, std::array<float, 6> (FtkObject::*signal)(std::array<float, 6>), FtkObject* receiver,
 						void (FtkObject::*slot)(std::array<float, 6>));
 
+			//disconnect the indicated signal relationship
 			void disconnect(int type, int index);
+
+			virtual bool checkBounds(FtkObject* renderable) = 0;
+			virtual bool checkBounds(Renderable2D* renderable) = 0;
+
+			inline void setParent(FtkObject* parent) { m_Parent = parent; }
+			inline bool isEnabled() const { return m_Enabled; }
 	};
-}}
+}}}
 #endif
