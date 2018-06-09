@@ -13,7 +13,7 @@
 
 namespace ftk { namespace core { namespace graphics { namespace ui {
 
-    class FtkViewport : public Group, public FTKObject {
+    class FtkViewport : public Group, public FtkObject {
 
         private:
             //position and size for outer bound of viewport including inner panels

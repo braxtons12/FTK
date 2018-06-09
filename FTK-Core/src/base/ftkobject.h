@@ -1,5 +1,5 @@
 /*
- * Macro class for all FTK UI elements
+ * Macro class for all Ftk UI elements
  * Provides signal/slot macro functionality similar to Qt
  *
  * Header File
@@ -69,41 +69,41 @@ namespace ftk { namespace core {
 			(*m_SignalsFA6.at(index))(signal); \
 		}
 
-	class FTKObject {
+	class FtkObject {
 
 		public:
-			static std::vector<Signal<FTKObject, FTKObject, bool, void, bool>*> m_SignalsBool;
-			static std::vector<Signal<FTKObject, FTKObject, int, void, int>*> m_SignalsInt;
-			static std::vector<Signal<FTKObject, FTKObject, float, void, float>*> m_SignalsFloat;
-			static std::vector<Signal<FTKObject, FTKObject, math::vec2, void, math::vec2>*> m_SignalsVec2;
-			static std::vector<Signal<FTKObject, FTKObject, math::vec3, void, math::vec3>*> m_SignalsVec3;
-			static std::vector<Signal<FTKObject, FTKObject, math::vec4, void, math::vec4>*> m_SignalsVec4;
-			static std::vector<Signal<FTKObject, FTKObject, std::array<float, 5>, void, std::array<float, 5>>*> m_SignalsFA5;
-			static std::vector<Signal<FTKObject, FTKObject, std::array<float, 6>, void, std::array<float, 6>>*> m_SignalsFA6;
+			static std::vector<Signal<FtkObject, FtkObject, bool, void, bool>*> m_SignalsBool;
+			static std::vector<Signal<FtkObject, FtkObject, int, void, int>*> m_SignalsInt;
+			static std::vector<Signal<FtkObject, FtkObject, float, void, float>*> m_SignalsFloat;
+			static std::vector<Signal<FtkObject, FtkObject, math::vec2, void, math::vec2>*> m_SignalsVec2;
+			static std::vector<Signal<FtkObject, FtkObject, math::vec3, void, math::vec3>*> m_SignalsVec3;
+			static std::vector<Signal<FtkObject, FtkObject, math::vec4, void, math::vec4>*> m_SignalsVec4;
+			static std::vector<Signal<FtkObject, FtkObject, std::array<float, 5>, void, std::array<float, 5>>*> m_SignalsFA5;
+			static std::vector<Signal<FtkObject, FtkObject, std::array<float, 6>, void, std::array<float, 6>>*> m_SignalsFA6;
 
-			int connect(FTKObject* sender, bool (FTKObject::*signal)(bool), FTKObject* receiver,
-						void (FTKObject::*slot)(bool));
+			int connect(FtkObject* sender, bool (FtkObject::*signal)(bool), FtkObject* receiver,
+						void (FtkObject::*slot)(bool));
 
-			int connect(FTKObject* sender, int (FTKObject::*signal)(int), FTKObject* receiver,
-						void (FTKObject::*slot)(int));
+			int connect(FtkObject* sender, int (FtkObject::*signal)(int), FtkObject* receiver,
+						void (FtkObject::*slot)(int));
 
-			int connect(FTKObject* sender, float (FTKObject::*signal)(float), FTKObject* receiver,
-						void (FTKObject::*slot)(float));
+			int connect(FtkObject* sender, float (FtkObject::*signal)(float), FtkObject* receiver,
+						void (FtkObject::*slot)(float));
 
-			int connect(FTKObject* sender, math::vec2 (FTKObject::*signal)(math::vec2), FTKObject* receiver,
-						void (FTKObject::*slot)(math::vec2));
+			int connect(FtkObject* sender, math::vec2 (FtkObject::*signal)(math::vec2), FtkObject* receiver,
+						void (FtkObject::*slot)(math::vec2));
 
-			int connect(FTKObject* sender, math::vec3 (FTKObject::*signal)(math::vec3), FTKObject* receiver,
-						void (FTKObject::*slot)(math::vec3));
+			int connect(FtkObject* sender, math::vec3 (FtkObject::*signal)(math::vec3), FtkObject* receiver,
+						void (FtkObject::*slot)(math::vec3));
 
-			int connect(FTKObject* sender, math::vec4 (FTKObject::*signal)(math::vec4), FTKObject* receiver,
-						void (FTKObject::*slot)(math::vec4));
+			int connect(FtkObject* sender, math::vec4 (FtkObject::*signal)(math::vec4), FtkObject* receiver,
+						void (FtkObject::*slot)(math::vec4));
 
-			int connect(FTKObject* sender, std::array<float, 5> (FTKObject::*signal)(std::array<float, 5>), FTKObject* receiver,
-						void (FTKObject::*slot)(std::array<float, 5>));
+			int connect(FtkObject* sender, std::array<float, 5> (FtkObject::*signal)(std::array<float, 5>), FtkObject* receiver,
+						void (FtkObject::*slot)(std::array<float, 5>));
 
-			int connect(FTKObject* sender, std::array<float, 6> (FTKObject::*signal)(std::array<float, 6>), FTKObject* receiver,
-						void (FTKObject::*slot)(std::array<float, 6>));
+			int connect(FtkObject* sender, std::array<float, 6> (FtkObject::*signal)(std::array<float, 6>), FtkObject* receiver,
+						void (FtkObject::*slot)(std::array<float, 6>));
 
 			void disconnect(int type, int index);
 	};

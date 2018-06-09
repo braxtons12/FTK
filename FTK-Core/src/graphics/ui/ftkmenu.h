@@ -29,7 +29,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
     #define MENU_TYPE_HORIZONTAL 0
     #define MENU_TYPE_VERTICAL   1
 
-    class FtkMenu : public Renderable2D, public FTKObject {
+    class FtkMenu : public Renderable2D, public FtkObject {
 
         private:
             input::Mouse& m_Mouse = input::Mouse::GetInstance();
@@ -139,6 +139,11 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
             inline void setVisible(bool visibile) { m_Visible = visibile; }
             inline bool getVisible() { return m_Visible; }
             inline math::vec4 getColor() { return m_Color; }
+
+			FtkMenu* submenuAt(int index);
+			FtkMenu* submenuAt(std::vector<int> indices);
+			FtkButton* entryAt(int index);
+			FtkButton* entryAt(std::vector<int> indices);
     };
 }}}}
 

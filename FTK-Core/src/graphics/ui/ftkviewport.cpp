@@ -48,52 +48,52 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
                 case TOP_PANEL:
                     m_TopInnerPanel = panel;
-                    m_TopInnerPanelSizeSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelSize,
-																							   m_TopInnerPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
-                    m_TopInnerPanelPositionSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
-																									   m_TopInnerPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
+                    m_TopInnerPanelSizeSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelSize,
+																							   m_TopInnerPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
+                    m_TopInnerPanelPositionSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
+																									   m_TopInnerPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
                     m_InnerSize.m_y -= m_TopInnerPanel->getSize().m_y;
 					m_TopInnerPanel->setUpdateViewportSizeSignalIndex(connect(m_TopInnerPanel,
-															(std::array<float, 6> (FTKObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
-															this, (void (FTKObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
+															(std::array<float, 6> (FtkObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
+															this, (void (FtkObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
                     break;
 
                 case RIGHT_PANEL:
                     m_RightInnerPanel = panel;
-                    m_RightInnerPanelSizeSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelSize,
-																								   m_RightInnerPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
-                    m_RightInnerPanelPositionSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
-																									   	 m_RightInnerPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
+                    m_RightInnerPanelSizeSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelSize,
+																								   m_RightInnerPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
+                    m_RightInnerPanelPositionSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
+																									   	 m_RightInnerPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
                     m_InnerSize.m_x -= m_RightInnerPanel->getSize().m_x;
 					m_RightInnerPanel->setUpdateViewportSizeSignalIndex(connect(m_RightInnerPanel,
-															(std::array<float, 6> (FTKObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
-															this, (void (FTKObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
+															(std::array<float, 6> (FtkObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
+															this, (void (FtkObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
                     break;
 
                 case BOTTOM_PANEL:
                     m_BottomInnerPanel = panel;
-                    m_BottomInnerPanelSizeSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelSize,
-																								   	  m_BottomInnerPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
-                    m_BottomInnerPanelPositionSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
-																									   	 	  m_BottomInnerPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
+                    m_BottomInnerPanelSizeSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelSize,
+																								   	  m_BottomInnerPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
+                    m_BottomInnerPanelPositionSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
+																									   	 	  m_BottomInnerPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
                     m_InnerSize.m_y -= m_BottomInnerPanel->getSize().m_y;
                     m_InnerPosition.m_y += m_BottomInnerPanel->getSize().m_y;
 					m_BottomInnerPanel->setUpdateViewportSizeSignalIndex(connect(m_BottomInnerPanel,
-															(std::array<float, 6> (FTKObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
-															this, (void (FTKObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
+															(std::array<float, 6> (FtkObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
+															this, (void (FtkObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
                     break;
 
                 case LEFT_PANEL:
                     m_LeftInnerPanel = panel;
-                    m_LeftInnerPanelSizeSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelSize,
-																								m_LeftInnerPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
-                    m_LeftInnerPanelPositionSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
-																									   m_LeftInnerPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
+                    m_LeftInnerPanelSizeSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelSize,
+																								m_LeftInnerPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
+                    m_LeftInnerPanelPositionSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
+																									   m_LeftInnerPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
                     m_InnerSize.m_x -= m_LeftInnerPanel->getSize().m_x;
                     m_InnerPosition.m_x += m_LeftInnerPanel->getSize().m_x;
 					m_LeftInnerPanel->setUpdateViewportSizeSignalIndex(connect(m_LeftInnerPanel,
-															(std::array<float, 6> (FTKObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
-															this, (void (FTKObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
+															(std::array<float, 6> (FtkObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
+															this, (void (FtkObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
                     break;
             }
         } else {
@@ -101,10 +101,10 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
                 case TOP_PANEL:
                     m_TopOuterPanel = panel;
-                    m_TopOuterPanelSizeSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelSize,
-																								m_TopOuterPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
-                    m_TopOuterPanelPositionSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
-																									    m_TopOuterPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
+                    m_TopOuterPanelSizeSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelSize,
+																								m_TopOuterPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
+                    m_TopOuterPanelPositionSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
+																									    m_TopOuterPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
                     m_InnerSize.m_y -= m_TopOuterPanel->getSize().m_y;
                     m_OuterSize.m_y -= m_TopOuterPanel->getSize().m_y;
                     if(m_TopInnerPanel) {
@@ -112,16 +112,16 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 						emitVec2(m_TopInnerPanelPositionSignal, position);
 					}
 					m_TopOuterPanel->setUpdateViewportSizeSignalIndex(connect(m_TopOuterPanel,
-															(std::array<float, 6> (FTKObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
-															this, (void (FTKObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
+															(std::array<float, 6> (FtkObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
+															this, (void (FtkObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
                     break;
 
                 case RIGHT_PANEL:
                     m_RightOuterPanel = panel;
-                    m_RightOuterPanelSizeSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelSize,
-																									m_RightOuterPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
-                    m_RightOuterPanelPositionSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
-																									       m_RightOuterPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
+                    m_RightOuterPanelSizeSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelSize,
+																									m_RightOuterPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
+                    m_RightOuterPanelPositionSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
+																									       m_RightOuterPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
                     m_InnerSize.m_x -= m_RightOuterPanel->getSize().m_x;
                     m_OuterSize.m_x -= m_RightOuterPanel->getSize().m_x;
                     if(m_RightInnerPanel) {
@@ -129,16 +129,16 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 						emitVec2(m_RightInnerPanelPositionSignal, position);
 					}
 					m_RightOuterPanel->setUpdateViewportSizeSignalIndex(connect(m_RightOuterPanel,
-															(std::array<float, 6> (FTKObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
-															this, (void (FTKObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
+															(std::array<float, 6> (FtkObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
+															this, (void (FtkObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
                     break;
 
                 case BOTTOM_PANEL:
                     m_BottomOuterPanel = panel;
-                    m_BottomOuterPanelSizeSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelSize,
-																										m_BottomOuterPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
-                    m_BottomOuterPanelPositionSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
-																									    	   m_BottomOuterPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
+                    m_BottomOuterPanelSizeSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelSize,
+																										m_BottomOuterPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
+                    m_BottomOuterPanelPositionSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
+																									    	   m_BottomOuterPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
                     m_InnerSize.m_y -= m_BottomOuterPanel->getSize().m_y;
                     m_InnerPosition.m_y += m_BottomOuterPanel->getSize().m_y;
                     m_OuterSize.m_y -= m_BottomOuterPanel->getSize().m_y;
@@ -148,16 +148,16 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 						emitVec2(m_BottomInnerPanelPositionSignal, position);
 					}
 					m_BottomOuterPanel->setUpdateViewportSizeSignalIndex(connect(m_BottomOuterPanel,
-															(std::array<float, 6> (FTKObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
-															this, (void (FTKObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
+															(std::array<float, 6> (FtkObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
+															this, (void (FtkObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
                     break;
 
                 case LEFT_PANEL:
                     m_LeftOuterPanel = panel;
-                    m_LeftOuterPanelSizeSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelSize,
-																								 m_LeftOuterPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
-                    m_LeftOuterPanelPositionSignal = connect(this, (math::vec2 (FTKObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
-																									    m_LeftOuterPanel, (void (FTKObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
+                    m_LeftOuterPanelSizeSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelSize,
+																								 m_LeftOuterPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_SizeChanged);
+                    m_LeftOuterPanelPositionSignal = connect(this, (math::vec2 (FtkObject::*)(math::vec2))&FtkViewport::updatePanelPosition,
+																									    m_LeftOuterPanel, (void (FtkObject::*)(math::vec2))&FtkPanel::on_PositionChanged);
                     m_InnerSize.m_x -= m_LeftOuterPanel->getSize().m_x;
                     m_InnerPosition.m_x += m_LeftOuterPanel->getSize().m_x;
                     m_OuterSize.m_x -= m_LeftOuterPanel->getSize().m_x;
@@ -167,8 +167,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 						emitVec2(m_LeftInnerPanelPositionSignal, position);
 					}
 					m_LeftOuterPanel->setUpdateViewportSizeSignalIndex(connect(m_LeftOuterPanel,
-															(std::array<float, 6> (FTKObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
-															this, (void (FTKObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
+															(std::array<float, 6> (FtkObject::*)(std::array<float, 6>))&FtkPanel::updateViewportSize,
+															this, (void (FtkObject::*)(std::array<float, 6>))&FtkViewport::on_ViewportPanelResized));
                     break;
             }
         }

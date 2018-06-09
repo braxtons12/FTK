@@ -1,9 +1,9 @@
 /**
  * Base Window class
  * Maintains an OpenGL context through GLFW and glew
- * 
+ *
  * Header File
- * 
+ *
  * C 2018 Braxton Salyer
  **/
 
@@ -19,13 +19,13 @@
 #include <GLFW/glfw3.h>
 
 namespace ftk { namespace core { namespace graphics {
-	
+
 	namespace ui {
-		
+
 		class FtkWindow;
 	}
-	
-    class NativeWindow : public FTKObject {
+
+    class NativeWindow : public FtkObject {
 
         private:
             friend struct GLFWwindow;
@@ -35,10 +35,10 @@ namespace ftk { namespace core { namespace graphics {
             bool m_closed;
 
 			static int m_Signal;
-			
+
             /**
              * Initialize the Window
-             * 
+             *
              **/
             bool init();
 
@@ -48,37 +48,37 @@ namespace ftk { namespace core { namespace graphics {
 
             /**
              * Constructor
-             * 
+             *
              **/
             NativeWindow(const char *name, int width, int height);
 
             /**
              * Destructor
-             * 
+             *
              **/
             ~NativeWindow();
 
             /**
              * Clear the Window in OpenGL
-             * 
+             *
              **/
             inline void clear() const { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
             /**
              * Update the Window State
-             * 
+             *
              **/
             void update();
 
             /**
              * Check if the Window should close
-             * 
+             *
              **/
             inline bool closed() const { return glfwWindowShouldClose(m_Window); }
 
             /**
              * GLFW key Callback
-             * 
+             *
              **/
 			static void keyCallback(GLFWwindow *window, int key, int scanCode, int action, int mods) {
 
@@ -88,7 +88,7 @@ namespace ftk { namespace core { namespace graphics {
 
             /**
              * GLFW mouse button Callback
-             * 
+             *
              **/
 			static void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 
@@ -97,7 +97,7 @@ namespace ftk { namespace core { namespace graphics {
 
             /**
              * GLFW mouse position Callback
-             * 
+             *
              **/
 			static void mousePositionCallback(GLFWwindow *window, double x, double y) {
 
@@ -109,10 +109,10 @@ namespace ftk { namespace core { namespace graphics {
 
             /**
              * GLFW window resized Callback
-             * 
+             *
              **/
 			static void WindowResizeCallBack(GLFWwindow *window, int width, int height) {
-				
+
 				math::vec2 size = math::vec2(width, height);
 				emitVec2(m_Signal, size);
 				glViewport(0, 0, width, height);
@@ -127,26 +127,26 @@ namespace ftk { namespace core { namespace graphics {
 			inline void setSignalIndex(int index) { m_Signal = index; }
             /**
              * Make this the current OpenGL context
-             * 
+             *
              **/
             inline void makeContextCurrent() { glfwMakeContextCurrent(m_Window); }
 
             /**
              * Convert mouse coordinates to framebuffer coordinates
-             * 
+             *
              **/
             void convertCoords(double& x, double& y);
-			
+
 			/**
 			 * Signal to FtkWindow to update itself
-			 * 
+			 *
 			 **/
 			math::vec2 updateSignal(math::vec2 sig) {
-				
+
 				return sig;
 			}
-			
-			
+
+
     };
 }}}
 

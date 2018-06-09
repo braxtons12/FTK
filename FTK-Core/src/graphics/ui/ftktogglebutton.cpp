@@ -1,20 +1,20 @@
 /**
  * UI ToggleButton class
  * Enhances the base button class by adding toggle functionality
- * 
+ *
  * Implementation File
- * 
+ *
  * C 2018 Braxton Salyer
- * 
+ *
  **/
 
 #include "ftktogglebutton.h"
 
 namespace ftk { namespace core { namespace graphics { namespace ui {
-   
+
     /**
      * Set the color based on the current state
-     * 
+     *
      **/
     void FtkToggleButton::SetColor() {
 
@@ -27,17 +27,17 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
     /**
      * Checks if the button has been clicked.
      * Updates the state accordingly
-     * 
+     *
      **/
     bool FtkToggleButton::clicked() {
-                
+
         double x, y;
         m_Mouse.getMousePosition(x, y);
         y = m_ParentWindow->getHeight() - y;
         m_ParentWindow->convertCoords(x, y);
 
         if (m_Mouse.Pressed(0) && (x >= m_Position.m_x && x <= (m_Position.m_x + m_Size.m_x)) &&
-            (y >= m_Position.m_y && y<= (m_Position.m_y + m_Size.m_y))) 
+            (y >= m_Position.m_y && y<= (m_Position.m_y + m_Size.m_y)))
         {
 
             if(m_State == BUTTON_STATE_ON) m_State = BUTTON_STATE_OFF;
@@ -52,7 +52,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
     /**
      * Checks if the mouse if hovering over the button
      * Updates the state accordingly
-     * 
+     *
      **/
     bool FtkToggleButton::checkHover() {
 

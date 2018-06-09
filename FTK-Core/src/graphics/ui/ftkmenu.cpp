@@ -1,11 +1,11 @@
 /**
  * UI Menu class
  * Used for creating any kind of traditional dropdown or cascading menu
- * 
+ *
  * Implementation File
- * 
+ *
  * C 2018 Braxton Salyer
- * 
+ *
  **/
 
 #include "ftkmenu.h"
@@ -26,7 +26,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
         m_State = MENU_STATE_HOVER;
         m_Color = m_ColorHover.getColor();
         m_Visible = true;
-		
+
         for(int i = 0; i < m_NumMenus; ++i) {
 
             m_SubMenus.at(i)->update();
@@ -45,7 +45,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
             temp = m_SubMenus.at(i)->getVisible();
         }
-                
+
         if(temp) { m_State = MENU_STATE_HOVER; m_Visible = true; }
         else if(m_AlwaysVisible) setState(MENU_STATE_NORMAL);
         else { setState(MENU_STATE_OFF);}
@@ -81,8 +81,8 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
             CheckHoverOutOfBounds();
         }
-    } 
-    
+    }
+
     //check if the menu hierarchy is hovered and the menu is a horizontal menu
     void FtkMenu::CheckHoverHorizontal(double x, double y) {
 
@@ -116,17 +116,17 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
         if(m_MenuType == MENU_TYPE_HORIZONTAL) CheckHoverHorizontal(x, y);
         else CheckHoverVertical(x, y);
-                
+
     }
 
     void FtkMenu::update() {
-		
+
 		checkHover();
 	}
-	
+
     /**
      * Submit the menu for rendering
-     * 
+     *
      **/
     void FtkMenu::submit(Renderer2D* renderer) const {
 
@@ -142,5 +142,36 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
         }
 
     }
+
+	FtkMenu* FtkMenu::submenuAt(int index) {
+
+		return m_SubMenus.at(index);
+	}
+
+	FtkMenu* FtkMenu::submenuAt(std::vector<int> indices) {
+
+		int level = indices.size() ;
+		FtkMenu* menu = this;
+		for(int i = 0; i < level; ++i) {
+			menu = menu->submenuAt(indices.at(i));
+		}
+		return menu;
+	}
+
+	FtkButton* FtkMenu::entryAt(int index) {
+
+		return m_Buttons.at(index);
+	}
+
+	FtkButton* FtkMenu::entryAt(std::vector<int> indices) {
+
+		int level = indices.size() ;
+		std::vector<int> menulevels;
+		for(int i = 0; i < level - 1; ++i) {
+			menulevels.push_back(indices.at(i));
+		}
+		FtkMenu* menu = submenuAt(menulevels);
+		return menu->entryAt(indices.at(level));
+	}
 
 }}}}

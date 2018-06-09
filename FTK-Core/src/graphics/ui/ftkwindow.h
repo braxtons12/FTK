@@ -2,11 +2,11 @@
  * Wrapper for the basic Window class.
  * Enables more UI-friendly operations
  * DOES NOT extend Window, but rather serves as a container for it
- * 
+ *
  * Header File
- * 
+ *
  * C 2018 Braxton Salyer
- * 
+ *
  **/
 
 #ifndef _FTK_WINDOW
@@ -29,14 +29,14 @@
 #include <array>
 #include <GL/glew.h>
 
-namespace ftk { namespace core { namespace graphics { namespace ui { 
+namespace ftk { namespace core { namespace graphics { namespace ui {
 
 	//define necessary macros
 	#define WINDOW_NO_MENU     0
 	#define WINDOW_HAS_MENU    1
 	//#define MAX_SHADERS     1000 deprecated with static sprites
 
-	class FtkWindow : public FTKObject {
+	class FtkWindow : public FtkObject {
 
 		private:
 			NativeWindow* m_Window;
@@ -55,14 +55,14 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 			/**
 			* Initialize the window
-			* 
+			*
 			**/
 			void init();
 
 		public:
 			/**
 			* Constructor
-			* 
+			*
 			**/
 			FtkWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath);
 
@@ -73,13 +73,13 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 			/**
 			* Used to scale the container when the Window is resized
-			* 
+			*
 			**/
 			void scale(math::vec2 scale);
 
 			/**
 			* Add a Renderable to the window
-			* 
+			*
 			**/
 			inline void addElement(Renderable2D* renderable) {
 				//if(typeid(*renderable) == (typeid(Static_Sprite))) ((Static_Sprite*)renderable)->setShader(*m_Shader); deprecated with static sprites
@@ -88,25 +88,25 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 			/**
 			* Create the window menu from the given parameters
-			* 
+			*
 			**/
-			void setMenu(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover, int state, 
-						int menuType, int numMenus, bool alwaysVisible, std::vector<FtkMenu*> subMenus);
+			void setMenu(math::vec3 position, math::vec2 size, Color colorOff, Color colorNormal, Color colorHover, int state,
+									   int menuType, int numMenus, bool alwaysVisible, std::vector<FtkMenu*> subMenus);
 
 			inline void setMenu(FtkMenu* menu) { m_Menu = menu; m_HasMenu = true; }
 
 			/**
 			* Update the state of the window content
-			* 
+			*
 			**/
 			void update();
 
 			/**
 			* Render the contents of the window
-			* 
+			*
 			**/
 			void render();
-			
+
 			inline void beginRender() { m_Renderer->begin(); }
 
 			//getters and setters
@@ -119,9 +119,9 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 			/**
 			* Activate the window's renderer
-			* 
+			*
 			**/
-			inline void activateRenderer() { m_Renderer = new BatchRenderer2D(); }
+			inline void activateRenderer() { m_Renderer = (Renderer2D*)new BatchRenderer2D(); }
 
 			//wrap some base window functions
 			inline void clear() { m_Window->clear(); }
@@ -129,13 +129,13 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 			inline void convertCoords(double& x, double& y) { m_Window->convertCoords(x, y); }
 
-			
+
 			//slot for Window::updateSignal
 			void on_WindowUpdate(math::vec2 sig) {
-				
+
 				double x = sig.m_x;
 				double y = sig.m_y;
-				
+
 				x /= m_Width;
 				y /= m_Height;
 				m_Window->m_XScaleFactor *= x;

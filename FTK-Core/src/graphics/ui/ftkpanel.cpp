@@ -38,6 +38,9 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 											BUTTON_STATE_NORMAL, m_ParentWindow);
 				break;
 		}
+
+		m_DragHandle.setClickedSignalIndex(connect(&m_DragHandle, (bool (FtkObject::*)(bool))&FtkButton::clickedSignal,
+																					this, (void (FtkObject::*)(bool))&FtkPanel::on_HandleClicked));
 	}
 
 	FtkPanel::~FtkPanel() {
@@ -61,8 +64,14 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 					scale(math::vec2(sig.m_x / m_Size.m_x, sig.m_y / m_Size.m_y));
 	}
 
-	void on_HandleClicked(bool sig) {
+	void FtkPanel::on_HandleClicked(bool sig) {
 
+		math::vec3 position = m_DragHandle.getPosition();
+		math::vec2 old = m_Size;
+		m_Size += math::vec2(position.m_x - m_Size.m_x, position.m_y - m_Size.m_y);
+		m_ShownSize = m_Size;
+		std::array<float, 6> signal = {(float)m_Type, (float)m_LayoutPosition, m_Size.m_x, m_Size.m_y, old.m_x, old.m_y};
+		emitFA6(m_ViewportSizeSignal, signal);
 	}
 
 }}}}

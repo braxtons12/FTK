@@ -14,8 +14,6 @@
 
 namespace ftk { namespace core { namespace graphics { namespace ui {
 
-	#define NO_PANEL	 0 //used for signals
-
     #define OUTER_PANEL  1
     #define INNER_PANEL  2
 
@@ -26,7 +24,7 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 	class FtkViewport;
 
-    class FtkPanel : public Group, public FTKObject {
+    class FtkPanel : public Group, public FtkObject {
 
         private:
             math::vec3 m_Position;

@@ -2,88 +2,88 @@
 
 namespace ftk { namespace core {
 
-	std::vector<Signal<FTKObject, FTKObject, bool, void, bool>*> FTKObject::m_SignalsBool =
-								std::vector<Signal<FTKObject, FTKObject, bool, void, bool>*>();
-	std::vector<Signal<FTKObject, FTKObject, int, void, int>*> FTKObject::m_SignalsInt =
-								std::vector<Signal<FTKObject, FTKObject, int, void, int>*>();
-	std::vector<Signal<FTKObject, FTKObject, float, void, float>*> FTKObject::m_SignalsFloat =
-								std::vector<Signal<FTKObject, FTKObject, float, void, float>*>();
-	std::vector<Signal<FTKObject, FTKObject, math::vec2, void, math::vec2>*> FTKObject::m_SignalsVec2 =
-								std::vector<Signal<FTKObject, FTKObject, math::vec2, void, math::vec2>*>();
-	std::vector<Signal<FTKObject, FTKObject, math::vec3, void, math::vec3>*> FTKObject::m_SignalsVec3 =
-								std::vector<Signal<FTKObject, FTKObject, math::vec3, void, math::vec3>*>();
-	std::vector<Signal<FTKObject, FTKObject, math::vec4, void, math::vec4>*> FTKObject::m_SignalsVec4 =
-								std::vector<Signal<FTKObject, FTKObject, math::vec4, void, math::vec4>*>();
-	std::vector<Signal<FTKObject, FTKObject, std::array<float, 5>, void, std::array<float, 5>>*> FTKObject::m_SignalsFA5 =
-								std::vector<Signal<FTKObject, FTKObject, std::array<float, 5>, void, std::array<float, 5>>*>();
-	std::vector<Signal<FTKObject, FTKObject, std::array<float, 6>, void, std::array<float, 6>>*> FTKObject::m_SignalsFA6 =
-								std::vector<Signal<FTKObject, FTKObject, std::array<float, 6>, void, std::array<float, 6>>*>();
+	std::vector<Signal<FtkObject, FtkObject, bool, void, bool>*> FtkObject::m_SignalsBool =
+								std::vector<Signal<FtkObject, FtkObject, bool, void, bool>*>();
+	std::vector<Signal<FtkObject, FtkObject, int, void, int>*> FtkObject::m_SignalsInt =
+								std::vector<Signal<FtkObject, FtkObject, int, void, int>*>();
+	std::vector<Signal<FtkObject, FtkObject, float, void, float>*> FtkObject::m_SignalsFloat =
+								std::vector<Signal<FtkObject, FtkObject, float, void, float>*>();
+	std::vector<Signal<FtkObject, FtkObject, math::vec2, void, math::vec2>*> FtkObject::m_SignalsVec2 =
+								std::vector<Signal<FtkObject, FtkObject, math::vec2, void, math::vec2>*>();
+	std::vector<Signal<FtkObject, FtkObject, math::vec3, void, math::vec3>*> FtkObject::m_SignalsVec3 =
+								std::vector<Signal<FtkObject, FtkObject, math::vec3, void, math::vec3>*>();
+	std::vector<Signal<FtkObject, FtkObject, math::vec4, void, math::vec4>*> FtkObject::m_SignalsVec4 =
+								std::vector<Signal<FtkObject, FtkObject, math::vec4, void, math::vec4>*>();
+	std::vector<Signal<FtkObject, FtkObject, std::array<float, 5>, void, std::array<float, 5>>*> FtkObject::m_SignalsFA5 =
+								std::vector<Signal<FtkObject, FtkObject, std::array<float, 5>, void, std::array<float, 5>>*>();
+	std::vector<Signal<FtkObject, FtkObject, std::array<float, 6>, void, std::array<float, 6>>*> FtkObject::m_SignalsFA6 =
+								std::vector<Signal<FtkObject, FtkObject, std::array<float, 6>, void, std::array<float, 6>>*>();
 
-	int FTKObject::connect(FTKObject* sender, bool (FTKObject::*signal)(bool), FTKObject* receiver,
-						   void (FTKObject::*slot)(bool))
+	int FtkObject::connect(FtkObject* sender, bool (FtkObject::*signal)(bool), FtkObject* receiver,
+						   void (FtkObject::*slot)(bool))
 	{
-		m_SignalsBool.push_back(new Signal<FTKObject, FTKObject, bool, void, bool>());
+		m_SignalsBool.push_back(new Signal<FtkObject, FtkObject, bool, void, bool>());
 		m_SignalsBool.at(m_SignalsBool.size() - 1)->connect(sender, signal, receiver, slot);
 		return m_SignalsBool.size() -1;
 	}
 
-	int FTKObject::connect(FTKObject* sender, int (FTKObject::*signal)(int), FTKObject* receiver,
-						   void (FTKObject::*slot)(int))
+	int FtkObject::connect(FtkObject* sender, int (FtkObject::*signal)(int), FtkObject* receiver,
+						   void (FtkObject::*slot)(int))
 	{
-		m_SignalsInt.push_back(new Signal<FTKObject, FTKObject, int, void, int>());
+		m_SignalsInt.push_back(new Signal<FtkObject, FtkObject, int, void, int>());
 		m_SignalsInt.at(m_SignalsInt.size() - 1)->connect(sender, signal, receiver, slot);
 		return m_SignalsInt.size() -1;
 	}
 
-	int FTKObject::connect(FTKObject* sender, float (FTKObject::*signal)(float), FTKObject* receiver,
-						void (FTKObject::*slot)(float))
+	int FtkObject::connect(FtkObject* sender, float (FtkObject::*signal)(float), FtkObject* receiver,
+						void (FtkObject::*slot)(float))
 	{
-		m_SignalsFloat.push_back(new Signal<FTKObject, FTKObject, float, void, float>());
+		m_SignalsFloat.push_back(new Signal<FtkObject, FtkObject, float, void, float>());
 		m_SignalsFloat.at(m_SignalsFloat.size() - 1)->connect(sender, signal, receiver, slot);
 		return m_SignalsFloat.size() -1;
 	}
 
-	int FTKObject::connect(FTKObject* sender, math::vec2 (FTKObject::*signal)(math::vec2), FTKObject* receiver,
-						   void (FTKObject::*slot)(math::vec2))
+	int FtkObject::connect(FtkObject* sender, math::vec2 (FtkObject::*signal)(math::vec2), FtkObject* receiver,
+						   void (FtkObject::*slot)(math::vec2))
 	{
-		m_SignalsVec2.push_back(new Signal<FTKObject, FTKObject, math::vec2, void, math::vec2>());
+		m_SignalsVec2.push_back(new Signal<FtkObject, FtkObject, math::vec2, void, math::vec2>());
 		m_SignalsVec2.at(m_SignalsVec2.size() - 1)->connect(sender, signal, receiver, slot);
 		return m_SignalsVec2.size() -1;
 	}
 
-	int FTKObject::connect(FTKObject* sender, math::vec3 (FTKObject::*signal)(math::vec3), FTKObject* receiver,
-						   void (FTKObject::*slot)(math::vec3))
+	int FtkObject::connect(FtkObject* sender, math::vec3 (FtkObject::*signal)(math::vec3), FtkObject* receiver,
+						   void (FtkObject::*slot)(math::vec3))
 	{
-		m_SignalsVec3.push_back(new Signal<FTKObject, FTKObject, math::vec3, void, math::vec3>());
+		m_SignalsVec3.push_back(new Signal<FtkObject, FtkObject, math::vec3, void, math::vec3>());
 		m_SignalsVec3.at(m_SignalsVec3.size() - 1)->connect(sender, signal, receiver, slot);
 		return m_SignalsVec3.size() -1;
 	}
 
-	int FTKObject::connect(FTKObject* sender, math::vec4 (FTKObject::*signal)(math::vec4), FTKObject* receiver,
-							void (FTKObject::*slot)(math::vec4))
+	int FtkObject::connect(FtkObject* sender, math::vec4 (FtkObject::*signal)(math::vec4), FtkObject* receiver,
+							void (FtkObject::*slot)(math::vec4))
 	{
-		m_SignalsVec4.push_back(new Signal<FTKObject, FTKObject, math::vec4, void, math::vec4>());
+		m_SignalsVec4.push_back(new Signal<FtkObject, FtkObject, math::vec4, void, math::vec4>());
 		m_SignalsVec4.at(m_SignalsVec4.size() -1)->connect(sender, signal, receiver, slot);
 		return m_SignalsVec4.size() -1;
 	}
 
-	int FTKObject::connect(FTKObject* sender, std::array<float, 5> (FTKObject::*signal)(std::array<float, 5>), FTKObject* receiver,
-				void (FTKObject::*slot)(std::array<float, 5>))
+	int FtkObject::connect(FtkObject* sender, std::array<float, 5> (FtkObject::*signal)(std::array<float, 5>), FtkObject* receiver,
+				void (FtkObject::*slot)(std::array<float, 5>))
 	{
-		m_SignalsFA5.push_back(new Signal<FTKObject, FTKObject, std::array<float, 5>, void, std::array<float, 5>>());
+		m_SignalsFA5.push_back(new Signal<FtkObject, FtkObject, std::array<float, 5>, void, std::array<float, 5>>());
 		m_SignalsFA5.at(m_SignalsFA5.size() -1)->connect(sender, signal, receiver, slot);
 		return m_SignalsFA5.size() -1;
 	}
 
-	int FTKObject::connect(FTKObject* sender, std::array<float, 6> (FTKObject::*signal)(std::array<float, 6>), FTKObject* receiver,
-				void (FTKObject::*slot)(std::array<float, 6>))
+	int FtkObject::connect(FtkObject* sender, std::array<float, 6> (FtkObject::*signal)(std::array<float, 6>), FtkObject* receiver,
+				void (FtkObject::*slot)(std::array<float, 6>))
 	{
-		m_SignalsFA6.push_back(new Signal<FTKObject, FTKObject, std::array<float, 6>, void, std::array<float, 6>>());
+		m_SignalsFA6.push_back(new Signal<FtkObject, FtkObject, std::array<float, 6>, void, std::array<float, 6>>());
 		m_SignalsFA6.at(m_SignalsFA6.size() -1)->connect(sender, signal, receiver, slot);
 		return m_SignalsFA6.size() -1;
 	}
 
-	void FTKObject::disconnect(int type, int index) {
+	void FtkObject::disconnect(int type, int index) {
 
 		switch(type) {
 
