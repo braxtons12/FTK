@@ -122,8 +122,21 @@ namespace ftk { namespace core { namespace graphics {
 			//disconnect the indicated signal relationship
 			void disconnect(int type, int index);
 
-			virtual bool checkBounds(FtkObject* renderable) = 0;
-			virtual bool checkBounds(Renderable2D* renderable) = 0;
+			virtual bool checkBounds(FtkObject* renderable) {
+
+				return checkBounds((Renderable2D*)renderable);
+			}
+
+			virtual bool checkBounds(Renderable2D* renderable) {
+
+				math::vec3 renderablePos = renderable->getPosition();
+				math::vec2 renderableSize = renderable->getSize();
+				if(renderablePos.m_x + renderableSize.m_x < m_Position.m_x) return false;
+				else if(renderablePos.m_y + renderableSize.m_y < m_Position.m_y) return false;
+				else if(renderablePos.m_x > m_Position.m_x + m_Size.m_x) return false;
+				else if(renderablePos.m_y > m_Position.m_y + m_Size.m_y) return false;
+				return true;
+			}
 
 			inline void setParent(FtkObject* parent) { m_Parent = parent; }
 			inline bool isEnabled() const { return m_Enabled; }

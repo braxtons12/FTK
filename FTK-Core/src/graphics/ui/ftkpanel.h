@@ -55,9 +55,6 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
             inline FtkViewport* const getParentViewport() const { return m_ParentViewport; }
 			inline void setUpdateViewportSizeSignalIndex(int index) { m_ViewportSizeSignal = index; }
 
-			virtual bool checkBounds(FtkObject* renderable) override;
-			virtual bool checkBounds(Renderable2D* renderable) override;
-
 			//signals
 			std::array<float, 6> updateViewportSize(std::array<float, 6> sig) {
 

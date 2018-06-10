@@ -9,18 +9,14 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 
 	bool FtkViewport::checkBounds(Renderable2D* renderable) {
 
-		math::vec3 position = renderable->getPosition();
-        math::vec2 size = renderable->getSize();
+		math::vec3 renderablePos = renderable->getPosition();
+        math::vec2 renderableSize = renderable->getSize();
 
-        if(position.m_x > (m_InnerPosition.m_x + m_InnerSize.m_x)) return false;
-        else if(position.m_x > (m_OuterPosition.m_x + m_OuterSize.m_x)) return false;
-        else if((position.m_x + size.m_x) < m_OuterPosition.m_x) return false;
-        else if((position.m_x + size.m_x) < m_InnerPosition.m_x) return false;
-        else if(position.m_y > (m_InnerPosition.m_y + m_InnerSize.m_y)) return false;
-        else if(position.m_y > (m_OuterPosition.m_y + m_OuterSize.m_y)) return false;
-        else if((position.m_y + size.m_y) < m_OuterPosition.m_y) return false;
-        else if((position.m_y + size.m_y) < m_InnerPosition.m_y) return false;
-        else return true;
+        if(renderablePos.m_x + renderableSize.m_x < m_InnerPosition.m_x) return false;
+		else if(renderablePos.m_y + renderableSize.m_y < m_InnerPosition.m_y) return false;
+		else if(renderablePos.m_x > m_InnerPosition.m_x + m_InnerSize.m_x) return false;
+		else if(renderablePos.m_y > m_InnerPosition.m_y + m_InnerSize.m_y) return false;
+        return true;
 	}
 
     void FtkViewport::submitPanels(Renderer2D* renderer) {

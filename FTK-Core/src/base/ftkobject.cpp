@@ -1,6 +1,6 @@
 #include "ftkobject.h"
 
-namespace ftk { namespace core {
+namespace ftk { namespace core { namespace graphics {
 
 	std::vector<Signal<FtkObject, FtkObject, bool, void, bool>*> FtkObject::m_SignalsBool =
 								std::vector<Signal<FtkObject, FtkObject, bool, void, bool>*>();
@@ -160,4 +160,4 @@ namespace ftk { namespace core {
 				break;
 		}
 	}
-}}
+}}}

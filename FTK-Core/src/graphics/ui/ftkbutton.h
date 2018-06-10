@@ -172,20 +172,6 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 					}
 				}
 			}
-
-			virtual bool checkBounds(FtkObject* renderable) override {
-
-				return checkBounds((Renderable2D*)renderable);
-			}
-
-			virtual bool checkBounds(Renderable2D* renderable) override {
-
-				if(renderable->getPosition().m_x < m_Position.m_x) return false;
-				else if(renderable->getPosition().m_y < m_Position.m_y) return false;
-				else if(renderable->getPosition().m_x + renderable->getSize().m_x < m_Position.m_x + m_Size.m_x) return false;
-				else if(renderable->getPosition().m_y + renderable->getSize().m_y < m_Position.m_y + m_Size.m_y) return false;
-				return true;
-			}
     };
 }}}}
 

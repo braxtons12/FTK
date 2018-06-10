@@ -1,23 +1,23 @@
 /**
  * Base Window class
  * Maintains an OpenGL context through GLFW and glew
- * 
+ *
  * Implementation File
- * 
+ *
  * C 2018 Braxton Salyer
  **/
 
 #include "nativewindow.h"
 
 namespace ftk { namespace core { namespace graphics {
-	
+
 	int NativeWindow::m_Signal = 0;
     /**
      * Initialize the Window
-     * 
+     *
      **/
     bool NativeWindow::init() {
-		
+
         m_XScaleFactor = 1.0;
         m_YScaleFactor = 1.0;
 
@@ -59,9 +59,11 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * Constructor
-     * 
+     *
      **/
-    NativeWindow::NativeWindow(const char *name, int width, int height) {
+    NativeWindow::NativeWindow(const char *name, int width, int height)
+		: FtkObject(math::vec3(0.0f, 0.0f, 0.0f), math::vec2(width, height), math::vec4(0.0f, 0.0f, 0.0f, 1.0f))
+	{
 
         m_name = name;
         m_width = width;
@@ -72,7 +74,7 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * Destructor
-     * 
+     *
      **/
     NativeWindow::~NativeWindow() {
 
@@ -81,7 +83,7 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * Update the Window State
-     * 
+     *
      **/
     void NativeWindow::update() {
 
@@ -96,7 +98,7 @@ namespace ftk { namespace core { namespace graphics {
 
     /**
      * Convert mouse coordinates to framebuffer coordinates
-     * 
+     *
      **/
     void NativeWindow::convertCoords(double& x, double& y) {
 

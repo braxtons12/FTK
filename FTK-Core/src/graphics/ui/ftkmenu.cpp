@@ -174,4 +174,23 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 		return menu->entryAt(indices.at(level));
 	}
 
+	bool FtkMenu::checkBounds(Renderable2D* renderable) {
+
+		if(m_State != MENU_STATE_OFF) {
+			math::vec3 renderablePos = renderable->getPosition();
+			math::vec2 renderableSize = renderable->getSize();
+			if(renderablePos.m_x + renderableSize.m_x < m_Position.m_x) return false;
+			else if(renderablePos.m_y + renderableSize.m_y < m_Position.m_y) return false;
+			else if(renderablePos.m_x > m_Position.m_x + m_Size.m_x) return false;
+			else if(renderablePos.m_y > m_Position.m_y + m_Size.m_y) return false;
+			return true;
+		}
+		return false;
+	}
+
+	bool FtkMenu::checkBounds(FtkObject* renderable) {
+
+		return checkBounds((Renderable2D*)renderable);
+	}
+
 }}}}

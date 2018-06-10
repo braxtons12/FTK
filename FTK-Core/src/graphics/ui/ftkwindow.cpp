@@ -40,8 +40,9 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 	 *
 	 **/
 	FtkWindow::FtkWindow(const char* name, int width, int height, const char* vertexShaderPath, const char* fragmentShaderPath)
-		: m_Name(name), m_Width(width), m_Height(height), m_VertexShaderPath(vertexShaderPath), m_FragmentShaderPath(fragmentShaderPath),
-		m_HasMenu(false)
+		: FtkObject(math::vec3(0.0f, 0.0f, 0.0f), math::vec2(width, height), math::vec4(0.0f, 0.0f, 0.0f, 1.0f)),
+		m_Name(name), m_Width(width), m_Height(height), m_VertexShaderPath(vertexShaderPath),
+		m_FragmentShaderPath(fragmentShaderPath), m_HasMenu(false)
 	{
 		init();
 	}

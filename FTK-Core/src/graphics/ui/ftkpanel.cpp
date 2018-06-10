@@ -48,20 +48,6 @@ namespace ftk { namespace core { namespace graphics { namespace ui {
 		disconnect(FA6_SIGNAL, m_ViewportSizeSignal);
 	}
 
-	bool FtkPanel::checkBounds(FtkObject* renderable) {
-
-		return checkBounds((Renderable2D*)renderable);
-	}
-
-	bool FtkPanel::checkBounds(Renderable2D* renderable) {
-
-		if(renderable->getPosition().m_x < m_Position.m_x) return false;
-		else if(renderable->getPosition().m_y < m_Position.m_y) return false;
-		else if(renderable->getPosition().m_x + renderable->getSize().m_x < m_Position.m_x + m_Size.m_x) return false;
-		else if(renderable->getPosition().m_y + renderable->getSize().m_y < m_Position.m_y + m_Size.m_y) return false;
-		return true;
-	}
-
 	void FtkPanel::submit(Renderer2D* renderer) const {
 
 		renderer->push(getTransform());
